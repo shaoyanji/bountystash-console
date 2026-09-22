@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-view="3d">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matt Ji // Senior Systems &amp; Infrastructure Engineer</title>
+  <meta name="description" content="Systems engineer with a background in engineering, quantitative economics, and energy systems (Colorado School of Mines &amp; University of Freiburg). I design concurrent Go services, declarative NixOS fleet infrastructure, and quantitative data pipelines. Experienced managing risk and telemetry across $100M+ in renewable capital assets.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%231F69FF%22/><text y=%22.9em%22 font-size=%2280%22 font-family=%22monospace%22 font-weight=%22bold%22 fill=%22white%22>M</text></svg>">
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        var v = localStorage.getItem('viewMode') || '3d';
+        document.documentElement.setAttribute('data-view', v);
+      } catch(e){}
+    })();
+  </script>
+  <style>
+:root{--font-mono:ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;--font-sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;--text-xs:0.76rem;--text-sm:0.86rem;--text-base:0.98rem;--text-md:1.12rem;--text-lg:1.30rem;--text-xl:1.65rem;--text-display:clamp(2.0rem, 4vw, 3.0rem);--space-xs:0.35rem;--space-sm:0.75rem;--space-md:1.25rem;--space-lg:1.75rem;--space-xl:2.75rem;--bg:#07080a;--surface:#0e1017;--surface-hover:#151822;--border:#222634;--border-focus:#4f8eff;--text:#f0f2f5;--text-muted:#828898;--accent:#1f69ff;--accent-bright:#4f8eff;--accent-contrast:#ffffff;--shadow:#000000;--badge-bg:#141824;--code-bg:#090a10;--solar-fill:rgba(31, 105, 255, 0.15);--status-online:#00ff66;--hud-bg:rgba(14, 16, 23, 0.94);--inspector-width:360px}[data-theme="light"]{--bg:#f4f4ee;--surface:#ffffff;--surface-hover:#f7f7f2;--border:#141518;--border-focus:#0047ff;--text:#141518;--text-muted:#4e5361;--accent:#0047ff;--accent-bright:#0037cc;--accent-contrast:#ffffff;--shadow:#141518;--badge-bg:#e6e8ee;--code-bg:#e8ebf2;--solar-fill:rgba(0, 71, 255, 0.12);--status-online:#009933;--hud-bg:rgba(244, 244, 238, 0.96)}*, *::before, *::after{box-sizing:border-box;margin:0;padding:0}html, body{width:100%;height:100%;overflow:hidden;background-color:var(--bg);color:var(--text);font-family:var(--font-sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}::selection{background:var(--accent);color:var(--accent-contrast)}:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px}h1, h2, h3, h4{font-weight:800;line-height:1.15;letter-spacing:-0.035em;color:var(--text)}h1{font-size:var(--text-display)}h2{font-size:var(--text-xl);border-bottom:2px solid var(--border);padding-bottom:var(--space-xs);margin-bottom:var(--space-md)}h3{font-size:var(--text-lg)}p{margin-bottom:var(--space-sm);color:var(--text)}p.lead{font-size:var(--text-md);line-height:1.6}.muted{color:var(--text-muted)}.mono{font-family:var(--font-mono)}a{color:var(--accent-bright);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;cursor:pointer;transition:color 0.15s ease}a:hover{color:var(--text);background-color:var(--accent);text-decoration:none}.btn{display:inline-flex;align-items:center;gap:var(--space-xs);font-family:var(--font-mono);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;text-decoration:none;background:var(--surface);color:var(--text);padding:0.5rem 0.9rem;border:2px solid var(--border);box-shadow:3px 3px 0 var(--shadow);cursor:pointer;transition:transform 0.1s ease, box-shadow 0.1s ease}.btn:hover{transform:translate(-2px, -2px);box-shadow:5px 5px 0 var(--accent);background:var(--surface-hover);color:var(--text)}.btn:active{transform:translate(2px, 2px);box-shadow:1px 1px 0 var(--accent)}.btn-primary{background:var(--accent);color:var(--accent-contrast);border-color:var(--border)}.btn-primary:hover{background:var(--accent-bright);color:var(--accent-contrast)}.spatial-hud-top{position:fixed;top:0;left:0;width:100%;height:48px;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:0 var(--space-md);background:var(--hud-bg);backdrop-filter:blur(10px);border-bottom:2px solid var(--border);font-family:var(--font-mono);font-size:var(--text-xs)}.spatial-hud-bottom{position:fixed;bottom:0;left:0;width:100%;height:44px;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:0 var(--space-md);background:var(--hud-bg);backdrop-filter:blur(10px);border-top:2px solid var(--border);font-family:var(--font-mono);font-size:var(--text-xs)}.sector-nav-rail{display:flex;align-items:center;gap:0.35rem}.nav-sector-btn{background:transparent;border:1.5px solid var(--border);color:var(--text-muted);font-family:var(--font-mono);font-size:0.72rem;font-weight:700;padding:0.22rem 0.6rem;cursor:pointer;transition:all 0.15s ease}.nav-sector-btn:hover{color:var(--text);border-color:var(--accent-bright)}.nav-sector-btn.active{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent);box-shadow:2px 2px 0 var(--shadow)}.hud-control-btn{background:transparent;border:1.5px solid var(--border);color:var(--text);font-family:var(--font-mono);font-size:var(--text-xs);padding:0.22rem 0.55rem;cursor:pointer;font-weight:700;box-shadow:2px 2px 0 var(--shadow);transition:all 0.1s}.hud-control-btn:hover{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--status-online);box-shadow:0 0 6px var(--status-online)}#workspaceContainer{position:relative;width:100vw;height:calc(100vh - 92px);margin-top:48px;display:flex;overflow:hidden}#spatialViewport{position:relative;flex:1;height:100%;overflow:hidden;perspective:1100px;perspective-origin:50% 50%;display:flex;align-items:center;justify-content:center}#cameraWorld{position:relative;width:100%;height:100%;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center}.sector-plane{position:absolute;top:50%;left:50%;width:min(840px, 92%);max-height:82vh;overflow-y:auto;background:var(--surface);border:2px solid var(--border);padding:var(--space-lg);box-shadow:6px 6px 0 var(--shadow);transform-origin:center center;transition:transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;scrollbar-width:thin;scrollbar-color:var(--border) transparent}.sector-plane::-webkit-scrollbar{width:6px}.sector-plane::-webkit-scrollbar-thumb{background:var(--border)}.sector-plane.plane-active{transform:translate(-50%, -50%) translate3d(0, 0, 0) scale(1);opacity:1;filter:blur(0px);pointer-events:auto;z-index:50;display:block}.sector-plane.plane-depth-1{transform:translate(-50%, -50%) translate3d(0, 0, -250px) scale(0.93);opacity:0.32;filter:blur(1.5px);pointer-events:none;z-index:20;display:block}.sector-plane.plane-depth-2{transform:translate(-50%, -50%) translate3d(0, 0, -500px) scale(0.86);opacity:0.10;filter:blur(3px);pointer-events:none;z-index:10;display:block}.sector-plane.plane-hidden{display:none !important;pointer-events:none !important;opacity:0 !important;z-index:0 !important}.sector-tag{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:var(--text-xs);font-weight:700;color:var(--accent-bright);text-transform:uppercase;margin-bottom:var(--space-xs);border-bottom:1px dashed var(--border);padding-bottom:0.35rem}.telemetry-strip{display:flex;flex-wrap:wrap;gap:var(--space-md);padding:var(--space-sm) 0;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);margin:var(--space-md) 0;font-family:var(--font-mono);font-size:var(--text-xs)}.telemetry-item strong{color:var(--accent-bright)}.cards-grid{display:grid;grid-template-columns:1fr;gap:var(--space-md)}.card{background:var(--surface);border:1.5px solid var(--border);padding:var(--space-md);box-shadow:3px 3px 0 var(--shadow)}.card-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:var(--space-xs);margin-bottom:var(--space-xs)}.card-period{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-muted)}.card-role{font-family:var(--font-mono);font-size:var(--text-xs);color:var(--accent-bright);font-weight:700}.card-impact{border-left:3px solid var(--accent);padding-left:var(--space-sm);margin:var(--space-sm) 0;font-size:var(--text-sm);color:var(--text-muted);font-family:var(--font-mono)}.tag-list{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:var(--space-sm)}.badge{font-family:var(--font-mono);font-size:var(--text-xs);padding:0.15rem 0.45rem;background:var(--badge-bg);color:var(--text);border:1px solid var(--border);font-weight:600}.zoom-hint{display:flex;align-items:center;justify-content:space-between;margin-top:var(--space-md);padding:var(--space-xs) var(--space-sm);background:var(--badge-bg);border:1px dashed var(--border);font-family:var(--font-mono);font-size:var(--text-xs);color:var(--accent-bright)}#inspectorPane{width:var(--inspector-width);height:100%;border-left:2px solid var(--border);background:var(--surface);display:flex;flex-direction:column;z-index:100;box-shadow:-4px 0 10px rgba(0,0,0,0.3);font-family:var(--font-mono)}.inspector-header{padding:0.6rem var(--space-sm);border-bottom:2px solid var(--border);background:var(--badge-bg);display:flex;justify-content:space-between;align-items:center;font-size:var(--text-xs);font-weight:700}.inspector-body{flex:1;overflow-y:auto;padding:var(--space-sm);display:flex;flex-direction:column;gap:var(--space-sm)}.inspector-footer{padding:0.4rem var(--space-sm);border-top:1px dashed var(--border);background:var(--badge-bg);font-size:0.72rem;display:flex;justify-content:space-between;align-items:center;color:var(--text-muted)}.visual-stage{border:1.5px solid var(--border);background:var(--code-bg);padding:0.75rem;position:relative;overflow:hidden;box-shadow:2px 2px 0 var(--shadow)}[data-theme="light"] #inspectorPane{box-shadow:-4px 0 10px rgba(0,0,0,0.06)}[data-theme="light"] .scanline{opacity:0.2}.visual-stage-header{display:flex;justify-content:space-between;font-size:0.72rem;color:var(--accent-bright);font-weight:700;margin-bottom:0.5rem;border-bottom:1px solid var(--border);padding-bottom:0.25rem}.scanline{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg, transparent, var(--accent-bright), transparent);animation:scanAnim 3s linear infinite;opacity:0.6;pointer-events:none}@keyframes scanAnim{0%{top:0%}100%{top:100%}}.radar-pulse{animation:pulseAnim 2.5s ease-out infinite;transform-origin:center}@keyframes pulseAnim{0%{r:10;opacity:0.8}100%{r:50;opacity:0}}.cyber-metric-row{display:flex;justify-content:space-between;font-size:0.75rem;padding:0.25rem 0;border-bottom:1px dotted var(--border)}.cyber-metric-row span:last-child{color:var(--text);font-weight:700}html[data-view="flat"], html[data-view="flat"] body{width:100% !important;height:100% !important;overflow:hidden !important}html[data-view="flat"] #workspaceContainer{position:relative !important;width:100vw !important;height:calc(100vh - 92px) !important;margin-top:48px !important;display:flex !important;overflow:hidden !important}html[data-view="flat"] #spatialViewport{flex:1 !important;min-width:0 !important;height:100% !important;overflow-y:auto !important;overflow-x:hidden !important;perspective:none !important;display:block !important;padding:var(--space-lg) var(--space-md) var(--space-xl) var(--space-md) !important;scrollbar-width:thin;scrollbar-color:var(--accent) var(--surface);scroll-behavior:smooth}html[data-view="flat"] #spatialViewport::-webkit-scrollbar{width:7px}html[data-view="flat"] #spatialViewport::-webkit-scrollbar-track{background:var(--surface);border-left:1px solid var(--border)}html[data-view="flat"] #spatialViewport::-webkit-scrollbar-thumb{background:var(--border-focus, #4f8eff)}html[data-view="flat"] #spatialViewport::-webkit-scrollbar-thumb:hover{background:var(--accent-bright)}html[data-view="flat"] #cameraWorld{display:block !important;position:static !important;transform:none !important;width:100% !important;max-width:840px !important;margin:0 auto !important;height:auto !important}html[data-view="flat"] .sector-plane{position:relative !important;top:auto !important;left:auto !important;transform:none !important;margin:0 0 var(--space-xl) 0 !important;max-height:none !important;height:auto !important;overflow:visible !important;opacity:1 !important;filter:none !important;pointer-events:auto !important;display:block !important;width:100% !important;scroll-margin-top:var(--space-md) !important}html[data-view="flat"] .sector-plane:last-child{margin-bottom:var(--space-xl) !important}html[data-view="flat"] #inspectorPane{display:flex !important;width:var(--inspector-width) !important;height:100% !important;flex-shrink:0 !important;border-left:2px solid var(--border) !important;background:var(--surface) !important;z-index:100 !important}html[data-view="flat"] .zoom-hint{display:none !important}@media (max-width:1024px){#inspectorPane, html[data-view="flat"] #inspectorPane{display:none !important}}@media (max-width:640px){.sector-plane{width:96%;padding:var(--space-md)}.spatial-hud-top, .spatial-hud-bottom{padding:0 0.5rem}.nav-sector-btn{padding:0.18rem 0.35rem;font-size:0.65rem}}
+  </style>
+</head>
+<body>
+
+  <!-- PERSISTENT TOP HUD -->
+  <header class="spatial-hud-top">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span class="status-dot"></span>
+      <strong>MATT JI</strong>
+      <span class="muted">// Gutach im Breisgau / Freiburg, Germany (Remote)</span>
+    </div>
+
+    <div id="hudCoordinates" style="color: var(--accent-bright); font-weight: 700;">
+      [ DEPTH: Z 0000 // SECTOR: 00 CONSOLE ]
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 0.5rem;">
+      <button id="viewToggleBtn" class="hud-control-btn" aria-label="Toggle 3D spatial or flat document view">[ VIEW: <span id="viewLabel">3D HUD</span> ]</button>
+      <button id="themeToggleBtn" class="hud-control-btn" aria-label="Toggle dark or light theme">[ <span id="themeLabel">DARK</span> ]</button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE CONTAINER (3D VIEWPORT ON LEFT + CYBER VISUAL INSPECTOR ON RIGHT) -->
+  <div id="workspaceContainer">
+
+    <!-- 3D SPATIAL VIEWPORT -->
+    <div id="spatialViewport">
+      <div id="cameraWorld">
+
+        <!-- =================================================================
+             SECTOR 0: THE WORKSHOP CONSOLE (Z: 0px)
+             ================================================================= -->
+        <section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="CONSOLE">
+          <div class="sector-tag">
+            <span>// SECTOR 00 : IDENTITY &amp; DISPATCH</span>
+            <span class="mono">DEPTH: 0000px</span>
+          </div>
+
+          <h1 style="margin: 0.5rem 0;">Matt Ji</h1>
+          <p class="lead"><strong>Senior Systems &amp; Infrastructure Engineer</strong></p>
+          <p class="muted" style="margin-bottom: 0.75rem;">Go • NixOS • Concurrency • Energy &amp; Quantitative Infrastructure</p>
+          <p>Systems engineer with a background in engineering, quantitative economics, and energy systems (Colorado School of Mines &amp; University of Freiburg). I design concurrent Go services, declarative NixOS fleet infrastructure, and quantitative data pipelines. Experienced managing risk and telemetry across $100M+ in renewable capital assets.</p>
+
+          <!-- HORIZONTAL TELEMETRY STRIP -->
+          <div class="telemetry-strip">
+            <div class="telemetry-item">OPS: <strong>$100M+ ASSETS</strong></div>
+            <div class="telemetry-item">STACK: <strong>GO &amp; NIXOS</strong></div>
+            <div class="telemetry-item">EDUCATION: <strong>MINES &amp; FREIBURG</strong></div>
+            <div class="telemetry-item">AUTH: <strong>US &amp; GERMAN PR</strong></div>
+          </div>
+
+          <!-- RECRUITER FAST-PATH -->
+          <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 1.25rem;">
+            • Status: <strong>US Citizen</strong> · <strong>German Permanent Residence (Niederlassungserlaubnis)</strong><br>
+            • Languages: <strong>English (Native)</strong> · <strong>German (Fluent C1)</strong><br>
+            • Setup: <strong>100% Remote (CET / US-East)</strong> · Available on short notice
+          </div>
+
+          <div class="tag-list" style="margin-bottom: 1rem;">
+            <a href="mailto:matt@bountystash.com" class="btn btn-primary">✉ Email Me</a>
+            <a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn">GitHub Profile</a>
+            <a href="https://linkedin.com/in/mattji" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+            <button class="btn" onclick="window.spatialNav.jumpTo(1)">Enter Systems Sector →</button>
+          </div>
+
+          <div class="zoom-hint">
+            <span>[ NAV: MOUSE WHEEL / ARROW DOWN TO ZOOM INTO SECTOR 01 ]</span>
+            <button class="btn" style="padding: 0.2rem 0.5rem; font-size: 0.7rem;" onclick="window.spatialNav.jumpTo(1)">Zoom In ↓</button>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             SECTOR 1: CORE SYSTEMS INFRASTRUCTURE
+             ================================================================= -->
+        <section class="sector-plane plane-depth-1" id="sector1" data-sector="1" data-name="SYSTEMS">
+          <div class="sector-tag">
+            <span>// SECTOR 01 : SYSTEMS &amp; DISTRIBUTED INFRASTRUCTURE</span>
+            <span class="mono">DEPTH: -0600px</span>
+          </div>
+
+          <h2>Core Systems &amp; Fleet Infrastructure</h2>
+          <p class="muted">Deterministic Go servers, append-only event ledgers, and zero-drift declarative Linux fleets.</p>
+
+          <div class="cards-grid" style="margin-top: 1rem;">
+            <!-- BOUNTYSTASH -->
+            <article class="card">
+              <div class="card-header">
+                <h3>Bountystash: Deterministic Work Engine</h3>
+                <span class="badge">GO SERVER</span>
+              </div>
+              <div class="card-role">Creator &amp; Architect · 2024 — Present</div>
+              <p style="margin-top: 0.5rem;">A thin, server-rendered Go application turning unstructured task requirements into immutable, content-addressed specifications. Features an append-only event ledger, a keyboard-first terminal UI, and curl-friendly endpoints with zero frontend bloat.</p>
+              <div class="card-impact">
+                • Single-binary deployment with sub-millisecond route resolution<br>
+                • Content hashes &amp; projection quotient hashes for tamper-evident versioning<br>
+                • Dual-surface: readable markdown for agents, clean HTML for browsers, TUI for humans
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                <div class="tag-list" style="margin-top: 0;">
+                  <span class="badge">#Go</span>
+                  <span class="badge">#PostgreSQL</span>
+                  <span class="badge">#Nix Flakes</span>
+                  <span class="badge">#TUI</span>
+                  <span class="badge">#Event Sourcing</span>
+                </div>
+                <a href="https://github.com/shaoyanji/bountystash" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Source Code (GitHub) →</a>
+              </div>
+            </article>
+
+            <!-- NIXCONFIG FLEET -->
+            <article class="card">
+              <div class="card-header">
+                <h3>Multi-Host Declarative NixOS Fleet</h3>
+                <span class="badge">NIXCONFIG</span>
+              </div>
+              <div class="card-role">Production-Grade Infrastructure · Active</div>
+              <p style="margin-top: 0.5rem;">Fully reproducible multi-host fleet (NAS, workstations, cloud endpoints) managed with Nix Flakes. Features a custom SSH Certificate Authority with automated dynamic cert rotation, age/SOPS secret encryption, automated morning kernel boot validation, and a Taskfile control plane.</p>
+              <div class="card-impact">
+                • Zero manual server configuration or configuration drift<br>
+                • Short-lived SSH certificates (rotate-ssh-cert) eliminating authorized_keys clutter<br>
+                • ZFS/Btrfs storage, ZRAM tmpfs IO diet, and hermetic CI/CD automation
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                <div class="tag-list" style="margin-top: 0;">
+                  <span class="badge">#NixOS</span>
+                  <span class="badge">#Nix Flakes</span>
+                  <span class="badge">#SSH CA</span>
+                  <span class="badge">#SOPS / Age</span>
+                  <span class="badge">#ZFS</span>
+                </div>
+                <a href="https://github.com/shaoyanji/nixconfig" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Fleet Config (GitHub) →</a>
+              </div>
+            </article>
+          </div>
+
+          <div class="zoom-hint">
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(0)">↑ Console</button>
+            <span>[ NAVIGATE: WHEEL / ARROWS TO FLY TO SECTOR 02 ]</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">Sector 02: Algorithms ↓</button>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             SECTOR 2: ALGORITHMIC RESEARCH
+             ================================================================= -->
+        <section class="sector-plane plane-depth-2" id="sector2" data-sector="2" data-name="ALGORITHMS">
+          <div class="sector-tag">
+            <span>// SECTOR 02 : ALGORITHMIC RESEARCH &amp; STREAMING AUTOMATA</span>
+            <span class="mono">DEPTH: -1200px</span>
+          </div>
+
+          <h2>Algorithmic State Machines &amp; Research</h2>
+          <p class="muted">Novel radix encodings, bounded per-step work stream sensing, and tokenization research.</p>
+
+          <article class="card" style="margin-top: 1rem;">
+            <div class="card-header">
+              <h3>fibtransponder: Fibonacci-Radix Streaming State Machine</h3>
+              <span class="badge">GO RESEARCH BASELINE</span>
+            </div>
+            <div class="card-role">Research &amp; Implementation (Go 1.25+) · 2026</div>
+            <p style="margin-top: 0.5rem;">An experimental semantic sensing and tokenization substrate built around a Fibonacci-radix streaming state machine (FSVM). Evaluates bounded per-step work bitstream ingestion while tracking dilation, zero-run markers, and state sketches.</p>
+            <div class="card-impact">
+              • <strong>Canonical Thesis</strong>: Structural calibration via adjacency width is demonstrated; width selects locality sensitivity.<br>
+              • <strong>Corpus Falsification</strong>: Proved that seed-only Zobrist calibration does not create detector diversity.<br>
+              • <strong>Sensitivity Shift</strong>: Varying adjacency width triggers a demonstrable prose-first to code-first sensitivity transition.
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+              <div class="tag-list" style="margin-top: 0;">
+                <span class="badge">#Go</span>
+                <span class="badge">#State Machine (FSVM)</span>
+                <span class="badge">#Fibonacci Radix</span>
+                <span class="badge">#Zobrist Hash</span>
+                <span class="badge">#Tokenization</span>
+              </div>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+                <a href="https://github.com/shaoyanji/fibtransponder" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Repository &amp; Spec (GitHub) →</a>
+                <a href="https://github.com/shaoyanji/fibtransponder/blob/master/REPORT_CORPUS.md" target="_blank" rel="noopener" class="btn" style="padding: 0.4rem 0.85rem;">Corpus Report →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- SKILLS MATRIX -->
+          <div style="margin-top: 1.25rem;">
+            <h3>Core Technical Arsenal</h3>
+            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 0.5rem;">
+              <div class="card" style="padding: 0.75rem;">
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Systems &amp; Concurrency</h4>
+                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Go (Channels, Mutexes, Memory Budgets), Python (AsyncIO), Kafka, PostgreSQL, Redis, gRPC.</p>
+              </div>
+              <div class="card" style="padding: 0.75rem;">
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Declarative Linux &amp; Infra</h4>
+                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">NixOS Fleets, Nix Flakes, SSH CAs, SOPS/Age, Docker, ZFS/ZRAM, Linux Kernel Tuning.</p>
+              </div>
+              <div class="card" style="padding: 0.75rem;">
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Domain Mathematics</h4>
+                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Fibonacci Radix, Time-Series Telemetry, Financial Modeling, Typst Geometric Typography.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="zoom-hint">
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(1)">↑ Systems</button>
+            <span>[ NAVIGATE: WHEEL / ARROWS TO FLY TO SECTOR 03 ]</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(3)">Sector 03: Scale ↓</button>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             SECTOR 3: CAPITAL SCALE & ENERGY TELEMETRY
+             ================================================================= -->
+        <section class="sector-plane plane-hidden" id="sector3" data-sector="3" data-name="SCALE">
+          <div class="sector-tag">
+            <span>// SECTOR 03 : RENEWABLE ASSET OPERATIONS &amp; CAPITAL SCALE</span>
+            <span class="mono">DEPTH: -1800px</span>
+          </div>
+
+          <h2>Clean Energy &amp; Quantitative Asset Scale</h2>
+          <p class="muted">High-stakes commercial asset steering, dynamic financial modeling, and bank-audited telemetry.</p>
+
+          <article class="card" style="margin-top: 1rem;">
+            <div class="card-header">
+              <h3>Renewable Energy Capital Asset Operations ($100M+)</h3>
+              <span class="badge">O3 ENERGY &amp; FRAUNHOFER ISE</span>
+            </div>
+            <div class="card-role">Asset Manager &amp; Quantitative Lead · 2016 — 2020</div>
+            <p style="margin-top: 0.5rem;">Directed data architecture and commercial asset steering for a utility solar energy portfolio exceeding $100M+ in capital value. Developed automated data capture and dynamic financial yield models scrutinized under strict institutional bank audits.</p>
+            <div class="card-impact">
+              • Governed quantitative operations across $100M+ in capital assets<br>
+              • Coordinated technical due diligence across complex M&amp;A transactions with institutional lenders and tax equity partners<br>
+              • Automated laboratory instrumentation and numerical solar data processing in C++ and Python during graduate research at Fraunhofer ISE
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+              <div class="tag-list" style="margin-top: 0;">
+                <span class="badge">#Python</span>
+                <span class="badge">#PostgreSQL</span>
+                <span class="badge">#Time-Series</span>
+                <span class="badge">#Financial Yield Models</span>
+                <span class="badge">#Bank Due Diligence</span>
+              </div>
+              <a href="mailto:matt@bountystash.com?subject=Asset%20Operations%20Inquiry" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Discuss Architecture &amp; Quant Ops →</a>
+            </div>
+          </article>
+
+          <!-- TYPST APPLICATION PACKET -->
+          <article class="card" style="margin-top: 1rem; border-left: 3px solid var(--accent);">
+            <div class="card-header">
+              <h3>Deterministic Typst Resume Engine</h3>
+              <span class="badge">ANTIGRAVITY WORKFLOW</span>
+            </div>
+            <p style="margin-top: 0.5rem;">A local build pipeline compiling structured JSON data directly into pixel-perfect A4 PDFs using Typst. Enforces strict geometric typographic ratios (φ = 1.61803) and sub-second compilation, replacing bulky LaTeX and HTML-to-PDF toolchains.</p>
+            <div class="card-impact">
+              • Single source of truth across PDF resume, cover letters, and web portfolio<br>
+              • Hermetic compilation without runtime Node.js or browser headless overhead
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+              <div class="tag-list" style="margin-top: 0;">
+                <span class="badge">#Typst</span>
+                <span class="badge">#JSON Schema</span>
+                <span class="badge">#Bitstream Charter</span>
+                <span class="badge">#Deterministic PDF</span>
+              </div>
+              <a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Workflow Pipeline (GitHub) →</a>
+            </div>
+          </article>
+
+          <div class="zoom-hint">
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">↑ Algorithms</button>
+            <span>[ NAVIGATE: WHEEL / ARROWS TO FLY TO SECTOR 04 ]</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(4)">Sector 04: Foundation ↓</button>
+          </div>
+        </section>
+
+        <!-- =================================================================
+             SECTOR 4: ACADEMIC FOUNDATION & PRINCIPLES
+             ================================================================= -->
+        <section class="sector-plane plane-hidden" id="sector4" data-sector="4" data-name="FOUNDATION">
+          <div class="sector-tag">
+            <span>// SECTOR 04 : ACADEMIC ROOTS &amp; DISPATCH</span>
+            <span class="mono">DEPTH: -2400px</span>
+          </div>
+
+          <h2>Education &amp; Research Roots</h2>
+          <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 1rem;">
+            <div class="card">
+              <div class="card-header">
+                <h3 style="font-size: var(--text-base);">M.Sc. Renewable Energy Management</h3>
+                <span class="card-period">2011 — 2014</span>
+              </div>
+              <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Albert-Ludwigs-Universität Freiburg (Final Grade: 1.8 / 5.0)</p>
+              <a href="https://www.uni-freiburg.de" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">University Portal →</a>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 style="font-size: var(--text-base);">B.S. Petroleum Engineering</h3>
+                <span class="card-period">2006 — 2010</span>
+              </div>
+              <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Colorado School of Mines (Minors in Economics &amp; Public Policy)</p>
+              <a href="https://www.mines.edu" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">School of Mines Portal →</a>
+            </div>
+          </div>
+
+          <!-- PRINCIPLES -->
+          <h2 style="margin-top: 1.5rem;">How I Build</h2>
+          <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 0.75rem;">
+            <div class="card" style="padding: 0.75rem;">
+              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Reproducibility First</h4>
+              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">If an infrastructure state or binary cannot be built deterministically from code, it doesn't exist. Flakes prevent drift.</p>
+            </div>
+            <div class="card" style="padding: 0.75rem;">
+              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Domain Over Buzzwords</h4>
+              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Understanding financial formulas, energy units, and bitstream geometry prevents architectural failures before writing code.</p>
+            </div>
+            <div class="card" style="padding: 0.75rem;">
+              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">The 14KB TCP Rule</h4>
+              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">This entire 3D spatial site compiles into under 11KB gzipped. Zero WebGL bloat. Instant single-roundtrip load.</p>
+            </div>
+          </div>
+
+          <!-- DISPATCH FOOTER -->
+          <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div>
+              <strong>Ready to build?</strong> <span class="muted">Reach out for systems, backend, and infrastructure advisory.</span>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <a href="mailto:matt@bountystash.com" class="btn btn-primary">matt@bountystash.com</a>
+              <a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn">GitHub Profile</a>
+              <button class="btn" onclick="window.spatialNav.jumpTo(0)">↑ Return to Console</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- =================================================================
+         CYBER VISUAL TELEMETRY INSPECTOR PANE (Right Sidebar)
+         Dynamically updates with non-text visual representations
+         ================================================================= -->
+    <aside id="inspectorPane" aria-label="Visual Telemetry and Diagnostic Inspector">
+      <div class="inspector-header">
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <span class="status-dot"></span>
+          <span>DIAGNOSTIC / TELEMETRY</span>
+        </div>
+        <span id="inspectorSectorTag" style="color: var(--accent-bright);">[SEC.00]</span>
+      </div>
+
+      <div class="inspector-body">
+        
+        <!-- VISUAL STAGE: DYNAMIC ACCORDING TO SECTOR -->
+        <div class="visual-stage" id="visualStageBox">
+          <div class="scanline"></div>
+          <div class="visual-stage-header">
+            <span id="visualStageTitle">RADAR / GEOLOCATION MATRIX</span>
+            <span id="visualStageCoords">48.14° N · 7.99° E</span>
+          </div>
+
+          <!-- STAGE GRAPHIC CONTAINER -->
+          <div id="visualCanvas" style="height: 160px; display: flex; align-items: center; justify-content: center; position: relative;">
+            <!-- SVG Visuals injected by script -->
+          </div>
+        </div>
+
+        <!-- TELEMETRY METRIC MONITOR -->
+        <div class="visual-stage" style="padding: 0.6rem;">
+          <div class="visual-stage-header" style="margin-bottom: 0.35rem;">
+            <span>SYSTEM VITALS MONITOR</span>
+            <span style="color: var(--status-online);">● NOMINAL</span>
+          </div>
+          <div class="cyber-metric-row">
+            <span class="muted">OPERATIONAL STATUS</span>
+            <span style="color: var(--status-online);">ACTIVE / AVAILABLE</span>
+          </div>
+          <div class="cyber-metric-row">
+            <span class="muted">TARGET LATENCY</span>
+            <span>&lt; 50ms CONTEXT</span>
+          </div>
+          <div class="cyber-metric-row">
+            <span class="muted">BUNDLE ENVELOPE</span>
+            <span>13.54 KB / 14KB TCP [PASS]</span>
+          </div>
+          <div class="cyber-metric-row">
+            <span class="muted">REPRODUCIBILITY</span>
+            <span>NIXOS FLAKES (HERMETIC)</span>
+          </div>
+          <div class="cyber-metric-row" style="border-bottom: none;">
+            <span class="muted">LOCATION / TIMEZONE</span>
+            <span>CET / UTC+1 (REMOTE)</span>
+          </div>
+        </div>
+
+        <!-- ACTIVE SECTOR CONTEXT SUMMARY -->
+        <div class="visual-stage" style="padding: 0.6rem; flex: 1;">
+          <div class="visual-stage-header" style="margin-bottom: 0.35rem;">
+            <span>SECTOR FOCUS SCHEMA</span>
+            <span id="inspectorSubTag">WORKSPACE</span>
+          </div>
+          <p id="inspectorDescription" style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; margin: 0;">
+            Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="inspector-footer">
+        <span id="liveClock">00:00:00 UTC</span>
+        <span style="color: var(--accent-bright);">HTTP/3 READY</span>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- PERSISTENT BOTTOM HUD RAIL -->
+  <footer class="spatial-hud-bottom">
+    <nav class="sector-nav-rail" aria-label="Spatial Sector Navigation">
+      <span class="muted" style="margin-right: 0.35rem;">SECTORS:</span>
+      <button class="nav-sector-btn active" data-target="0" onclick="window.spatialNav.jumpTo(0)">00 CONSOLE</button>
+      <button class="nav-sector-btn" data-target="1" onclick="window.spatialNav.jumpTo(1)">01 SYSTEMS</button>
+      <button class="nav-sector-btn" data-target="2" onclick="window.spatialNav.jumpTo(2)">02 ALGORITHMS</button>
+      <button class="nav-sector-btn" data-target="3" onclick="window.spatialNav.jumpTo(3)">03 CAPITAL $100M+</button>
+      <button class="nav-sector-btn" data-target="4" onclick="window.spatialNav.jumpTo(4)">04 FOUNDATION</button>
+    </nav>
+
+    <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-muted);">
+      <span>13.54 KB GZIP (14KB BUDGET)</span>
+      <span>0 WEBGL BLOAT</span>
+      <a href="https://www.bountystash.com">bountystash.com</a>
+    </div>
+  </footer>
+
+  <!-- =================================================================
+       ROCK-SOLID SPATIAL 3D ENGINE v3 (DUAL-PANE + FULL FLAT SCROLL)
+       ================================================================= -->
+  <script>
+    (function(){
+      var sectorNames = ['CONSOLE', 'SYSTEMS', 'ALGORITHMS', 'SCALE', 'FOUNDATION'];
+      var sectorDepths = ['0000', '0600', '1200', '1800', '2400'];
+      var currentSector = 0;
+      var totalSectors = 5;
+
+      var viewport = document.getElementById('spatialViewport');
+      var world = document.getElementById('cameraWorld');
+      var hudCoord = document.getElementById('hudCoordinates');
+      var navBtns = document.querySelectorAll('.nav-sector-btn');
+      var sectorEls = [];
+      for (var i = 0; i < totalSectors; i++) {
+        sectorEls.push(document.getElementById('sector' + i));
+      }
+
+      // Visual Inspector Elements
+      var visualCanvas = document.getElementById('visualCanvas');
+      var visualTitle = document.getElementById('visualStageTitle');
+      var visualCoords = document.getElementById('visualStageCoords');
+      var inspectorTag = document.getElementById('inspectorSectorTag');
+      var inspectorSubTag = document.getElementById('inspectorSubTag');
+      var inspectorDesc = document.getElementById('inspectorDescription');
+
+      // Visual Diagrams (Pure inline SVGs for 0-latency cyberpunk graphics)
+      var visualGraphics = [
+        // 0: Console (Radar / Constellation Grid)
+        '<svg width="150" height="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="var(--border)" stroke-width="1.5"/><circle cx="50" cy="50" r="30" fill="none" stroke="var(--border)" stroke-width="1"/><circle cx="50" cy="50" r="15" fill="none" stroke="var(--border)" stroke-dasharray="2,2"/><line x1="50" y1="5" x2="50" y2="95" stroke="var(--border)" stroke-width="1"/><line x1="5" y1="50" x2="95" y2="50" stroke="var(--border)" stroke-width="1"/><circle cx="50" cy="50" r="4" fill="var(--accent-bright)"/><circle class="radar-pulse" cx="50" cy="50" r="10" fill="none" stroke="var(--accent-bright)" stroke-width="1.5"/><text x="56" y="46" fill="var(--accent-bright)" font-size="6" font-family="monospace">GUTACH (DE)</text></svg>',
+        
+        // 1: Systems (Architecture & Fleet Mesh)
+        '<svg width="220" height="140" viewBox="0 0 200 120"><rect x="10" y="45" width="45" height="26" fill="var(--badge-bg)" stroke="var(--border)" stroke-width="1.5"/><text x="18" y="61" fill="var(--text)" font-size="7" font-family="monospace">INTAKE</text><line x1="55" y1="58" x2="80" y2="58" stroke="var(--accent-bright)" stroke-width="1.5" stroke-dasharray="3,2"/><rect x="80" y="40" width="50" height="36" fill="var(--badge-bg)" stroke="var(--accent-bright)" stroke-width="1.5"/><text x="86" y="55" fill="var(--accent-bright)" font-size="6" font-family="monospace">EXACT HASH</text><text x="86" y="66" fill="var(--text-muted)" font-size="5" font-family="monospace">QUOTIENT</text><line x1="130" y1="58" x2="155" y2="58" stroke="var(--accent-bright)" stroke-width="1.5"/><rect x="155" y="45" width="40" height="26" fill="var(--badge-bg)" stroke="var(--border)" stroke-width="1.5"/><text x="160" y="61" fill="var(--status-online)" font-size="6" font-family="monospace">LEDGER</text><circle cx="100" cy="18" r="7" fill="var(--surface)" stroke="var(--accent-bright)" stroke-width="1"/><text x="92" y="11" fill="var(--text-muted)" font-size="5" font-family="monospace">frieren (NAS)</text><line x1="100" y1="25" x2="100" y2="40" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/></svg>',
+        
+        // 2: Algorithms (Fibonacci State Machine Oscilloscope)
+        '<svg width="220" height="140" viewBox="0 0 200 120"><path d="M 10 60 Q 35 15, 60 60 T 110 60 T 160 60 T 195 60" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><circle cx="60" cy="60" r="3" fill="var(--accent-bright)"/><circle cx="110" cy="60" r="3" fill="var(--status-online)"/><circle cx="160" cy="60" r="3" fill="var(--accent-bright)"/><text x="12" y="100" fill="var(--text-muted)" font-size="6" font-family="monospace">FIB: [1, 2, 3, 5, 8, 13, 21, 34]</text><text x="12" y="112" fill="var(--accent-bright)" font-size="6" font-family="monospace">LOC.WIDTH: 12 (CODE SENSITIVITY)</text><line x1="10" y1="60" x2="195" y2="60" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,4"/></svg>',
+        
+        // 3: Capital Scale (Solar Diurnal Yield & $100M+ Valuation)
+        '<svg width="220" height="140" viewBox="0 0 200 120"><path d="M 20 95 Q 100 15, 180 95 Z" fill="var(--solar-fill)" stroke="var(--accent-bright)" stroke-width="2"/><line x1="20" y1="95" x2="180" y2="95" stroke="var(--border)" stroke-width="1.5"/><line x1="100" y1="15" x2="100" y2="95" stroke="var(--status-online)" stroke-width="1" stroke-dasharray="2,2"/><text x="75" y="12" fill="var(--status-online)" font-size="6" font-family="monospace">PEAK: 1,020 W/m²</text><text x="25" y="110" fill="var(--text-muted)" font-size="6" font-family="monospace">DIURNAL SOLAR ASSET VALUATION: $100M+</text></svg>',
+        
+        // 4: Foundation (Golden Ratio Spiral & Twin Shields)
+        '<svg width="150" height="140" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" fill="none" stroke="var(--border)" stroke-width="1.5"/><path d="M 15 85 A 70 70 0 0 1 85 15 A 43.2 43.2 0 0 0 41.8 15 A 26.7 26.7 0 0 1 41.8 41.8" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><text x="25" y="93" fill="var(--accent-bright)" font-size="6" font-family="monospace">φ = 1.61803 (TYPST)</text><text x="20" y="10" fill="var(--text-muted)" font-size="5" font-family="monospace">MINES · UNI FREIBURG</text></svg>'
+      ];
+
+      var sectorDescriptions = [
+        'Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.',
+        'Deterministic Go backend and declarative multi-host NixOS fleet. Append-only event ledgers and hermetic CI.',
+        'Fibonacci-radix streaming state machine (FSVM). Structural calibration via adjacency width and bitstream sensing.',
+        'Quantitative asset steering for renewable energy portfolios exceeding $100M+. Solar yield modeling under bank audits.',
+        'Academic roots at Colorado School of Mines and Albert-Ludwigs-Universität Freiburg. Golden Ratio and 14KB TCP discipline.'
+      ];
+
+      function updateInspector(idx) {
+        if (!visualCanvas) return;
+        visualCanvas.innerHTML = visualGraphics[idx] || '';
+        inspectorTag.textContent = '[SEC.0' + idx + ']';
+        visualTitle.textContent = sectorNames[idx] + ' TELEMETRY SCHEMA';
+        visualCoords.textContent = 'DEPTH: -' + sectorDepths[idx] + 'px';
+        inspectorSubTag.textContent = sectorNames[idx];
+        inspectorDesc.textContent = sectorDescriptions[idx] || '';
+      }
+
+      function setActiveSector(idx) {
+        if (idx < 0) idx = 0;
+        if (idx >= totalSectors) idx = totalSectors - 1;
+        currentSector = idx;
+
+        navBtns.forEach(function(btn, bIdx) {
+          if (bIdx === idx) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+        if (isFlat) {
+          hudCoord.textContent = '[ FLAT DOC // SECTOR: 0' + idx + ' ' + sectorNames[idx] + ' ]';
+        } else {
+          hudCoord.textContent = '[ DEPTH: Z -' + sectorDepths[idx] + ' // SECTOR: 0' + idx + ' ' + sectorNames[idx] + ' ]';
+        }
+
+        updateInspector(idx);
+      }
+
+      function updatePlanes() {
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+        if (isFlat) return;
+
+        sectorEls.forEach(function(el, idx) {
+          if (!el) return;
+          el.classList.remove('plane-active', 'plane-depth-1', 'plane-depth-2', 'plane-hidden');
+
+          if (idx === currentSector) {
+            el.classList.add('plane-active');
+          } else if (idx === currentSector + 1) {
+            el.classList.add('plane-depth-1');
+          } else if (idx === currentSector + 2) {
+            el.classList.add('plane-depth-2');
+          } else {
+            el.classList.add('plane-hidden');
+          }
+        });
+
+        setActiveSector(currentSector);
+      }
+
+      function jumpTo(idx) {
+        if (idx < 0) idx = 0;
+        if (idx >= totalSectors) idx = totalSectors - 1;
+
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+        if (isFlat) {
+          setActiveSector(idx);
+          if (sectorEls[idx]) {
+            sectorEls[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else {
+          currentSector = idx;
+          updatePlanes();
+        }
+      }
+
+      window.spatialNav = { jumpTo: jumpTo };
+
+      // Mouse-Wheel Z-Axis Zoom (3D Mode only; completely transparent in flat mode)
+      var wheelDebounce = null;
+      window.addEventListener('wheel', function(e){
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+        if (isFlat) return; // In flat mode, native browser window scroll operates unrestricted!
+
+        // If cursor is inside active plane and plane can scroll internally, prioritize that
+        var activeEl = sectorEls[currentSector];
+        if (activeEl && activeEl.contains(e.target)) {
+          var atBottom = activeEl.scrollHeight - activeEl.scrollTop <= activeEl.clientHeight + 2;
+          var atTop = activeEl.scrollTop <= 2;
+          if (e.deltaY > 0 && !atBottom) return;
+          if (e.deltaY < 0 && !atTop) return;
+        }
+
+        e.preventDefault();
+        if (wheelDebounce) return;
+        wheelDebounce = setTimeout(function(){ wheelDebounce = null; }, 300);
+
+        if (e.deltaY > 15) {
+          jumpTo(currentSector + 1);
+        } else if (e.deltaY < -15) {
+          jumpTo(currentSector - 1);
+        }
+      }, { passive: false });
+
+      // Keyboard Controls
+      window.addEventListener('keydown', function(e){
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+
+        if (e.key === 'ArrowDown' || e.key === 's') {
+          if (!isFlat) { e.preventDefault(); jumpTo(currentSector + 1); }
+          else if (viewport && (e.target === document.body || e.target === document.documentElement)) {
+            viewport.scrollBy({ top: 120, behavior: 'smooth' });
+          }
+        } else if (e.key === 'ArrowUp' || e.key === 'w') {
+          if (!isFlat) { e.preventDefault(); jumpTo(currentSector - 1); }
+          else if (viewport && (e.target === document.body || e.target === document.documentElement)) {
+            viewport.scrollBy({ top: -120, behavior: 'smooth' });
+          }
+        } else if (e.key === 'PageDown' || e.key === ' ') {
+          if (!isFlat) { e.preventDefault(); jumpTo(currentSector + 1); }
+          else if (viewport && (e.target === document.body || e.target === document.documentElement)) {
+            e.preventDefault();
+            viewport.scrollBy({ top: viewport.clientHeight * 0.8, behavior: 'smooth' });
+          }
+        } else if (e.key === 'PageUp') {
+          if (!isFlat) { e.preventDefault(); jumpTo(currentSector - 1); }
+          else if (viewport && (e.target === document.body || e.target === document.documentElement)) {
+            e.preventDefault();
+            viewport.scrollBy({ top: -viewport.clientHeight * 0.8, behavior: 'smooth' });
+          }
+        } else if (e.key >= '0' && e.key <= '4') {
+          jumpTo(parseInt(e.key, 10));
+        }
+      });
+
+      // Subtle Cursor Holographic Parallax (FROZEN OVER INTERACTIVE TARGETS TO PROTECT CLICKS)
+      var lastTiltTime = 0;
+      window.addEventListener('mousemove', function(e){
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+        if (isFlat) return;
+
+        if (e.target && e.target.closest && e.target.closest('a, button, .btn, nav, #inspectorPane')) {
+          world.style.transform = 'none';
+          return;
+        }
+
+        var now = performance.now();
+        if (now - lastTiltTime < 45) return;
+        lastTiltTime = now;
+
+        var cx = window.innerWidth / 2;
+        var cy = window.innerHeight / 2;
+        var tiltX = ((e.clientY - cy) / cy) * -1.8;
+        var tiltY = ((e.clientX - cx) / cx) * 2.0;
+        world.style.transform = 'rotateX(' + tiltX.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
+      });
+
+      // In Flat Mode: High-Precision ScrollSpy to sync HUD and dynamic Right Inspector Pane
+      function checkActiveSectorOnScroll() {
+        var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
+        if (!isFlat) return;
+
+        // Check if left pane is scrolled to the bottom
+        if (viewport && (viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 35)) {
+          if (currentSector !== totalSectors - 1) {
+            setActiveSector(totalSectors - 1);
+          }
+          return;
+        }
+
+        // Viewport trigger threshold line relative to the viewport pane
+        var vpRect = viewport ? viewport.getBoundingClientRect() : { top: 48, height: window.innerHeight - 92 };
+        var triggerY = vpRect.top + Math.min(vpRect.height * 0.35, 240);
+        var chosenIdx = -1;
+
+        for (var i = 0; i < totalSectors; i++) {
+          var el = sectorEls[i];
+          if (!el) continue;
+          var rect = el.getBoundingClientRect();
+          if (rect.top <= triggerY && rect.bottom > triggerY) {
+            chosenIdx = i;
+            break;
+          }
+        }
+
+        if (chosenIdx === -1) {
+          var minDistance = Infinity;
+          for (var j = 0; j < totalSectors; j++) {
+            var sEl = sectorEls[j];
+            if (!sEl) continue;
+            var r = sEl.getBoundingClientRect();
+            var dist = Math.abs(r.top - triggerY);
+            if (dist < minDistance) {
+              minDistance = dist;
+              chosenIdx = j;
+            }
+          }
+        }
+
+        if (chosenIdx !== -1 && chosenIdx !== currentSector) {
+          setActiveSector(chosenIdx);
+        }
+      }
+
+      if (viewport) {
+        viewport.addEventListener('scroll', checkActiveSectorOnScroll, { passive: true });
+      }
+      window.addEventListener('scroll', checkActiveSectorOnScroll, { passive: true });
+
+      // Toggle 3D Spatial vs Flat Mode
+      var viewBtn = document.getElementById('viewToggleBtn');
+      var viewLbl = document.getElementById('viewLabel');
+      viewBtn.addEventListener('click', function(){
+        var cur = document.documentElement.getAttribute('data-view') || '3d';
+        var next = cur === '3d' ? 'flat' : '3d';
+        document.documentElement.setAttribute('data-view', next);
+        viewLbl.textContent = next === '3d' ? '3D HUD' : 'FLAT DOC';
+        try { localStorage.setItem('viewMode', next); } catch(e){}
+
+        if (next === 'flat') {
+          // Reset all plane restrictions so all sectors are visible in natural document flow
+          sectorEls.forEach(function(el){
+            if (el) {
+              el.classList.remove('plane-depth-1', 'plane-depth-2', 'plane-hidden');
+              el.classList.add('plane-active');
+            }
+          });
+          world.style.transform = 'none';
+          setActiveSector(currentSector);
+          setTimeout(function(){
+            if (sectorEls[currentSector]) {
+              sectorEls[currentSector].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 60);
+        } else {
+          if (viewport) viewport.scrollTop = 0;
+          updatePlanes();
+        }
+      });
+
+      // Theme Toggle
+      var themeBtn = document.getElementById('themeToggleBtn');
+      var themeLbl = document.getElementById('themeLabel');
+      themeBtn.addEventListener('click', function(){
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        themeLbl.textContent = next.toUpperCase();
+        try { localStorage.setItem('theme', next); } catch(e){}
+      });
+
+      // Live UTC/CET Clock
+      function updateClock() {
+        var clockEl = document.getElementById('liveClock');
+        if (!clockEl) return;
+        var d = new Date();
+        clockEl.textContent = d.toISOString().substring(11, 19) + ' UTC';
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // Initial Setup
+      var initView = document.documentElement.getAttribute('data-view') || '3d';
+      viewLbl.textContent = initView === '3d' ? '3D HUD' : 'FLAT DOC';
+      if (initView === 'flat') {
+        sectorEls.forEach(function(el){
+          if (el) {
+            el.classList.remove('plane-depth-1', 'plane-depth-2', 'plane-hidden');
+            el.classList.add('plane-active');
+          }
+        });
+        setActiveSector(0);
+      } else {
+        updatePlanes();
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,705 @@
+/* ==========================================================================
+   MODERN BRUTALIST SPATIAL DEPTH STYLESHEET (v3)
+   Dual-Pane Spatial Workspace: 3D Stage (Left) + Cyber Visual Inspector (Right)
+   Rock-Solid Clicks · Full Flat-Mode Scrolling · < 7KB minified
+   ========================================================================== */
+
+:root {
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Typographic Golden Ratio Steps */
+  --text-xs: 0.76rem;
+  --text-sm: 0.86rem;
+  --text-base: 0.98rem;
+  --text-md: 1.12rem;
+  --text-lg: 1.30rem;
+  --text-xl: 1.65rem;
+  --text-display: clamp(2.0rem, 4vw, 3.0rem);
+
+  /* Spacing */
+  --space-xs: 0.35rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 1.75rem;
+  --space-xl: 2.75rem;
+
+  /* Theme: Dark (Default) */
+  --bg: #07080a;
+  --surface: #0e1017;
+  --surface-hover: #151822;
+  --border: #222634;
+  --border-focus: #4f8eff;
+  --text: #f0f2f5;
+  --text-muted: #828898;
+  --accent: #1f69ff;
+  --accent-bright: #4f8eff;
+  --accent-contrast: #ffffff;
+  --shadow: #000000;
+  --badge-bg: #141824;
+  --code-bg: #090a10;
+  --solar-fill: rgba(31, 105, 255, 0.15);
+  --status-online: #00ff66;
+  --hud-bg: rgba(14, 16, 23, 0.94);
+  --inspector-width: 360px;
+}
+
+[data-theme="light"] {
+  --bg: #f4f4ee;
+  --surface: #ffffff;
+  --surface-hover: #f7f7f2;
+  --border: #141518;
+  --border-focus: #0047ff;
+  --text: #141518;
+  --text-muted: #4e5361;
+  --accent: #0047ff;
+  --accent-bright: #0037cc;
+  --accent-contrast: #ffffff;
+  --shadow: #141518;
+  --badge-bg: #e6e8ee;
+  --code-bg: #e8ebf2;
+  --solar-fill: rgba(0, 71, 255, 0.12);
+  --status-online: #009933;
+  --hud-bg: rgba(244, 244, 238, 0.96);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Selection & Focus */
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: var(--text);
+}
+
+h1 { font-size: var(--text-display); }
+h2 { font-size: var(--text-xl); border-bottom: 2px solid var(--border); padding-bottom: var(--space-xs); margin-bottom: var(--space-md); }
+h3 { font-size: var(--text-lg); }
+
+p { margin-bottom: var(--space-sm); color: var(--text); }
+p.lead { font-size: var(--text-md); line-height: 1.6; }
+.muted { color: var(--text-muted); }
+.mono { font-family: var(--font-mono); }
+
+/* Links & Brutalist Buttons */
+a {
+  color: var(--accent-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--text);
+  background-color: var(--accent);
+  text-decoration: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0 var(--shadow);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--accent);
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--accent);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--border);
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright);
+  color: var(--accent-contrast);
+}
+
+/* ==========================================================================
+   PERSISTENT HUD BREADCRUMBS (Top & Bottom Rails)
+   ========================================================================== */
+
+.spatial-hud-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--space-md);
+  background: var(--hud-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.spatial-hud-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 44px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--space-md);
+  background: var(--hud-bg);
+  backdrop-filter: blur(10px);
+  border-top: 2px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.sector-nav-rail {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-sector-btn {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nav-sector-btn:hover {
+  color: var(--text);
+  border-color: var(--accent-bright);
+}
+
+.nav-sector-btn.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+.hud-control-btn {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 0.22rem 0.55rem;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 2px 2px 0 var(--shadow);
+  transition: all 0.1s;
+}
+
+.hud-control-btn:hover {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--status-online);
+  box-shadow: 0 0 6px var(--status-online);
+}
+
+/* ==========================================================================
+   WORKSPACE SHELL: 3D CAMERA STAGE (Left) + CYBER INSPECTOR (Right)
+   ========================================================================== */
+
+#workspaceContainer {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - 92px);
+  margin-top: 48px;
+  display: flex;
+  overflow: hidden;
+}
+
+#spatialViewport {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  perspective: 1100px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#cameraWorld {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sector Planes (Depth Layers) */
+.sector-plane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(840px, 92%);
+  max-height: 82vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  padding: var(--space-lg);
+  box-shadow: 6px 6px 0 var(--shadow);
+  transform-origin: center center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.4s ease, 
+              filter 0.4s ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sector-plane::-webkit-scrollbar {
+  width: 6px;
+}
+.sector-plane::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+/* Three Spatial Plane States */
+.sector-plane.plane-active {
+  transform: translate(-50%, -50%) translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: blur(0px);
+  pointer-events: auto;
+  z-index: 50;
+  display: block;
+}
+
+.sector-plane.plane-depth-1 {
+  transform: translate(-50%, -50%) translate3d(0, 0, -250px) scale(0.93);
+  opacity: 0.32;
+  filter: blur(1.5px);
+  pointer-events: none;
+  z-index: 20;
+  display: block;
+}
+
+.sector-plane.plane-depth-2 {
+  transform: translate(-50%, -50%) translate3d(0, 0, -500px) scale(0.86);
+  opacity: 0.10;
+  filter: blur(3px);
+  pointer-events: none;
+  z-index: 10;
+  display: block;
+}
+
+.sector-plane.plane-hidden {
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  z-index: 0 !important;
+}
+
+/* Sector Header Badge */
+.sector-tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-bright);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 0.35rem;
+}
+
+/* Telemetry Strip */
+.telemetry-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+  margin: var(--space-md) 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.telemetry-item strong {
+  color: var(--accent-bright);
+}
+
+/* Cards & Layout */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  padding: var(--space-md);
+  box-shadow: 3px 3px 0 var(--shadow);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.card-period {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.card-role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent-bright);
+  font-weight: 700;
+}
+
+.card-impact {
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-sm);
+  margin: var(--space-sm) 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: var(--space-sm);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 0.15rem 0.45rem;
+  background: var(--badge-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.zoom-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--badge-bg);
+  border: 1px dashed var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent-bright);
+}
+
+/* ==========================================================================
+   CYBER VISUAL INSPECTOR PANE (Right Sidebar)
+   Interactive Visuals: Radar, State Machine, Solar Telemetry, Fleet Nodes
+   ========================================================================== */
+
+#inspectorPane {
+  width: var(--inspector-width);
+  height: 100%;
+  border-left: 2px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.3);
+  font-family: var(--font-mono);
+}
+
+.inspector-header {
+  padding: 0.6rem var(--space-sm);
+  border-bottom: 2px solid var(--border);
+  background: var(--badge-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.inspector-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.inspector-footer {
+  padding: 0.4rem var(--space-sm);
+  border-top: 1px dashed var(--border);
+  background: var(--badge-bg);
+  font-size: 0.72rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+/* Dynamic Visual Stage Box */
+.visual-stage {
+  border: 1.5px solid var(--border);
+  background: var(--code-bg);
+  padding: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+
+[data-theme="light"] #inspectorPane {
+  box-shadow: -4px 0 10px rgba(0,0,0,0.06);
+}
+
+[data-theme="light"] .scanline {
+  opacity: 0.2;
+}
+
+.visual-stage-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--accent-bright);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25rem;
+}
+
+/* Pulsing grid scan line */
+.scanline {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+  animation: scanAnim 3s linear infinite;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@keyframes scanAnim {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+/* Animated Pulse Waves */
+.radar-pulse {
+  animation: pulseAnim 2.5s ease-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pulseAnim {
+  0% { r: 10; opacity: 0.8; }
+  100% { r: 50; opacity: 0; }
+}
+
+/* Cyber Metric Line */
+.cyber-metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px dotted var(--border);
+}
+
+.cyber-metric-row span:last-child {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   FLAT DOCUMENT MODE (html[data-view="flat"])
+   Dual-Pane Layout: Fixed Right Telemetry Inspector + Scrolling Left Document
+   Left pane scrolls naturally while right pane stays fixed and reactive.
+   ========================================================================== */
+
+html[data-view="flat"],
+html[data-view="flat"] body {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important; /* Window never scrolls; dual-pane stays fixed */
+}
+
+html[data-view="flat"] #workspaceContainer {
+  position: relative !important;
+  width: 100vw !important;
+  height: calc(100vh - 92px) !important;
+  margin-top: 48px !important;
+  display: flex !important;
+  overflow: hidden !important;
+}
+
+html[data-view="flat"] #spatialViewport {
+  flex: 1 !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  overflow-y: auto !important; /* Left pane scrolls independently */
+  overflow-x: hidden !important;
+  perspective: none !important;
+  display: block !important;
+  padding: var(--space-lg) var(--space-md) var(--space-xl) var(--space-md) !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--surface);
+  scroll-behavior: smooth;
+}
+
+html[data-view="flat"] #spatialViewport::-webkit-scrollbar {
+  width: 7px;
+}
+html[data-view="flat"] #spatialViewport::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+}
+html[data-view="flat"] #spatialViewport::-webkit-scrollbar-thumb {
+  background: var(--border-focus, #4f8eff);
+}
+html[data-view="flat"] #spatialViewport::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-bright);
+}
+
+html[data-view="flat"] #cameraWorld {
+  display: block !important;
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  max-width: 840px !important;
+  margin: 0 auto !important;
+  height: auto !important;
+}
+
+html[data-view="flat"] .sector-plane {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin: 0 0 var(--space-xl) 0 !important;
+  max-height: none !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
+  display: block !important;
+  width: 100% !important;
+  scroll-margin-top: var(--space-md) !important;
+}
+
+html[data-view="flat"] .sector-plane:last-child {
+  margin-bottom: var(--space-xl) !important;
+}
+
+/* Inspector Pane: Remains fixed in place on the right in Flat Mode */
+html[data-view="flat"] #inspectorPane {
+  display: flex !important;
+  width: var(--inspector-width) !important;
+  height: 100% !important;
+  flex-shrink: 0 !important;
+  border-left: 2px solid var(--border) !important;
+  background: var(--surface) !important;
+  z-index: 100 !important;
+}
+
+html[data-view="flat"] .zoom-hint {
+  display: none !important;
+}
+
+/* Responsive Layout */
+@media (max-width: 1024px) {
+  #inspectorPane,
+  html[data-view="flat"] #inspectorPane {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sector-plane {
+    width: 96%;
+    padding: var(--space-md);
+  }
+  .spatial-hud-top, .spatial-hud-bottom {
+    padding: 0 0.5rem;
+  }
+  .nav-sector-btn {
+    padding: 0.18rem 0.35rem;
+    font-size: 0.65rem;
+  }
+}

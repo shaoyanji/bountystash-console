@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-view="3d">
+<html lang="de" data-theme="dark" data-view="3d">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,19 +31,19 @@
     </div>
 
     <div id="hudCoordinates" style="color: var(--accent-bright); font-weight: 700;">
-      [ DEPTH: Z 0000 // SECTOR: 00 CONSOLE ]
+      [ TIEFE: Z 0000 // SEKTOR: 00 KONSOLE ]
     </div>
 
     <div style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
-      <span class="hud-control-btn" style="cursor: default;">[ <span style="color: var(--accent-bright);">EN</span> | <a href="/de/" style="color: var(--text-muted); text-decoration: none;">DE</a> ]</span>
-      <button id="crtToggleBtn" class="hud-control-btn" aria-label="Toggle CRT scanline filter">[ CRT: <span id="crtLabel">ON</span> ]</button>
-      <button id="sfxToggleBtn" class="hud-control-btn" aria-label="Toggle sound effects">[ SFX: <span id="sfxLabel">MUTE</span> ]</button>
-      <button id="viewToggleBtn" class="hud-control-btn" aria-label="Toggle 3D spatial or flat document view">[ VIEW: <span id="viewLabel">3D HUD</span> ]</button>
-      <button id="themeToggleBtn" class="hud-control-btn" aria-label="Toggle dark or light theme">[ <span id="themeLabel">DARK</span> ]</button>
+      <span class="hud-control-btn" style="cursor: default;">[ <a href="/" style="color: var(--text-muted); text-decoration: none;">EN</a> | <span style="color: var(--accent-bright);">DE</span> ]</span>
+      <button id="crtToggleBtn" class="hud-control-btn" aria-label="CRT-Scanline-Filter umschalten">[ CRT: <span id="crtLabel">ON</span> ]</button>
+      <button id="sfxToggleBtn" class="hud-control-btn" aria-label="Soundeffekte umschalten">[ SFX: <span id="sfxLabel">MUTE</span> ]</button>
+      <button id="viewToggleBtn" class="hud-control-btn" aria-label="3D- oder Dokumentenansicht umschalten">[ ANSICHT: <span id="viewLabel">3D HUD</span> ]</button>
+      <button id="themeToggleBtn" class="hud-control-btn" aria-label="Dunkles oder helles Farbschema">[ <span id="themeLabel">DARK</span> ]</button>
     </div>
   </header>
 
-  <!-- WORKSPACE CONTAINER (3D VIEWPORT ON LEFT + CYBER VISUAL INSPECTOR ON RIGHT) -->
+  <!-- WORKSPACE CONTAINER -->
   <div id="workspaceContainer">
 
     <!-- 3D SPATIAL VIEWPORT -->
@@ -51,72 +51,72 @@
       <div id="cameraWorld">
 
         <!-- =================================================================
-             SECTOR 0: THE WORKSHOP CONSOLE (Z: 0px)
+             SEKTOR 0: KONSOLE (Z: 0px)
              ================================================================= -->
-        <section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="CONSOLE">
+        <section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="KONSOLE">
           <div class="sector-tag">
-            <span>// SECTOR 00 : IDENTITY &amp; DISPATCH</span>
-            <span class="mono">DEPTH: 0000px</span>
+            <span>// SEKTOR 00 : IDENTITÄT &amp; DISPATCH</span>
+            <span class="mono">TIEFE: 0000px</span>
           </div>
 
           <h1 style="margin: 0.5rem 0;">Matt Ji</h1>
-          <p class="lead"><strong>Senior Systems &amp; Infrastructure Engineer</strong></p>
-          <p class="muted" style="margin-bottom: 0.75rem;">Go • NixOS • Concurrency • Energy &amp; Quantitative Infrastructure</p>
+          <p class="lead"><strong>Leitender System- und Infrastrukturingenieur</strong></p>
+          <p class="muted" style="margin-bottom: 0.75rem;">Go • NixOS • Nebenläufigkeit • Energie- und Quantitative Infrastruktur</p>
           <p>{{PROFILE_BIO}}</p>
 
           <!-- HORIZONTAL TELEMETRY STRIP -->
           <div class="telemetry-strip">
-            <div class="telemetry-item">OPS: <strong>$100M+ ASSETS</strong></div>
+            <div class="telemetry-item">PORTFOLIO: <strong>100M+ $ ASSETS</strong></div>
             <div class="telemetry-item">STACK: <strong>GO &amp; NIXOS</strong></div>
-            <div class="telemetry-item">EDUCATION: <strong>MINES &amp; FREIBURG</strong></div>
-            <div class="telemetry-item">AUTH: <strong>US &amp; GERMAN PR</strong></div>
+            <div class="telemetry-item">AUSBILDUNG: <strong>MINES &amp; FREIBURG</strong></div>
+            <div class="telemetry-item">STATUS: <strong>US &amp; NIEDERLASSUNG</strong></div>
           </div>
 
           <!-- RECRUITER FAST-PATH -->
           <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 1.25rem;">
-            • Status: <strong>US Citizen</strong> · <strong>German Permanent Residence (Niederlassungserlaubnis)</strong><br>
-            • Languages: <strong>English (Native)</strong> · <strong>German (Fluent C1)</strong><br>
-            • Setup: <strong>100% Remote (CET / US-East)</strong> · Available on short notice
+            • Status: <strong>US-Staatsbürger</strong> · <strong>Deutsche Niederlassungserlaubnis</strong><br>
+            • Sprachen: <strong>Englisch (Muttersprache)</strong> · <strong>Deutsch (Verhandlungssicher C1)</strong><br>
+            • Arbeitsweise: <strong>100% Remote (MEZ / US-Ostküste)</strong> · Kurzfristig verfügbar
           </div>
 
           <div class="tag-list" style="margin-bottom: 1rem;">
-            <a href="mailto:{{EMAIL}}" class="btn btn-primary">✉ Email Me</a>
-            <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">GitHub Profile</a>
+            <a href="mailto:{{EMAIL}}" class="btn btn-primary">✉ E-Mail senden</a>
+            <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">GitHub-Profil</a>
             <a href="{{LINKEDIN_URL}}" target="_blank" rel="noopener" class="btn">LinkedIn</a>
-            <button class="btn" onclick="window.spatialNav.jumpTo(1)">Enter Systems Sector →</button>
+            <button class="btn" onclick="window.spatialNav.jumpTo(1)">Zu Sektor 01: Systeme →</button>
           </div>
 
           <div class="zoom-hint">
-            <span>[ NAV: MOUSE WHEEL / ARROW DOWN TO ZOOM INTO SECTOR 01 ]</span>
+            <span>[ NAV: MAUSRAD / PFEILTASTE NACH UNTEN ZUM HINEINZOOMEN ]</span>
             <button class="btn" style="padding: 0.2rem 0.5rem; font-size: 0.7rem;" onclick="window.spatialNav.jumpTo(1)">Zoom In ↓</button>
           </div>
         </section>
 
         <!-- =================================================================
-             SECTOR 1: CORE SYSTEMS INFRASTRUCTURE
+             SEKTOR 1: KERN-SYSTEME
              ================================================================= -->
-        <section class="sector-plane plane-depth-1" id="sector1" data-sector="1" data-name="SYSTEMS">
+        <section class="sector-plane plane-depth-1" id="sector1" data-sector="1" data-name="SYSTEME">
           <div class="sector-tag">
-            <span>// SECTOR 01 : SYSTEMS &amp; DISTRIBUTED INFRASTRUCTURE</span>
-            <span class="mono">DEPTH: -0600px</span>
+            <span>// SEKTOR 01 : SYSTEME &amp; VERTEILTE INFRASTRUKTUR</span>
+            <span class="mono">TIEFE: -0600px</span>
           </div>
 
-          <h2>Core Systems &amp; Fleet Infrastructure</h2>
-          <p class="muted">Deterministic Go servers, append-only event ledgers, and zero-drift declarative Linux fleets.</p>
+          <h2>Kernsysteme &amp; Flotteninfrastruktur</h2>
+          <p class="muted">Deterministische Go-Server, Append-Only-Ledger und driftfreie deklarative Linux-Flotten.</p>
 
           <div class="cards-grid" style="margin-top: 1rem;">
             <!-- BOUNTYSTASH -->
             <article class="card">
               <div class="card-header">
-                <h3>Bountystash: Deterministic Work Engine</h3>
+                <h3>Bountystash: Deterministische Aufgaben-Engine</h3>
                 <span class="badge">GO SERVER</span>
               </div>
-              <div class="card-role">Creator &amp; Architect · 2024 — Present</div>
-              <p style="margin-top: 0.5rem;">A thin, server-rendered Go application turning unstructured task requirements into immutable, content-addressed specifications. Features an append-only event ledger, a keyboard-first terminal UI, and curl-friendly endpoints with zero frontend bloat.</p>
+              <div class="card-role">Urheber &amp; Architekt · 2024 — Heute</div>
+              <p style="margin-top: 0.5rem;">Schlanke, serverseitig gerenderte Go-Anwendung zur Überführung unstrukturierter Aufgabenanforderungen in unveränderliche, inhaltsadressierte Spezifikationen. Append-Only-Event-Ledger, tastaturfokussierte Terminal-Oberfläche und curl-fähige Endpunkte ohne Frontend-Ballast.</p>
               <div class="card-impact">
-                • Single-binary deployment with sub-millisecond route resolution<br>
-                • Content hashes &amp; projection quotient hashes for tamper-evident versioning<br>
-                • Dual-surface: readable markdown for agents, clean HTML for browsers, TUI for humans
+                • Single-Binary-Bereitstellung mit Routenauflösung im Sub-Millisekundenbereich<br>
+                • Content-Hashes &amp; Quotient-Hashes für manipulationssichere Versionierung<br>
+                • Dual-Surface: Markdown für Agenten, sauberes HTML für Browser, TUI für Menschen
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
                 <div class="tag-list" style="margin-top: 0;">
@@ -126,22 +126,22 @@
                   <span class="badge">#TUI</span>
                   <span class="badge">#Event Sourcing</span>
                 </div>
-                <a href="https://github.com/shaoyanji/bountystash" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Source Code (GitHub) →</a>
+                <a href="https://github.com/shaoyanji/bountystash" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Quellcode inspizieren (GitHub) →</a>
               </div>
             </article>
 
             <!-- NIXCONFIG FLEET -->
             <article class="card">
               <div class="card-header">
-                <h3>Multi-Host Declarative NixOS Fleet</h3>
+                <h3>Deklarative Multi-Host NixOS-Infrastruktur</h3>
                 <span class="badge">NIXCONFIG</span>
               </div>
-              <div class="card-role">Production-Grade Infrastructure · Active</div>
-              <p style="margin-top: 0.5rem;">Fully reproducible multi-host fleet (NAS, workstations, cloud endpoints) managed with Nix Flakes. Features a custom SSH Certificate Authority with automated dynamic cert rotation, age/SOPS secret encryption, automated morning kernel boot validation, and a Taskfile control plane.</p>
+              <div class="card-role">Produktionsflotte · Aktiv</div>
+              <p style="margin-top: 0.5rem;">Vollständig reproduzierbare Multi-Host-Flotte (NAS, Workstations, Cloud-Endpunkte), verwaltet mit Nix Flakes. Eigene SSH Certificate Authority mit dynamischer Rotation, Age/SOPS-Verschlüsselung, automatisierte Selbst-Upgrades und Taskfile-Steuerung.</p>
               <div class="card-impact">
-                • Zero manual server configuration or configuration drift<br>
-                • Short-lived SSH certificates (rotate-ssh-cert) eliminating authorized_keys clutter<br>
-                • ZFS/Btrfs storage, ZRAM tmpfs IO diet, and hermetic CI/CD automation
+                • Keine manuelle Serverkonfiguration oder Konfigurationsdrift<br>
+                • Kurzlebige SSH-Zertifikate (rotate-ssh-cert) ohne authorized_keys-Überladung<br>
+                • ZFS/Btrfs-Speicher, ZRAM Tmpfs-IO-Optimierung und hermetische CI/CD-Automation
               </div>
               <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
                 <div class="tag-list" style="margin-top: 0;">
@@ -151,203 +151,203 @@
                   <span class="badge">#SOPS / Age</span>
                   <span class="badge">#ZFS</span>
                 </div>
-                <a href="https://github.com/shaoyanji/nixconfig" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Fleet Config (GitHub) →</a>
+                <a href="https://github.com/shaoyanji/nixconfig" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Flottenkonfiguration (GitHub) →</a>
               </div>
             </article>
           </div>
 
           <div class="zoom-hint">
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(0)">↑ Console</button>
-            <span>[ NAVIGATE: WHEEL / ARROWS TO FLY TO SECTOR 02 ]</span>
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">Sector 02: Algorithms ↓</button>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(0)">↑ Konsole</button>
+            <span>[ NAVIGATION: MAUSRAD / PFEILTASTEN ZU SEKTOR 02 ]</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">Sektor 02: Algorithmen ↓</button>
           </div>
         </section>
 
         <!-- =================================================================
-             SECTOR 2: ALGORITHMIC RESEARCH
+             SEKTOR 2: ALGORITHMEN
              ================================================================= -->
-        <section class="sector-plane plane-depth-2" id="sector2" data-sector="2" data-name="ALGORITHMS">
+        <section class="sector-plane plane-depth-2" id="sector2" data-sector="2" data-name="ALGORITHMEN">
           <div class="sector-tag">
-            <span>// SECTOR 02 : ALGORITHMIC RESEARCH &amp; STREAMING AUTOMATA</span>
-            <span class="mono">DEPTH: -1200px</span>
+            <span>// SEKTOR 02 : ALGORITHMISCHE FORSCHUNG &amp; STREAMING-AUTOMATEN</span>
+            <span class="mono">TIEFE: -1200px</span>
           </div>
 
-          <h2>Algorithmic State Machines &amp; Research</h2>
-          <p class="muted">Novel radix encodings, bounded per-step work stream sensing, and tokenization research.</p>
+          <h2>Algorithmische Zustandsautomaten &amp; Forschung</h2>
+          <p class="muted">Neuartige Radix-Kodierung, beschränkte Schrittaufwände und Tokenisierungs-Forschung.</p>
 
           <article class="card" style="margin-top: 1rem;">
             <div class="card-header">
-              <h3>fibtransponder: Fibonacci-Radix Streaming State Machine</h3>
+              <h3>fibtransponder: Fibonacci-Streaming-Zustandsautomat</h3>
               <span class="badge">GO RESEARCH BASELINE</span>
             </div>
-            <div class="card-role">Research &amp; Implementation (Go 1.25+) · 2026</div>
-            <p style="margin-top: 0.5rem;">An experimental semantic sensing and tokenization substrate built around a Fibonacci-radix streaming state machine (FSVM). Evaluates bounded per-step work bitstream ingestion while tracking dilation, zero-run markers, and state sketches.</p>
+            <div class="card-role">Forschung &amp; Implementierung (Go 1.25+) · 2026</div>
+            <p style="margin-top: 0.5rem;">Experimentelles Substrat für semantische Sensorik und Tokenisierung auf Basis eines Fibonacci-Radix-Streaming-Zustandsautomaten (FSVM). Untersucht Bitstrom-Verarbeitung mit begrenztem Schrittaufwand, strukturelle Kalibrierung über Adjazenzbreite und Zobrist-Hash-Tabellen.</p>
             <div class="card-impact">
-              • <strong>Canonical Thesis</strong>: Structural calibration via adjacency width is demonstrated; width selects locality sensitivity.<br>
-              • <strong>Corpus Falsification</strong>: Proved that seed-only Zobrist calibration does not create detector diversity.<br>
-              • <strong>Sensitivity Shift</strong>: Varying adjacency width triggers a demonstrable prose-first to code-first sensitivity transition.
+              • <strong>Kanonische These</strong>: Strukturelle Kalibrierung über Adjazenzbreite wählt die Lokalitätssensitivität.<br>
+              • <strong>Korpus-Falsifikation</strong>: Reine Seed-Kalibrierung erzeugt nachweislich keine Detektor-Diversität.<br>
+              • <strong>Sensitivitätswechsel</strong>: Variation der Adjazenzbreite steuert gezielten Übergang von Prosa- zu Code-Sensitivität.
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
               <div class="tag-list" style="margin-top: 0;">
                 <span class="badge">#Go</span>
-                <span class="badge">#State Machine (FSVM)</span>
+                <span class="badge">#Zustandsautomat (FSVM)</span>
                 <span class="badge">#Fibonacci Radix</span>
                 <span class="badge">#Zobrist Hash</span>
-                <span class="badge">#Tokenization</span>
+                <span class="badge">#Tokenisierung</span>
               </div>
               <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-                <a href="https://github.com/shaoyanji/fibtransponder" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Repository &amp; Spec (GitHub) →</a>
-                <a href="https://github.com/shaoyanji/fibtransponder/blob/master/REPORT_CORPUS.md" target="_blank" rel="noopener" class="btn" style="padding: 0.4rem 0.85rem;">Corpus Report →</a>
+                <a href="https://github.com/shaoyanji/fibtransponder" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Repository &amp; Spezifikation (GitHub) →</a>
+                <a href="https://github.com/shaoyanji/fibtransponder/blob/master/REPORT_CORPUS.md" target="_blank" rel="noopener" class="btn" style="padding: 0.4rem 0.85rem;">Korpus-Report →</a>
               </div>
             </div>
           </article>
 
           <!-- SKILLS MATRIX -->
           <div style="margin-top: 1.25rem;">
-            <h3>Core Technical Arsenal</h3>
+            <h3>Kern-Arsenal</h3>
             <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 0.5rem;">
               <div class="card" style="padding: 0.75rem;">
-                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Systems &amp; Concurrency</h4>
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Systeme &amp; Nebenläufigkeit</h4>
                 <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Go (Channels, Mutexes, Memory Budgets), Python (AsyncIO), Kafka, PostgreSQL, Redis, gRPC.</p>
               </div>
               <div class="card" style="padding: 0.75rem;">
-                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Declarative Linux &amp; Infra</h4>
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Deklaratives Linux &amp; Infra</h4>
                 <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">NixOS Fleets, Nix Flakes, SSH CAs, SOPS/Age, Docker, ZFS/ZRAM, Linux Kernel Tuning.</p>
               </div>
               <div class="card" style="padding: 0.75rem;">
-                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Domain Mathematics</h4>
-                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Fibonacci Radix, Time-Series Telemetry, Financial Modeling, Typst Geometric Typography.</p>
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Domänenmathematik</h4>
+                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Fibonacci Radix, Zeitreihen-Telemetrie, Finanzmodellierung, Typst Geometrische Typografie.</p>
               </div>
             </div>
           </div>
 
           <div class="zoom-hint">
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(1)">↑ Systems</button>
-            <span>[ NAVIGATE: WHEEL / ARROWS TO FLY TO SECTOR 03 ]</span>
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(3)">Sector 03: Scale ↓</button>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(1)">↑ Systeme</button>
+            <span>[ NAVIGATION: MAUSRAD / PFEILTASTEN ZU SEKTOR 03 ]</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(3)">Sektor 03: Skalierung ↓</button>
           </div>
         </section>
 
         <!-- =================================================================
-             SECTOR 3: CAPITAL SCALE & ENERGY TELEMETRY
+             SEKTOR 3: ERNEUERBARE ASSETS
              ================================================================= -->
-        <section class="sector-plane plane-hidden" id="sector3" data-sector="3" data-name="SCALE">
+        <section class="sector-plane plane-hidden" id="sector3" data-sector="3" data-name="KAPITAL">
           <div class="sector-tag">
-            <span>// SECTOR 03 : RENEWABLE ASSET OPERATIONS &amp; CAPITAL SCALE</span>
-            <span class="mono">DEPTH: -1800px</span>
+            <span>// SEKTOR 03 : ERNEUERBARE ASSETS &amp; KAPITAL-SKALIERUNG</span>
+            <span class="mono">TIEFE: -1800px</span>
           </div>
 
-          <h2>Clean Energy &amp; Quantitative Asset Scale</h2>
-          <p class="muted">High-stakes commercial asset steering, dynamic financial modeling, and bank-audited telemetry.</p>
+          <h2>Erneuerbare Energien &amp; Quantitative Assets</h2>
+          <p class="muted">Verantwortliche kaufmännische Betriebsführung, dynamische Finanzmodelle und bankgeprüfte Telemetrie.</p>
 
           <article class="card" style="margin-top: 1rem;">
             <div class="card-header">
-              <h3>Renewable Energy Capital Asset Operations ($100M+)</h3>
+              <h3>Betriebsführung von Solar-Großanlagen (100M+ $)</h3>
               <span class="badge">O3 ENERGY &amp; FRAUNHOFER ISE</span>
             </div>
             <div class="card-role">Asset Manager &amp; Quantitative Lead · 2016 — 2020</div>
-            <p style="margin-top: 0.5rem;">Directed data architecture and commercial asset steering for a utility solar energy portfolio exceeding $100M+ in capital value. Developed automated data capture and dynamic financial yield models scrutinized under strict institutional bank audits.</p>
+            <p style="margin-top: 0.5rem;">Leitung der Datenarchitektur und kaufmännischen Betriebsführung eines Solarportfolios von über 100 Mio. $ Kapitalwert. Entwicklung automatisierter Felddatenerfassung und dynamischer Ertrags- und Bewertungsmodelle unter strengen Banken-Audits.</p>
             <div class="card-impact">
-              • Governed quantitative operations across $100M+ in capital assets<br>
-              • Coordinated technical due diligence across complex M&amp;A transactions with institutional lenders and tax equity partners<br>
-              • Automated laboratory instrumentation and numerical solar data processing in C++ and Python during graduate research at Fraunhofer ISE
+              • Quantitative Betriebsführung von über 100 Mio. $ Kapitalanlagen<br>
+              • Technische M&amp;A-Prüfungen mit institutionellen Kreditgebern und Steuereigenkapital-Partnern<br>
+              • Automatisierung von Labor- und Messdatenerfassung in C++ und Python während der Forschungszeit am Fraunhofer ISE
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
               <div class="tag-list" style="margin-top: 0;">
                 <span class="badge">#Python</span>
                 <span class="badge">#PostgreSQL</span>
                 <span class="badge">#Time-Series</span>
-                <span class="badge">#Financial Yield Models</span>
+                <span class="badge">#Ertragsmodelle</span>
                 <span class="badge">#Bank Due Diligence</span>
               </div>
-              <a href="mailto:{{EMAIL}}?subject=Asset%20Operations%20Inquiry" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Discuss Architecture &amp; Quant Ops →</a>
+              <a href="mailto:{{EMAIL}}?subject=Asset%20Operations%20Anfrage" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Architektur &amp; Quant-Betrieb anfragen →</a>
             </div>
           </article>
 
           <!-- TYPST APPLICATION PACKET -->
           <article class="card" style="margin-top: 1rem; border-left: 3px solid var(--accent);">
             <div class="card-header">
-              <h3>Deterministic Typst Resume Engine</h3>
+              <h3>Deterministische Typst-Dokumenten-Engine</h3>
               <span class="badge">ANTIGRAVITY WORKFLOW</span>
             </div>
-            <p style="margin-top: 0.5rem;">A local build pipeline compiling structured JSON data directly into pixel-perfect A4 PDFs using Typst. Enforces strict geometric typographic ratios (φ = 1.61803) and sub-second compilation, replacing bulky LaTeX and HTML-to-PDF toolchains.</p>
+            <p style="margin-top: 0.5rem;">Lokale Build-Pipeline zur deterministischen Kompilierung strukturierter JSON-Daten in pixelgenaue A4-PDFs mit Typst. Erzwingt strenge typografische Proportionen des Goldenen Schnitts (φ = 1.61803) mit Sub-Sekunden-Kompilierung.</p>
             <div class="card-impact">
-              • Single source of truth across PDF resume, cover letters, and web portfolio<br>
-              • Hermetic compilation without runtime Node.js or browser headless overhead
+              • Einheitliche Datenbasis für PDF-Lebenslauf, Anschreiben und Web-Präsenz<br>
+              • Hermetischer Build ohne ressourcenhungrige Node.js- oder Headless-Browser-Abhängigkeiten
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
               <div class="tag-list" style="margin-top: 0;">
                 <span class="badge">#Typst</span>
                 <span class="badge">#JSON Schema</span>
                 <span class="badge">#Bitstream Charter</span>
-                <span class="badge">#Deterministic PDF</span>
+                <span class="badge">#Deterministisches PDF</span>
               </div>
-              <a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Workflow Pipeline (GitHub) →</a>
+              <a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Workflow-Pipeline (GitHub) →</a>
             </div>
           </article>
 
           <div class="zoom-hint">
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">↑ Algorithms</button>
-            <span>[ NAVIGATE: WHEEL / ARROWS TO FLY TO SECTOR 04 ]</span>
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(4)">Sector 04: Foundation ↓</button>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">↑ Algorithmen</button>
+            <span>[ NAVIGATION: MAUSRAD / PFEILTASTEN ZU SEKTOR 04 ]</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(4)">Sektor 04: Fundament ↓</button>
           </div>
         </section>
 
         <!-- =================================================================
-             SECTOR 4: ACADEMIC FOUNDATION & PRINCIPLES
+             SEKTOR 4: AKADEMISCHE WURZELN
              ================================================================= -->
-        <section class="sector-plane plane-hidden" id="sector4" data-sector="4" data-name="FOUNDATION">
+        <section class="sector-plane plane-hidden" id="sector4" data-sector="4" data-name="FUNDAMENT">
           <div class="sector-tag">
-            <span>// SECTOR 04 : ACADEMIC ROOTS &amp; DISPATCH</span>
-            <span class="mono">DEPTH: -2400px</span>
+            <span>// SEKTOR 04 : AKADEMISCHE WURZELN &amp; DISPATCH</span>
+            <span class="mono">TIEFE: -2400px</span>
           </div>
 
-          <h2>Education &amp; Research Roots</h2>
+          <h2>Ausbildung &amp; Forschungswurzeln</h2>
           <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 1rem;">
             <div class="card">
               <div class="card-header">
                 <h3 style="font-size: var(--text-base);">M.Sc. Renewable Energy Management</h3>
                 <span class="card-period">2011 — 2014</span>
               </div>
-              <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Albert-Ludwigs-Universität Freiburg (Final Grade: 1.8 / 5.0)</p>
-              <a href="https://www.uni-freiburg.de" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">University Portal →</a>
+              <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Albert-Ludwigs-Universität Freiburg (Abschlussnote: 1,8)</p>
+              <a href="https://www.uni-freiburg.de" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">Universitätsportal →</a>
             </div>
             <div class="card">
               <div class="card-header">
                 <h3 style="font-size: var(--text-base);">B.S. Petroleum Engineering</h3>
                 <span class="card-period">2006 — 2010</span>
               </div>
-              <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Colorado School of Mines (Minors in Economics &amp; Public Policy)</p>
+              <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Colorado School of Mines (Nebenfächer: Volkswirtschaft &amp; Public Policy)</p>
               <a href="https://www.mines.edu" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">School of Mines Portal →</a>
             </div>
           </div>
 
           <!-- PRINCIPLES -->
-          <h2 style="margin-top: 1.5rem;">How I Build</h2>
+          <h2 style="margin-top: 1.5rem;">Wie ich Systeme baue</h2>
           <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 0.75rem;">
             <div class="card" style="padding: 0.75rem;">
-              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Reproducibility First</h4>
-              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">If an infrastructure state or binary cannot be built deterministically from code, it doesn't exist. Flakes prevent drift.</p>
+              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Reproduzierbarkeit First</h4>
+              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Wenn ein Infrastrukturstatus oder Binary nicht deterministisch gebaut werden kann, existiert es nicht. Flakes verhindern Drift.</p>
             </div>
             <div class="card" style="padding: 0.75rem;">
-              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Domain Over Buzzwords</h4>
-              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Understanding financial formulas, energy units, and bitstream geometry prevents architectural failures before writing code.</p>
+              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Domänentiefe vor Schlagworten</h4>
+              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Finanzmathematik, physikalische Energiegrößen und Bitstrom-Geometrie verhindern Architekturfehler vor dem Coden.</p>
             </div>
             <div class="card" style="padding: 0.75rem;">
-              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">The 14KB TCP Rule</h4>
-              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">This entire 3D spatial site compiles into under 11KB gzipped. Zero WebGL bloat. Instant single-roundtrip load.</p>
+              <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Die 14KB TCP-Regel</h4>
+              <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Diese gesamte 3D-Präsenz kompiliert auf unter 14KB gzipped. Null WebGL-Ballast. Sofortiges Laden im ersten Roundtrip.</p>
             </div>
           </div>
 
           <!-- DISPATCH FOOTER -->
           <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
-              <strong>Ready to build?</strong> <span class="muted">Reach out for systems, backend, and infrastructure advisory.</span>
+              <strong>Bereit für den Aufbau?</strong> <span class="muted">Kontaktieren Sie mich für Beratung zu Systemen, Backend und Infrastruktur.</span>
             </div>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
               <a href="mailto:{{EMAIL}}" class="btn btn-primary">matt@bountystash.com</a>
-              <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">GitHub Profile</a>
-              <button class="btn" onclick="window.spatialNav.jumpTo(0)">↑ Return to Console</button>
+              <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">GitHub-Profil</a>
+              <button class="btn" onclick="window.spatialNav.jumpTo(0)">↑ Zurück zur Konsole</button>
             </div>
           </div>
         </section>
@@ -357,15 +357,14 @@
 
     <!-- =================================================================
          CYBER VISUAL TELEMETRY INSPECTOR PANE (Right Sidebar)
-         Dynamically updates with non-text visual representations
          ================================================================= -->
-    <aside id="inspectorPane" aria-label="Visual Telemetry and Diagnostic Inspector">
+    <aside id="inspectorPane" aria-label="Visuelle Telemetrie und Diagnose">
       <div class="inspector-header">
         <div style="display: flex; align-items: center; gap: 0.4rem;">
           <span class="status-dot"></span>
-          <span>DIAGNOSTIC / TELEMETRY</span>
+          <span>DIAGNOSE / TELEMETRIE</span>
         </div>
-        <span id="inspectorSectorTag" style="color: var(--accent-bright);">[SEC.00]</span>
+        <span id="inspectorSectorTag" style="color: var(--accent-bright);">[SEK.00]</span>
       </div>
 
       <div class="inspector-body">
@@ -374,8 +373,8 @@
         <div class="visual-stage" id="visualStageBox">
           <div class="scanline"></div>
           <div class="visual-stage-header">
-            <span id="visualStageTitle">RADAR / GEOLOCATION MATRIX</span>
-            <span id="visualStageCoords">48.14° N · 7.99° E</span>
+            <span id="visualStageTitle">RADAR / GEOLOKATIONSMATRIX</span>
+            <span id="visualStageCoords">48.14° N · 7.99° O</span>
           </div>
 
           <!-- STAGE GRAPHIC CONTAINER -->
@@ -387,39 +386,39 @@
         <!-- TELEMETRY METRIC MONITOR -->
         <div class="visual-stage" style="padding: 0.6rem;">
           <div class="visual-stage-header" style="margin-bottom: 0.35rem;">
-            <span>SYSTEM VITALS MONITOR</span>
+            <span>SYSTEM-VITALMONITOR</span>
             <span style="color: var(--status-online);">● NOMINAL</span>
           </div>
           <div class="cyber-metric-row">
-            <span class="muted">OPERATIONAL STATUS</span>
-            <span style="color: var(--status-online);">ACTIVE / AVAILABLE</span>
+            <span class="muted">BETRIEBSSTATUS</span>
+            <span style="color: var(--status-online);">AKTIV / VERFÜGBAR</span>
           </div>
           <div class="cyber-metric-row">
-            <span class="muted">TARGET LATENCY</span>
-            <span>&lt; 50ms CONTEXT</span>
+            <span class="muted">ZIEL-LATENZ</span>
+            <span>&lt; 50ms KONTEXT</span>
           </div>
           <div class="cyber-metric-row">
-            <span class="muted">BUNDLE ENVELOPE</span>
+            <span class="muted">BUNDLE-BUDGET</span>
             <span>{{GZIP_SIZE}} / 14KB TCP [PASS]</span>
           </div>
           <div class="cyber-metric-row">
-            <span class="muted">REPRODUCIBILITY</span>
-            <span>NIXOS FLAKES (HERMETIC)</span>
+            <span class="muted">REPRODUZIERBARKEIT</span>
+            <span>NIXOS FLAKES (HERMETISCH)</span>
           </div>
           <div class="cyber-metric-row" style="border-bottom: none;">
-            <span class="muted">LOCATION / TIMEZONE</span>
-            <span>CET / UTC+1 (REMOTE)</span>
+            <span class="muted">STANDORT / ZEITZONE</span>
+            <span>MEZ / UTC+1 (REMOTE)</span>
           </div>
         </div>
 
         <!-- ACTIVE SECTOR CONTEXT SUMMARY -->
         <div class="visual-stage" style="padding: 0.6rem; flex: 1;">
           <div class="visual-stage-header" style="margin-bottom: 0.35rem;">
-            <span>SECTOR FOCUS SCHEMA</span>
-            <span id="inspectorSubTag">WORKSPACE</span>
+            <span>SEKTOR-FOKUS SCHEMA</span>
+            <span id="inspectorSubTag">ARBEITSBEREICH</span>
           </div>
           <p id="inspectorDescription" style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; margin: 0;">
-            Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.
+            Haupt-Terminalstation. Kernidentität, Aufenthalts- und Arbeitsstatus sowie direkte Kommunikationskanäle.
           </p>
         </div>
 
@@ -427,7 +426,7 @@
 
       <div class="inspector-footer">
         <span id="liveClock">00:00:00 UTC</span>
-        <span style="color: var(--accent-bright);">HTTP/3 READY</span>
+        <span style="color: var(--accent-bright);">HTTP/3 BEREIT</span>
       </div>
     </aside>
 
@@ -435,28 +434,26 @@
 
   <!-- PERSISTENT BOTTOM HUD RAIL -->
   <footer class="spatial-hud-bottom">
-    <nav class="sector-nav-rail" aria-label="Spatial Sector Navigation">
-      <span class="muted" style="margin-right: 0.35rem;">SECTORS:</span>
-      <button class="nav-sector-btn active" data-target="0" onclick="window.spatialNav.jumpTo(0)">00 CONSOLE</button>
-      <button class="nav-sector-btn" data-target="1" onclick="window.spatialNav.jumpTo(1)">01 SYSTEMS</button>
-      <button class="nav-sector-btn" data-target="2" onclick="window.spatialNav.jumpTo(2)">02 ALGORITHMS</button>
-      <button class="nav-sector-btn" data-target="3" onclick="window.spatialNav.jumpTo(3)">03 CAPITAL $100M+</button>
-      <button class="nav-sector-btn" data-target="4" onclick="window.spatialNav.jumpTo(4)">04 FOUNDATION</button>
+    <nav class="sector-nav-rail" aria-label="Sektor-Navigation">
+      <span class="muted" style="margin-right: 0.35rem;">SEKTOREN:</span>
+      <button class="nav-sector-btn active" data-target="0" onclick="window.spatialNav.jumpTo(0)">00 KONSOLE</button>
+      <button class="nav-sector-btn" data-target="1" onclick="window.spatialNav.jumpTo(1)">01 SYSTEME</button>
+      <button class="nav-sector-btn" data-target="2" onclick="window.spatialNav.jumpTo(2)">02 ALGORITHMEN</button>
+      <button class="nav-sector-btn" data-target="3" onclick="window.spatialNav.jumpTo(3)">03 KAPITAL 100M+$</button>
+      <button class="nav-sector-btn" data-target="4" onclick="window.spatialNav.jumpTo(4)">04 FUNDAMENT</button>
     </nav>
 
     <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-muted);">
       <span>{{GZIP_SIZE}} GZIP (14KB BUDGET)</span>
-      <span>0 WEBGL BLOAT</span>
+      <span>0 WEBGL-BALLAST</span>
       <a href="{{WEBSITE_URL}}">bountystash.com</a>
     </div>
   </footer>
 
-  <!-- =================================================================
-       ROCK-SOLID SPATIAL 3D ENGINE v3 (DUAL-PANE + FULL FLAT SCROLL)
-       ================================================================= -->
+  <!-- SPATIAL 3D ENGINE v3 (DEUTSCH) -->
   <script>
     (function(){
-      var sectorNames = ['CONSOLE', 'SYSTEMS', 'ALGORITHMS', 'SCALE', 'FOUNDATION'];
+      var sectorNames = ['KONSOLE', 'SYSTEME', 'ALGORITHMEN', 'KAPITAL', 'FUNDAMENT'];
       var sectorDepths = ['0000', '0600', '1200', '1800', '2400'];
       var currentSector = 0;
       var totalSectors = 5;
@@ -478,38 +475,29 @@
       var inspectorSubTag = document.getElementById('inspectorSubTag');
       var inspectorDesc = document.getElementById('inspectorDescription');
 
-      // Visual Diagrams (Pure inline SVGs for 0-latency cyberpunk graphics)
+      // Visual Diagrams (SVGs)
       var visualGraphics = [
-        // 0: Console (Radar / Constellation Grid)
         '<svg width="150" height="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="var(--border)" stroke-width="1.5"/><circle cx="50" cy="50" r="30" fill="none" stroke="var(--border)" stroke-width="1"/><circle cx="50" cy="50" r="15" fill="none" stroke="var(--border)" stroke-dasharray="2,2"/><line x1="50" y1="5" x2="50" y2="95" stroke="var(--border)" stroke-width="1"/><line x1="5" y1="50" x2="95" y2="50" stroke="var(--border)" stroke-width="1"/><circle cx="50" cy="50" r="4" fill="var(--accent-bright)"/><circle class="radar-pulse" cx="50" cy="50" r="10" fill="none" stroke="var(--accent-bright)" stroke-width="1.5"/><text x="56" y="46" fill="var(--accent-bright)" font-size="6" font-family="monospace">GUTACH (DE)</text></svg>',
-        
-        // 1: Systems (Architecture & Fleet Mesh)
-        '<svg width="220" height="140" viewBox="0 0 200 120"><rect x="10" y="45" width="45" height="26" fill="var(--badge-bg)" stroke="var(--border)" stroke-width="1.5"/><text x="18" y="61" fill="var(--text)" font-size="7" font-family="monospace">INTAKE</text><line x1="55" y1="58" x2="80" y2="58" stroke="var(--accent-bright)" stroke-width="1.5" stroke-dasharray="3,2"/><rect x="80" y="40" width="50" height="36" fill="var(--badge-bg)" stroke="var(--accent-bright)" stroke-width="1.5"/><text x="86" y="55" fill="var(--accent-bright)" font-size="6" font-family="monospace">EXACT HASH</text><text x="86" y="66" fill="var(--text-muted)" font-size="5" font-family="monospace">QUOTIENT</text><line x1="130" y1="58" x2="155" y2="58" stroke="var(--accent-bright)" stroke-width="1.5"/><rect x="155" y="45" width="40" height="26" fill="var(--badge-bg)" stroke="var(--border)" stroke-width="1.5"/><text x="160" y="61" fill="var(--status-online)" font-size="6" font-family="monospace">LEDGER</text><circle cx="100" cy="18" r="7" fill="var(--surface)" stroke="var(--accent-bright)" stroke-width="1"/><text x="92" y="11" fill="var(--text-muted)" font-size="5" font-family="monospace">frieren (NAS)</text><line x1="100" y1="25" x2="100" y2="40" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/></svg>',
-        
-        // 2: Algorithms (Fibonacci State Machine Oscilloscope)
-        '<svg width="220" height="140" viewBox="0 0 200 120"><path d="M 10 60 Q 35 15, 60 60 T 110 60 T 160 60 T 195 60" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><circle cx="60" cy="60" r="3" fill="var(--accent-bright)"/><circle cx="110" cy="60" r="3" fill="var(--status-online)"/><circle cx="160" cy="60" r="3" fill="var(--accent-bright)"/><text x="12" y="100" fill="var(--text-muted)" font-size="6" font-family="monospace">FIB: [1, 2, 3, 5, 8, 13, 21, 34]</text><text x="12" y="112" fill="var(--accent-bright)" font-size="6" font-family="monospace">LOC.WIDTH: 12 (CODE SENSITIVITY)</text><line x1="10" y1="60" x2="195" y2="60" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,4"/></svg>',
-        
-        // 3: Capital Scale (Solar Diurnal Yield & $100M+ Valuation)
-        '<svg width="220" height="140" viewBox="0 0 200 120"><path d="M 20 95 Q 100 15, 180 95 Z" fill="var(--solar-fill)" stroke="var(--accent-bright)" stroke-width="2"/><line x1="20" y1="95" x2="180" y2="95" stroke="var(--border)" stroke-width="1.5"/><line x1="100" y1="15" x2="100" y2="95" stroke="var(--status-online)" stroke-width="1" stroke-dasharray="2,2"/><text x="75" y="12" fill="var(--status-online)" font-size="6" font-family="monospace">PEAK: 1,020 W/m²</text><text x="25" y="110" fill="var(--text-muted)" font-size="6" font-family="monospace">DIURNAL SOLAR ASSET VALUATION: $100M+</text></svg>',
-        
-        // 4: Foundation (Golden Ratio Spiral & Twin Shields)
+        '<svg width="220" height="140" viewBox="0 0 200 120"><rect x="10" y="45" width="45" height="26" fill="var(--badge-bg)" stroke="var(--border)" stroke-width="1.5"/><text x="18" y="61" fill="var(--text)" font-size="7" font-family="monospace">EINGANG</text><line x1="55" y1="58" x2="80" y2="58" stroke="var(--accent-bright)" stroke-width="1.5" stroke-dasharray="3,2"/><rect x="80" y="40" width="50" height="36" fill="var(--badge-bg)" stroke="var(--accent-bright)" stroke-width="1.5"/><text x="86" y="55" fill="var(--accent-bright)" font-size="6" font-family="monospace">EXAKT HASH</text><text x="86" y="66" fill="var(--text-muted)" font-size="5" font-family="monospace">QUOTIENT</text><line x1="130" y1="58" x2="155" y2="58" stroke="var(--accent-bright)" stroke-width="1.5"/><rect x="155" y="45" width="40" height="26" fill="var(--badge-bg)" stroke="var(--border)" stroke-width="1.5"/><text x="160" y="61" fill="var(--status-online)" font-size="6" font-family="monospace">LEDGER</text><circle cx="100" cy="18" r="7" fill="var(--surface)" stroke="var(--accent-bright)" stroke-width="1"/><text x="92" y="11" fill="var(--text-muted)" font-size="5" font-family="monospace">frieren (NAS)</text><line x1="100" y1="25" x2="100" y2="40" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,2"/></svg>',
+        '<svg width="220" height="140" viewBox="0 0 200 120"><path d="M 10 60 Q 35 15, 60 60 T 110 60 T 160 60 T 195 60" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><circle cx="60" cy="60" r="3" fill="var(--accent-bright)"/><circle cx="110" cy="60" r="3" fill="var(--status-online)"/><circle cx="160" cy="60" r="3" fill="var(--accent-bright)"/><text x="12" y="100" fill="var(--text-muted)" font-size="6" font-family="monospace">FIB: [1, 2, 3, 5, 8, 13, 21, 34]</text><text x="12" y="112" fill="var(--accent-bright)" font-size="6" font-family="monospace">BREITE: 12 (CODE-SENSITIVITÄT)</text><line x1="10" y1="60" x2="195" y2="60" stroke="var(--border)" stroke-width="1" stroke-dasharray="2,4"/></svg>',
+        '<svg width="220" height="140" viewBox="0 0 200 120"><path d="M 20 95 Q 100 15, 180 95 Z" fill="var(--solar-fill)" stroke="var(--accent-bright)" stroke-width="2"/><line x1="20" y1="95" x2="180" y2="95" stroke="var(--border)" stroke-width="1.5"/><line x1="100" y1="15" x2="100" y2="95" stroke="var(--status-online)" stroke-width="1" stroke-dasharray="2,2"/><text x="75" y="12" fill="var(--status-online)" font-size="6" font-family="monospace">SPITZE: 1.020 W/m²</text><text x="25" y="110" fill="var(--text-muted)" font-size="6" font-family="monospace">SOLARE ANLAGENBEWERTUNG: 100M+ $</text></svg>',
         '<svg width="150" height="140" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" fill="none" stroke="var(--border)" stroke-width="1.5"/><path d="M 15 85 A 70 70 0 0 1 85 15 A 43.2 43.2 0 0 0 41.8 15 A 26.7 26.7 0 0 1 41.8 41.8" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><text x="25" y="93" fill="var(--accent-bright)" font-size="6" font-family="monospace">φ = 1.61803 (TYPST)</text><text x="20" y="10" fill="var(--text-muted)" font-size="5" font-family="monospace">MINES · UNI FREIBURG</text></svg>'
       ];
 
       var sectorDescriptions = [
-        'Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.',
-        'Deterministic Go backend and declarative multi-host NixOS fleet. Append-only event ledgers and hermetic CI.',
-        'Fibonacci-radix streaming state machine (FSVM). Structural calibration via adjacency width and bitstream sensing.',
-        'Quantitative asset steering for renewable energy portfolios exceeding $100M+. Solar yield modeling under bank audits.',
-        'Academic roots at Colorado School of Mines and Albert-Ludwigs-Universität Freiburg. Golden Ratio and 14KB TCP discipline.'
+        'Haupt-Terminalstation. Kernidentität, Aufenthalts- und Arbeitsstatus sowie direkte Kommunikationskanäle.',
+        'Deterministisches Go-Backend und deklarative NixOS-Flotte. Append-Only-Event-Ledger und hermetische CI.',
+        'Fibonacci-Radix-Streaming-Zustandsautomat (FSVM). Strukturelle Kalibrierung über Adjazenzbreite und Bitstrom-Sensorik.',
+        'Quantitative Betriebsführung für Erneuerbare-Energien-Portfolios über 100 Mio. $. Solarertragsmodelle unter Bank-Audits.',
+        'Akademische Wurzeln an der Colorado School of Mines und Universität Freiburg. Goldener Schnitt und 14KB TCP-Disziplin.'
       ];
 
       function updateInspector(idx) {
         if (!visualCanvas) return;
         visualCanvas.innerHTML = visualGraphics[idx] || '';
-        inspectorTag.textContent = '[SEC.0' + idx + ']';
-        visualTitle.textContent = sectorNames[idx] + ' TELEMETRY SCHEMA';
-        visualCoords.textContent = 'DEPTH: -' + sectorDepths[idx] + 'px';
+        inspectorTag.textContent = '[SEK.0' + idx + ']';
+        visualTitle.textContent = sectorNames[idx] + ' TELEMETRIE-SCHEMA';
+        visualCoords.textContent = 'TIEFE: -' + sectorDepths[idx] + 'px';
         inspectorSubTag.textContent = sectorNames[idx];
         inspectorDesc.textContent = sectorDescriptions[idx] || '';
       }
@@ -526,9 +514,9 @@
 
         var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
         if (isFlat) {
-          hudCoord.textContent = '[ FLAT DOC // SECTOR: 0' + idx + ' ' + sectorNames[idx] + ' ]';
+          hudCoord.textContent = '[ DOKUMENT // SEKTOR: 0' + idx + ' ' + sectorNames[idx] + ' ]';
         } else {
-          hudCoord.textContent = '[ DEPTH: Z -' + sectorDepths[idx] + ' // SECTOR: 0' + idx + ' ' + sectorNames[idx] + ' ]';
+          hudCoord.textContent = '[ TIEFE: Z -' + sectorDepths[idx] + ' // SEKTOR: 0' + idx + ' ' + sectorNames[idx] + ' ]';
         }
 
         updateInspector(idx);
@@ -576,13 +564,12 @@
 
       window.spatialNav = { jumpTo: jumpTo };
 
-      // Mouse-Wheel Z-Axis Zoom (3D Mode only; completely transparent in flat mode)
+      // Mouse-Wheel Z-Axis Zoom
       var wheelDebounce = null;
       window.addEventListener('wheel', function(e){
         var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
-        if (isFlat) return; // In flat mode, native browser window scroll operates unrestricted!
+        if (isFlat) return;
 
-        // If cursor is inside active plane and plane can scroll internally, prioritize that
         var activeEl = sectorEls[currentSector];
         if (activeEl && activeEl.contains(e.target)) {
           var atBottom = activeEl.scrollHeight - activeEl.scrollTop <= activeEl.clientHeight + 2;
@@ -633,7 +620,7 @@
         }
       });
 
-      // Subtle Cursor Holographic Parallax (FROZEN OVER INTERACTIVE TARGETS TO PROTECT CLICKS)
+      // Subtle Cursor Holographic Parallax
       var lastTiltTime = 0;
       window.addEventListener('mousemove', function(e){
         var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
@@ -655,12 +642,11 @@
         world.style.transform = 'rotateX(' + tiltX.toFixed(2) + 'deg) rotateY(' + tiltY.toFixed(2) + 'deg)';
       });
 
-      // In Flat Mode: High-Precision ScrollSpy to sync HUD and dynamic Right Inspector Pane
+      // High-Precision ScrollSpy
       function checkActiveSectorOnScroll() {
         var isFlat = document.documentElement.getAttribute('data-view') === 'flat';
         if (!isFlat) return;
 
-        // Check if left pane is scrolled to the bottom
         if (viewport && (viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 35)) {
           if (currentSector !== totalSectors - 1) {
             setActiveSector(totalSectors - 1);
@@ -668,7 +654,6 @@
           return;
         }
 
-        // Viewport trigger threshold line relative to the viewport pane
         var vpRect = viewport ? viewport.getBoundingClientRect() : { top: 48, height: window.innerHeight - 92 };
         var triggerY = vpRect.top + Math.min(vpRect.height * 0.35, 240);
         var chosenIdx = -1;
@@ -707,18 +692,17 @@
       }
       window.addEventListener('scroll', checkActiveSectorOnScroll, { passive: true });
 
-      // Toggle 3D Spatial vs Flat Mode
+      // View Toggle
       var viewBtn = document.getElementById('viewToggleBtn');
       var viewLbl = document.getElementById('viewLabel');
       viewBtn.addEventListener('click', function(){
         var cur = document.documentElement.getAttribute('data-view') || '3d';
         var next = cur === '3d' ? 'flat' : '3d';
         document.documentElement.setAttribute('data-view', next);
-        viewLbl.textContent = next === '3d' ? '3D HUD' : 'FLAT DOC';
+        viewLbl.textContent = next === '3d' ? '3D HUD' : 'DOKUMENT';
         try { localStorage.setItem('viewMode', next); } catch(e){}
 
         if (next === 'flat') {
-          // Reset all plane restrictions so all sectors are visible in natural document flow
           sectorEls.forEach(function(el){
             if (el) {
               el.classList.remove('plane-depth-1', 'plane-depth-2', 'plane-hidden');
@@ -749,7 +733,7 @@
         try { localStorage.setItem('theme', next); } catch(e){}
       });
 
-      // Live UTC/CET Clock
+      // Live Clock
       function updateClock() {
         var clockEl = document.getElementById('liveClock');
         if (!clockEl) return;
@@ -839,7 +823,7 @@
 
       // Initial Setup
       var initView = document.documentElement.getAttribute('data-view') || '3d';
-      viewLbl.textContent = initView === '3d' ? '3D HUD' : 'FLAT DOC';
+      viewLbl.textContent = initView === '3d' ? '3D HUD' : 'DOKUMENT';
       if (initView === 'flat') {
         sectorEls.forEach(function(el){
           if (el) {

@@ -93,7 +93,7 @@ document.documentElement.setAttribute('data-view', v);
 </div>
 <h2>Core Systems &amp; Fleet Infrastructure</h2>
 <p class="muted">Deterministic Go servers, append-only event ledgers, and zero-drift declarative Linux fleets.</p>
-<p class="mono" style="margin-top: 0.5rem;"><a href="/work/" style="text-decoration: none;">[ ALL CASE STUDIES &rarr; ]</a></p>
+<p class="mono" style="margin-top: 0.5rem;"><a href="/work/" style="text-decoration: none;">[ ALL CASE STUDIES → ]</a></p>
 <div class="cards-grid" style="margin-top: 1rem;">
 <article class="card">
 <div class="card-header">
@@ -355,7 +355,7 @@ document.documentElement.setAttribute('data-view', v);
 </div>
 <div class="cyber-metric-row">
 <span class="muted">BUNDLE ENVELOPE</span>
-<span>13.81 KB / 14KB TCP [PASS]</span>
+<span>13.80 KB / 14KB TCP [PASS]</span>
 </div>
 <div class="cyber-metric-row">
 <span class="muted">REPRODUCIBILITY</span>
@@ -371,9 +371,7 @@ document.documentElement.setAttribute('data-view', v);
 <span>SECTOR FOCUS SCHEMA</span>
 <span id="inspectorSubTag">WORKSPACE</span>
 </div>
-<p id="inspectorDescription" style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; margin: 0;">
-Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.
-</p>
+<p id="inspectorDescription" style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; margin: 0;">Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.</p>
 </div>
 </div>
 <div class="inspector-footer">
@@ -392,15 +390,15 @@ Primary terminal station. Core identity, legal work status, and direct communica
 <button class="nav-sector-btn" data-target="4" onclick="window.spatialNav.jumpTo(4)">04 FOUNDATION</button>
 </nav>
 <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-muted);">
-<span>13.81 KB GZIP (14KB BUDGET)</span>
+<span>13.80 KB GZIP (14KB BUDGET)</span>
 <span>0 WEBGL BLOAT</span>
 <a href="https://www.bountystash.com">bountystash.com</a>
 </div>
 </footer>
 <script>
 (function(){
-var sectorNames = ['CONSOLE', 'SYSTEMS', 'ALGORITHMS', 'SCALE', 'FOUNDATION'];
-var sectorDepths = ['0000', '0600', '1200', '1800', '2400'];
+var sectorNames = ["CONSOLE","SYSTEMS","ALGORITHMS","SCALE","FOUNDATION"];
+var sectorDepths = ["0000","0600","1200","1800","2400"];
 var currentSector = 0;
 var totalSectors = 5;
 var viewport = document.getElementById('spatialViewport');
@@ -431,13 +429,7 @@ var visualGraphics = [
 // 4: Foundation (Golden Ratio Spiral & Twin Shields)
 '<svg width="150" height="140" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" fill="none" stroke="var(--border)" stroke-width="1.5"/><path d="M 15 85 A 70 70 0 0 1 85 15 A 43.2 43.2 0 0 0 41.8 15 A 26.7 26.7 0 0 1 41.8 41.8" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><text x="25" y="93" fill="var(--accent-bright)" font-size="6" font-family="monospace">φ = 1.61803 (TYPST)</text><text x="20" y="10" fill="var(--text-muted)" font-size="5" font-family="monospace">MINES · UNI FREIBURG</text></svg>'
 ];
-var sectorDescriptions = [
-'Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.',
-'Deterministic Go backend and declarative multi-host NixOS fleet. Append-only event ledgers and hermetic CI.',
-'Fibonacci-radix streaming state machine (FSVM). Structural calibration via adjacency width and bitstream sensing.',
-'Quantitative asset steering for renewable energy portfolios exceeding $100M+. Solar yield modeling under bank audits.',
-'Academic roots at Colorado School of Mines and Albert-Ludwigs-Universität Freiburg. Golden Ratio and 14KB TCP discipline.'
-];
+var sectorDescriptions = ["Primary terminal station. Core identity, legal work status, and direct communication dispatch channels.","Deterministic Go backend and declarative multi-host NixOS fleet. Append-only event ledgers and hermetic CI.","Fibonacci-radix streaming state machine (FSVM). Structural calibration via adjacency width and bitstream sensing.","Quantitative asset steering for renewable energy portfolios exceeding $100M+. Solar yield modeling under bank audits.","Academic roots at Colorado School of Mines and Albert-Ludwigs-Universität Freiburg. Golden Ratio and 14KB TCP discipline."];
 function updateInspector(idx) {
 if (!visualCanvas) return;
 visualCanvas.innerHTML = visualGraphics[idx] || '';

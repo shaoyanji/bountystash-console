@@ -139,7 +139,48 @@ function homeSections(data, lang, slugs) {
     )
     .join('\n            ');
 
+  // Sectors are data too: the tag, the heading, the standfirst, the inspector's
+  // paragraph and the nav rail are copy, and a copy in the template drifts from
+  // the page it describes.
+  const sections = data.sections || [];
+  const chome = {};
+  const snake = (key) => key.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
+  for (const s of sections) {
+    const slot = (field, value) => {
+      chome[`S${s.id}_${field}`] = escapeHtml(value == null ? '' : String(value));
+    };
+    slot('NAME', s.name);
+    slot('RAIL', s.rail);
+    slot('TAG', s.tag);
+    slot('DEPTH', s.depth);
+    slot('TITLE', s.title);
+    slot('BLURB', s.blurb);
+    slot('INSPECTOR', s.inspector);
+    slot('HINT', s.hint);
+    slot('PREV', s.prev);
+    slot('NEXT', s.next);
+    if (s.arsenal) slot('ARSENAL', s.arsenal);
+    if (s.how) slot('HOW', s.how);
+  }
+  for (const [key, value] of Object.entries(data.ui || {})) {
+    chome[`UI_${snake(key)}`] = escapeHtml(value);
+  }
+  // These land inside a <script>, where HTML entities are not decoded, so they
+  // are quoted as JSON rather than escaped as markup.
+  chome.SECTOR_NAMES_JS = JSON.stringify(sections.map((s) => s.name || ''));
+  chome.SECTOR_DEPTHS_JS = JSON.stringify(
+    sections.map((s) => String(s.depth || '').replace(/^[-+]/, '').replace(/px$/, '')),
+  );
+  chome.SECTOR_DESCRIPTIONS_JS = JSON.stringify(sections.map((s) => s.inspector || ''));
+  chome.NAV_RAIL = sections
+    .map(
+      (s, i) =>
+        `<button class="nav-sector-btn${i === 0 ? ' active' : ''}" data-target="${s.id}" onclick="window.spatialNav.jumpTo(${s.id})">${escapeHtml(s.rail || '')}</button>`,
+    )
+    .join('\n      ');
+
   return {
+    ...chome,
     METRICS: metrics,
     SECTOR1: sector(1),
     SECTOR2: sector(2),

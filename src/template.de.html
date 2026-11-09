@@ -66,10 +66,10 @@
         <!-- =================================================================
              SEKTOR 0: KONSOLE (Z: 0px)
              ================================================================= -->
-        <section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="KONSOLE">
+        <section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="{{S0_NAME}}">
           <div class="sector-tag">
-            <span>// SEKTOR 00 : IDENTITÄT &amp; DISPATCH</span>
-            <span class="mono">TIEFE: 0000px</span>
+            <span>{{S0_TAG}}</span>
+            <span class="mono">TIEFE: {{S0_DEPTH}}</span>
           </div>
 
           <h1 style="margin: 0.5rem 0;">{{PROFILE_NAME}}</h1>
@@ -84,114 +84,115 @@
 
           <!-- RECRUITER FAST-PATH -->
           <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 1.25rem;">
-            • Status: <strong>{{CITIZENSHIP}}</strong> · <strong>{{RESIDENCY}}</strong><br>
-            • Sprachen: <strong>{{LANGUAGES}}</strong><br>
-            • Verfügbarkeit: <strong>{{AVAILABILITY}}</strong>
+            • {{UI_FAST_STATUS}}: <strong>{{CITIZENSHIP}}</strong> · <strong>{{RESIDENCY}}</strong><br>
+            • {{UI_FAST_LANGUAGES}}: <strong>{{LANGUAGES}}</strong><br>
+            • {{UI_FAST_AVAILABILITY}}: <strong>{{AVAILABILITY}}</strong>
           </div>
 
           <div class="tag-list" style="margin-bottom: 1rem;">
-            <a href="mailto:{{EMAIL}}" class="btn btn-primary">✉ E-Mail senden</a>
-            <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">GitHub-Profil</a>
+            <a href="mailto:{{EMAIL}}" class="btn btn-primary">{{UI_EMAIL_BUTTON}}</a>
+            <a href="/de/kontakt/" class="btn">{{UI_CONTACT_BUTTON}}</a>
+            <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">{{UI_GITHUB_BUTTON}}</a>
             <a href="{{LINKEDIN_URL}}" target="_blank" rel="noopener" class="btn">LinkedIn</a>
-            <button class="btn" onclick="window.spatialNav.jumpTo(1)">Zu Sektor 01: Systeme →</button>
+            <button class="btn" onclick="window.spatialNav.jumpTo(1)">{{UI_ENTER_BUTTON}}</button>
           </div>
 
           <div class="zoom-hint">
-            <span>[ NAV: MAUSRAD / PFEILTASTE NACH UNTEN ZUM HINEINZOOMEN ]</span>
-            <button class="btn" style="padding: 0.2rem 0.5rem; font-size: 0.7rem;" onclick="window.spatialNav.jumpTo(1)">Zoom In ↓</button>
+            <span>{{UI_HERO_HINT}}</span>
+            <button class="btn" style="padding: 0.2rem 0.5rem; font-size: 0.7rem;" onclick="window.spatialNav.jumpTo(1)">{{UI_ZOOM_BUTTON}}</button>
           </div>
         </section>
 
         <!-- =================================================================
              SEKTOR 1: KERN-SYSTEME
              ================================================================= -->
-        <section class="sector-plane plane-depth-1" id="sector1" data-sector="1" data-name="SYSTEME">
+        <section class="sector-plane plane-depth-1" id="sector1" data-sector="1" data-name="{{S1_NAME}}">
           <div class="sector-tag">
-            <span>// SEKTOR 01 : SYSTEME &amp; VERTEILTE INFRASTRUKTUR</span>
-            <span class="mono">TIEFE: -0600px</span>
+            <span>{{S1_TAG}}</span>
+            <span class="mono">TIEFE: {{S1_DEPTH}}</span>
           </div>
 
-          <h2>Kernsysteme &amp; Flotteninfrastruktur</h2>
-          <p class="muted">Deterministische Go-Server, Append-Only-Ledger und driftfreie deklarative Linux-Flotten.</p>
-          <p class="mono" style="margin-top: 0.5rem;"><a href="/work/" style="text-decoration: none;">[ ALL CASE STUDIES &rarr; ]</a></p>
+          <h2>{{S1_TITLE}}</h2>
+          <p class="muted">{{S1_BLURB}}</p>
+          <p class="mono" style="margin-top: 0.5rem;"><a href="/work/" style="text-decoration: none;">{{UI_WORK_LINK}}</a></p>
 
           <div class="cards-grid" style="margin-top: 1rem;">
             {{SECTOR1}}
           </div>
 
           <div class="zoom-hint">
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(0)">↑ Konsole</button>
-            <span>[ NAVIGATION: MAUSRAD / PFEILTASTEN ZU SEKTOR 02 ]</span>
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">Sektor 02: Algorithmen ↓</button>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(0)">{{S1_PREV}}</button>
+            <span>{{S1_HINT}}</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">{{S1_NEXT}}</button>
           </div>
         </section>
 
         <!-- =================================================================
              SEKTOR 2: ALGORITHMEN
              ================================================================= -->
-        <section class="sector-plane plane-depth-2" id="sector2" data-sector="2" data-name="ALGORITHMEN">
+        <section class="sector-plane plane-depth-2" id="sector2" data-sector="2" data-name="{{S2_NAME}}">
           <div class="sector-tag">
-            <span>// SEKTOR 02 : ALGORITHMISCHE FORSCHUNG &amp; STREAMING-AUTOMATEN</span>
-            <span class="mono">TIEFE: -1200px</span>
+            <span>{{S2_TAG}}</span>
+            <span class="mono">TIEFE: {{S2_DEPTH}}</span>
           </div>
 
-          <h2>Algorithmische Zustandsautomaten &amp; Forschung</h2>
-          <p class="muted">Neuartige Radix-Kodierung, beschränkte Schrittaufwände und Tokenisierungs-Forschung.</p>
+          <h2>{{S2_TITLE}}</h2>
+          <p class="muted">{{S2_BLURB}}</p>
 
           {{SECTOR2}}
 
           <!-- SKILLS MATRIX -->
           <div style="margin-top: 1.25rem;">
-            <h3>Kern-Arsenal</h3>
+            <h3>{{S2_ARSENAL}}</h3>
             <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 0.5rem;">
               {{SKILLS}}
             </div>
           </div>
 
           <div class="zoom-hint">
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(1)">↑ Systeme</button>
-            <span>[ NAVIGATION: MAUSRAD / PFEILTASTEN ZU SEKTOR 03 ]</span>
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(3)">Sektor 03: Skalierung ↓</button>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(1)">{{S2_PREV}}</button>
+            <span>{{S2_HINT}}</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(3)">{{S2_NEXT}}</button>
           </div>
         </section>
 
         <!-- =================================================================
              SEKTOR 3: ERNEUERBARE ASSETS
              ================================================================= -->
-        <section class="sector-plane plane-hidden" id="sector3" data-sector="3" data-name="KAPITAL">
+        <section class="sector-plane plane-hidden" id="sector3" data-sector="3" data-name="{{S3_NAME}}">
           <div class="sector-tag">
-            <span>// SEKTOR 03 : ERNEUERBARE ASSETS &amp; KAPITAL-SKALIERUNG</span>
-            <span class="mono">TIEFE: -1800px</span>
+            <span>{{S3_TAG}}</span>
+            <span class="mono">TIEFE: {{S3_DEPTH}}</span>
           </div>
 
-          <h2>Erneuerbare Energien &amp; Quantitative Assets</h2>
-          <p class="muted">Verantwortliche kaufmännische Betriebsführung, dynamische Finanzmodelle und bankgeprüfte Telemetrie.</p>
+          <h2>{{S3_TITLE}}</h2>
+          <p class="muted">{{S3_BLURB}}</p>
 
           {{SECTOR3}}
 
           <div class="zoom-hint">
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">↑ Algorithmen</button>
-            <span>[ NAVIGATION: MAUSRAD / PFEILTASTEN ZU SEKTOR 04 ]</span>
-            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(4)">Sektor 04: Fundament ↓</button>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(2)">{{S3_PREV}}</button>
+            <span>{{S3_HINT}}</span>
+            <button class="btn" style="padding: 0.25rem 0.6rem;" onclick="window.spatialNav.jumpTo(4)">{{S3_NEXT}}</button>
           </div>
         </section>
 
         <!-- =================================================================
              SEKTOR 4: AKADEMISCHE WURZELN
              ================================================================= -->
-        <section class="sector-plane plane-hidden" id="sector4" data-sector="4" data-name="FUNDAMENT">
+        <section class="sector-plane plane-hidden" id="sector4" data-sector="4" data-name="{{S4_NAME}}">
           <div class="sector-tag">
-            <span>// SEKTOR 04 : AKADEMISCHE WURZELN &amp; DISPATCH</span>
-            <span class="mono">TIEFE: -2400px</span>
+            <span>{{S4_TAG}}</span>
+            <span class="mono">TIEFE: {{S4_DEPTH}}</span>
           </div>
 
-          <h2>Ausbildung &amp; Forschungswurzeln</h2>
+          <h2>{{S4_TITLE}}</h2>
           <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 1rem;">
             {{EDUCATION}}
           </div>
 
           <!-- PRINCIPLES -->
-          <h2 style="margin-top: 1.5rem;">Wie ich Systeme baue</h2>
+          <h2 style="margin-top: 1.5rem;">{{S4_HOW}}</h2>
           <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 0.75rem;">
             {{PRINCIPLES}}
           </div>
@@ -199,12 +200,12 @@
           <!-- DISPATCH FOOTER -->
           <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
             <div>
-              <strong>Bereit für den Aufbau?</strong> <span class="muted">Kontaktieren Sie mich für Beratung zu Systemen, Backend und Infrastruktur.</span>
+              <strong>{{UI_READY}}</strong> <span class="muted">{{UI_DISPATCH}}</span>
             </div>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
               <a href="mailto:{{EMAIL}}" class="btn btn-primary">{{EMAIL}}</a>
-              <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">GitHub-Profil</a>
-              <button class="btn" onclick="window.spatialNav.jumpTo(0)">↑ Zurück zur Konsole</button>
+              <a href="{{GITHUB_URL}}" target="_blank" rel="noopener" class="btn">{{UI_GITHUB_BUTTON}}</a>
+              <button class="btn" onclick="window.spatialNav.jumpTo(0)">{{UI_RETURN_BUTTON}}</button>
             </div>
           </div>
         </section>
@@ -274,9 +275,7 @@
             <span>SEKTOR-FOKUS SCHEMA</span>
             <span id="inspectorSubTag">ARBEITSBEREICH</span>
           </div>
-          <p id="inspectorDescription" style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; margin: 0;">
-            Haupt-Terminalstation. Kernidentität, Aufenthalts- und Arbeitsstatus sowie direkte Kommunikationskanäle.
-          </p>
+          <p id="inspectorDescription" style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.45; margin: 0;">{{S0_INSPECTOR}}</p>
         </div>
 
       </div>
@@ -292,12 +291,8 @@
   <!-- PERSISTENT BOTTOM HUD RAIL -->
   <footer class="spatial-hud-bottom">
     <nav class="sector-nav-rail" aria-label="Sektor-Navigation">
-      <span class="muted" style="margin-right: 0.35rem;">SEKTOREN:</span>
-      <button class="nav-sector-btn active" data-target="0" onclick="window.spatialNav.jumpTo(0)">00 KONSOLE</button>
-      <button class="nav-sector-btn" data-target="1" onclick="window.spatialNav.jumpTo(1)">01 SYSTEME</button>
-      <button class="nav-sector-btn" data-target="2" onclick="window.spatialNav.jumpTo(2)">02 ALGORITHMEN</button>
-      <button class="nav-sector-btn" data-target="3" onclick="window.spatialNav.jumpTo(3)">03 KAPITAL 100M+$</button>
-      <button class="nav-sector-btn" data-target="4" onclick="window.spatialNav.jumpTo(4)">04 FUNDAMENT</button>
+      <span class="muted" style="margin-right: 0.35rem;">{{UI_RAIL_LABEL}}</span>
+      {{NAV_RAIL}}
     </nav>
 
     <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-muted);">
@@ -310,8 +305,8 @@
   <!-- SPATIAL 3D ENGINE v3 (DEUTSCH) -->
   <script>
     (function(){
-      var sectorNames = ['KONSOLE', 'SYSTEME', 'ALGORITHMEN', 'KAPITAL', 'FUNDAMENT'];
-      var sectorDepths = ['0000', '0600', '1200', '1800', '2400'];
+      var sectorNames = {{SECTOR_NAMES_JS}};
+      var sectorDepths = {{SECTOR_DEPTHS_JS}};
       var currentSector = 0;
       var totalSectors = 5;
 
@@ -341,13 +336,7 @@
         '<svg width="150" height="140" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" fill="none" stroke="var(--border)" stroke-width="1.5"/><path d="M 15 85 A 70 70 0 0 1 85 15 A 43.2 43.2 0 0 0 41.8 15 A 26.7 26.7 0 0 1 41.8 41.8" fill="none" stroke="var(--accent-bright)" stroke-width="2"/><text x="25" y="93" fill="var(--accent-bright)" font-size="6" font-family="monospace">φ = 1.61803 (TYPST)</text><text x="20" y="10" fill="var(--text-muted)" font-size="5" font-family="monospace">MINES · UNI FREIBURG</text></svg>'
       ];
 
-      var sectorDescriptions = [
-        'Haupt-Terminalstation. Kernidentität, Aufenthalts- und Arbeitsstatus sowie direkte Kommunikationskanäle.',
-        'Deterministisches Go-Backend und deklarative NixOS-Flotte. Append-Only-Event-Ledger und hermetische CI.',
-        'Fibonacci-Radix-Streaming-Zustandsautomat (FSVM). Strukturelle Kalibrierung über Adjazenzbreite und Bitstrom-Sensorik.',
-        'Quantitative Betriebsführung für Erneuerbare-Energien-Portfolios über 100 Mio. $. Solarertragsmodelle unter Bank-Audits.',
-        'Akademische Wurzeln an der Colorado School of Mines und Universität Freiburg. Goldener Schnitt und 14KB TCP-Disziplin.'
-      ];
+      var sectorDescriptions = {{SECTOR_DESCRIPTIONS_JS}};
 
       function updateInspector(idx) {
         if (!visualCanvas) return;

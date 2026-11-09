@@ -64,6 +64,9 @@ function compileLanguage({ lang, dataFile, templateFile, outputFile, minifiedCss
   template = template.replace(/{{META_TITLE}}/g, escapeHtml(`${data.profile.name} // ${data.profile.title}`));
   template = template.replace(/{{META_DESCRIPTION}}/g, escapeHtml(data.profile.bio));
   template = template.replace(/{{STATUS_TEXT}}/g, escapeHtml(data.profile.status.text));
+  // The language line is a fact about the CV, so it comes from the data rather
+  // than a second copy in the markup that nobody re-reads.
+  template = template.replace(/{{LANGUAGES}}/g, escapeHtml(data.profile.work_auth.languages));
   template = template.replace(/{{LOCATION}}/g, escapeHtml(data.profile.location));
   template = template.replace(/{{PROFILE_NAME}}/g, escapeHtml(data.profile.name));
   template = template.replace(/{{PROFILE_TITLE}}/g, escapeHtml(data.profile.title));
@@ -206,9 +209,105 @@ function build() {
     fs.chmodSync(to, 0o644);
   }
 
+  // Case-study pages: one template per locale, one directory per slug. The slug
+  // rule is the corpus's (lib/bountystash/shared.nix), so /work/<slug> is the URL
+  // the retired portfolio answered and the one its inbound links still name.
+  const pageJs = fs.readFileSync(path.join(ROOT_DIR, 'src', 'page-script.js'), 'utf-8');
+  const sub = {' ': '-', '/': '-', '&': 'and', "'": '', ',': '', '.': '', '(': '', ')': '', ':': '', '—': '-'};
+  const slug = (title) =>
+    Array.from(String(title).toLowerCase())
+      .map((c) => sub[c] ?? c)
+      .join('');
+  const num = (n) => String(n).padStart(2, '0');
+
+  const labels = {
+    en: {kind: 'Case study', impact: 'Impact', stack: 'Stack', back: '← Selected work', href: '/work/'},
+    de: {kind: 'Fallstudie', impact: 'Wirkung', stack: 'Technik', back: '← Ausgewählte Arbeiten', href: '/de/work/'},
+  };
+
+  // Slugs come from the English titles for both locales, which is the rule the
+  // corpus uses and the URL a reader may already have bookmarked.
+  const slugs = enData.projects.map((p) => slug(p.title));
+
+  const workPairs = [];
+  for (const lang of ['en', 'de']) {
+    const data = lang === 'de' ? deData : enData;
+    const l = labels[lang];
+    const dir = lang === 'de' ? path.join(DIST_DIR, 'de', 'work') : path.join(DIST_DIR, 'work');
+    const prefix = l.href;
+    const total = num(data.projects.length);
+
+    const detail = fs.readFileSync(path.join(ROOT_DIR, 'src', lang === 'de' ? 'work.de.html' : 'work.html'), 'utf-8');
+    const indexTpl = fs.readFileSync(
+      path.join(ROOT_DIR, 'src', lang === 'de' ? 'work-index.de.html' : 'work-index.html'),
+      'utf-8',
+    );
+
+    data.projects.forEach((p, i) => {
+      const s = slugs[i];
+      const stack = p.stack.map((x) => `            <span class="badge">#${escapeHtml(x)}</span>`).join('\n');
+      const link =
+        p.link && p.link !== '#'
+          ? `<a class="btn btn-primary" href="${escapeHtml(p.link)}" target="_blank" rel="noopener">Repository &rarr;</a>`
+          : '';
+      const repl = {
+        SLUG: s,
+        TITLE: escapeHtml(p.title),
+        DESCRIPTION: escapeHtml(p.description),
+        ROLE: escapeHtml(p.role),
+        PERIOD: escapeHtml(p.period),
+        IMPACT: escapeHtml(p.impact),
+        IMPACT_LABEL: l.impact,
+        STACK_LABEL: l.stack,
+        STACK: stack,
+        LINK: link,
+        KIND: l.kind,
+        BACK_HREF: prefix,
+        BACK_LABEL: l.back,
+        PAGE_JS: pageJs,
+        INDEX: num(i + 1),
+        TOTAL: total,
+      };
+      let html = detail;
+      for (const [key, value] of Object.entries(repl)) html = html.split(`{{${key}}}`).join(value);
+      fs.mkdirSync(path.join(dir, s), {recursive: true});
+      fs.writeFileSync(path.join(dir, s, 'index.html'), minifyHtml(html), 'utf-8');
+      // Both locales render the same slug, so the pair is recorded once.
+      if (lang === 'en') workPairs.push([`https://bountystash.com/work/${s}/`, `https://bountystash.com/de/work/${s}/`]);
+    });
+
+    const cards = data.projects
+      .map(
+        (p, i) => `        <article class="card">
+          <div class="card-header">
+            <h3><a href="${prefix}${slugs[i]}/">${escapeHtml(p.title)}</a></h3>
+            <span class="badge">${num(i + 1)}</span>
+          </div>
+          <div class="card-role">${escapeHtml(p.role)} · ${escapeHtml(p.period)}</div>
+          <p>${escapeHtml(p.description)}</p>
+          <div class="card-impact">${escapeHtml(p.impact)}</div>
+        </article>`,
+      )
+      .join('\n');
+
+    const indexRepl = {
+      TOTAL: total,
+      CARDS: cards,
+      PAGE_JS: pageJs,
+      BACK_HREF: lang === 'de' ? '/de/' : '/',
+      BACK_LABEL: lang === 'de' ? '← Startseite' : '← Home',
+    };
+    let indexHtml = indexTpl;
+    for (const [key, value] of Object.entries(indexRepl)) indexHtml = indexHtml.split(`{{${key}}}`).join(value);
+    fs.mkdirSync(dir, {recursive: true});
+    fs.writeFileSync(path.join(dir, 'index.html'), minifyHtml(indexHtml), 'utf-8');
+  }
+
   const pairs = [
     ['https://bountystash.com/', 'https://bountystash.com/de/'],
     ['https://bountystash.com/contact/', 'https://bountystash.com/de/kontakt/'],
+    ['https://bountystash.com/work/', 'https://bountystash.com/de/work/'],
+    ...workPairs,
   ];
   const urls = pairs
     .flatMap(([en, de]) =>
@@ -233,18 +332,13 @@ function build() {
     'User-agent: *\nAllow: /\n\nSitemap: https://bountystash.com/sitemap.xml\n',
     'utf-8',
   );
-  // The portfolio this domain used to serve answered /work/<slug> per locale.
-  // The console presents the same work inline, so the retired paths point at the
-  // console rather than 404 once the previous site's edge cache expires.
-  fs.writeFileSync(
-    path.join(DIST_DIR, '_redirects'),
-    '# retired Nix-portfolio case-study paths, now sections of the console\n' +
-      '/de/work/*  /de/  301\n' +
-      '/work/*     /     301\n' +
-      '/work       /     301\n',
-    'utf-8',
+  // Real pages now answer the retired paths, so no redirect rule remains: the
+  // worker serves env.ASSETS and the directory index is the case study.
+  fs.rmSync(path.join(DIST_DIR, '_redirects'), {force: true});
+  console.log(
+    ` • dist/robots.txt, dist/sitemap.xml, og cards: ${pairs.length * 2} URLs, ` +
+      `${pairs.length - 3} case studies per locale`,
   );
-  console.log(` • dist/robots.txt, dist/sitemap.xml, _redirects, og cards: ${pairs.length * 2} URLs`);
 }
 
 build();

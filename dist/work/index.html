@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-view="3d">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case studies — Matt Ji</title>
+<meta name="description" content="Four programmes: a solar portfolio's asset data, a bounded-cost streaming state machine, a NixOS fleet rebuilt from one repository, and a deterministic work engine.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://bountystash.com/work/">
+<link rel="alternate" hreflang="en" href="https://bountystash.com/work/">
+<link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/">
+<link rel="alternate" hreflang="x-default" href="https://bountystash.com/work/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bountystash.com/work/">
+<meta property="og:title" content="Case studies — Matt Ji">
+<meta property="og:description" content="Four programmes: a solar portfolio's asset data, a bounded-cost streaming state machine, a NixOS fleet rebuilt from one repository, and a deterministic work engine.">
+<meta property="og:image" content="https://bountystash.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231F69FF'/%3E%3Ctext y='.9em' font-size='80' font-family='monospace' font-weight='bold' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+<script>
+(function(){
+try {
+document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+document.documentElement.setAttribute('data-view', localStorage.getItem('viewMode') || '3d');
+} catch(e){}
+})();
+</script>
+</head>
+<body>
+<header class="spatial-hud-top">
+<div style="display: flex; align-items: center; gap: 0.75rem;">
+<span class="status-dot"></span>
+<strong>MATT JI</strong>
+<span class="muted">// CASE STUDIES</span>
+</div>
+<div style="color: var(--accent-bright); font-weight: 700;">
+[ DEPTH: Z 0000 // SECTOR: WORK ]
+</div>
+<div style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
+<span class="hud-control-btn" style="cursor: default;">[ <span style="color: var(--accent-bright);">EN</span> | <a href="/de/work/" style="color: var(--text-muted); text-decoration: none;">DE</a> ]</span>
+<button id="viewToggleBtn" class="hud-control-btn" aria-label="Toggle 3D spatial or flat document view">[ VIEW: <span id="viewLabel">3D HUD</span> ]</button>
+<button id="themeToggleBtn" class="hud-control-btn" aria-label="Toggle dark or light theme">[ <span id="themeLabel">DARK</span> ]</button>
+</div>
+</header>
+<div id="workspaceContainer">
+<div id="spatialViewport">
+<div id="cameraWorld">
+<section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="WORK">
+<div class="sector-tag">
+<span>// SECTOR: WORK</span>
+<span class="mono">04 CASES</span>
+</div>
+<h1 style="margin: 0.25rem 0;">Selected work</h1>
+<p class="lead">Each case is a programme with a number that had to survive an audit: what it was, what I did, and what it changed.</p>
+<article class="card">
+<div class="card-header">
+<h3><a href="/work/clean-energy-asset-and-telemetry-platform/">Clean Energy Asset &amp; Telemetry Platform</a></h3>
+<span class="badge">01</span>
+</div>
+<div class="card-role">Lead Operations @ O3 Energy · 2016 — 2020</div>
+<p>Led data architecture and commercial asset steering for a solar energy portfolio exceeding $100M+. Built dynamic quantitative valuation and yield models under bank audits, automated mobile field data capture, and structured counterparty risk hedging.</p>
+<div class="card-impact">Governed quantitative operations across $100M+ in assets; coordinated M&amp;A due diligence with institutional lenders, tax equity, and Fraunhofer ISE research frameworks.</div>
+</article>
+<article class="card">
+<div class="card-header">
+<h3><a href="/work/fibtransponder-fibonacci-streaming-state-machine/">fibtransponder: Fibonacci Streaming State Machine</a></h3>
+<span class="badge">02</span>
+</div>
+<div class="card-role">Research &amp; Implementation (Go) · 2026</div>
+<p>An experimental tokenization and semantic sensing substrate built around a Fibonacci-radix streaming state machine (FSVM). Evaluates bounded per-step work bitstream ingestion, structural calibration via adjacency width, and Zobrist hash seed tables.</p>
+<div class="card-impact">Demonstrated that structural adjacency width acts as a locality-sensitivity selector; falsified seed-only detector diversity through automated corpus benchmarks.</div>
+</article>
+<article class="card">
+<div class="card-header">
+<h3><a href="/work/multi-host-declarative-nixos-infrastructure/">Multi-Host Declarative NixOS Infrastructure</a></h3>
+<span class="badge">03</span>
+</div>
+<div class="card-role">Personal Infrastructure Fleet · Active</div>
+<p>Production-grade, fully reproducible multi-host fleet (NAS, workstations, cloud endpoints) managed with Nix Flakes. Features a custom SSH Certificate Authority with automated rotation, age/SOPS secret encryption, automated self-upgrades, and a Taskfile control plane.</p>
+<div class="card-impact">Zero manual server configuration. One-command host commissioning, automated morning kernel boot validation, and air-gapped secret hygiene.</div>
+</article>
+<article class="card">
+<div class="card-header">
+<h3><a href="/work/bountystash-deterministic-work-engine/">Bountystash: Deterministic Work Engine</a></h3>
+<span class="badge">04</span>
+</div>
+<div class="card-role">Creator &amp; Systems Architect · 2024 — Present</div>
+<p>Thin, server-rendered Go application turning unstructured task requirements into immutable, content-addressed specifications. Features append-only event sourcing, a keyboard-first terminal UI, and curl-friendly endpoints.</p>
+<div class="card-impact">Single-binary deployment, sub-millisecond route resolution, zero frontend dependencies, and deterministic audit trail.</div>
+</article>
+<p class="mono" style="margin-top: 1.5rem;"><a href="/" style="text-decoration: none;">[ ESC &rarr; CONSOLE ]</a></p>
+</section>
+</div>
+</div>
+</div>
+<footer class="spatial-hud-bottom">
+<span class="mono">[ WORK / 04 CASES ]</span>
+<span id="liveClock" class="mono">00:00:00 UTC</span>
+<span class="mono"><a href="/" style="text-decoration: none;">[ ESC &rarr; CONSOLE ]</a></span>
+</footer>
+<script>
+(function () {
+var html = document.documentElement;
+var viewBtn = document.getElementById('viewToggleBtn');
+var viewLbl = document.getElementById('viewLabel');
+var world = document.getElementById('cameraWorld');
+var viewport = document.getElementById('spatialViewport');
+function setView(next) {
+html.setAttribute('data-view', next);
+if (viewLbl) viewLbl.textContent = next === '3d' ? '3D HUD' : 'FLAT DOC';
+try { localStorage.setItem('viewMode', next); } catch (e) {}
+if (world) world.style.transform = '';
+if (viewport) viewport.scrollTop = 0;
+}
+if (viewBtn) {
+viewBtn.addEventListener('click', function () {
+setView((html.getAttribute('data-view') || '3d') === '3d' ? 'flat' : '3d');
+});
+}
+setView(html.getAttribute('data-view') || '3d');
+var themeBtn = document.getElementById('themeToggleBtn');
+var themeLbl = document.getElementById('themeLabel');
+if (themeBtn) {
+themeBtn.addEventListener('click', function () {
+var next = (html.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
+html.setAttribute('data-theme', next);
+if (themeLbl) themeLbl.textContent = next.toUpperCase();
+try { localStorage.setItem('theme', next); } catch (e) {}
+});
+}
+var crtBtn = document.getElementById('crtToggleBtn');
+var crtLbl = document.getElementById('crtLabel');
+function setCrt(on) {
+document.body.classList.toggle('crt-enabled', on);
+if (crtLbl) crtLbl.textContent = on ? 'ON' : 'OFF';
+try { localStorage.setItem('crtFilter', on ? 'on' : 'off'); } catch (e) {}
+}
+var savedCrt = 'on';
+try { savedCrt = localStorage.getItem('crtFilter') || 'on'; } catch (e) {}
+setCrt(savedCrt === 'on');
+if (crtBtn) {
+crtBtn.addEventListener('click', function () {
+setCrt(!document.body.classList.contains('crt-enabled'));
+});
+}
+function tick() {
+var el = document.getElementById('liveClock');
+if (el) el.textContent = new Date().toISOString().substring(11, 19) + ' UTC';
+}
+tick();
+setInterval(tick, 1000);
+if (viewport && world) {
+viewport.addEventListener('pointermove', function (e) {
+if (html.getAttribute('data-view') !== '3d') return;
+var x = e.clientX / window.innerWidth - 0.5;
+var y = e.clientY / window.innerHeight - 0.5;
+world.style.transform = 'rotateY(' + (x * 6).toFixed(2) + 'deg) rotateX(' + (-y * 4).toFixed(2) + 'deg)';
+}, { passive: true });
+viewport.addEventListener('pointerleave', function () { world.style.transform = ''; });
+}
+})();
+</script>
+</body>
+</html>

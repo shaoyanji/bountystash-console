@@ -15,7 +15,7 @@
     "work_auth": {
       "citizenship": "US-Staatsbürger",
       "residency": "Deutsche Niederlassungserlaubnis",
-      "languages": "Englisch (Muttersprache) · Deutsch (Verhandlungssicher C1)",
+      "languages": "Englisch (Muttersprache) · Deutsch (B2)",
       "availability": "Kündigungsfrist: Flexibel / Kurzfristig verfügbar"
     },
     "education": [
@@ -38,23 +38,57 @@
     }
   },
   "metrics": [
-    { "label": "Portfolio-Steuerung", "value": "100M+ $" },
-    { "label": "Ingenieur-Alma-Mater", "value": "Mines & Freiburg" },
-    { "label": "Primärer Tech-Stack", "value": "Go & NixOS" },
-    { "label": "Aufenthaltsstatus", "value": "US & Niederlassungserlaubnis" }
+    {
+      "label": "Portfolio-Steuerung",
+      "value": "100M+ $"
+    },
+    {
+      "label": "Ingenieur-Alma-Mater",
+      "value": "Mines & Freiburg"
+    },
+    {
+      "label": "Primärer Tech-Stack",
+      "value": "Go & NixOS"
+    },
+    {
+      "label": "Aufenthaltsstatus",
+      "value": "US & Niederlassungserlaubnis"
+    }
   ],
   "skills": [
     {
       "category": "Systeme & Nebenläufigkeit (Go / Python)",
-      "items": ["Go (Golang)", "Concurrency & Channels", "Kafka & Event Streaming", "PostgreSQL", "Redis", "gRPC & REST APIs", "Zustandsautomaten"]
+      "items": [
+        "Go (Golang)",
+        "Concurrency & Channels",
+        "Kafka & Event Streaming",
+        "PostgreSQL",
+        "Redis",
+        "gRPC & REST APIs",
+        "Zustandsautomaten"
+      ]
     },
     {
       "category": "Deklarative Infrastruktur & Linux",
-      "items": ["NixOS Fleets", "Nix Flakes", "SSH Certificate Authority", "SOPS / Age Verschlüsselung", "Docker & Container", "ZFS / Btrfs", "Linux Kernel / ZRAM"]
+      "items": [
+        "NixOS Fleets",
+        "Nix Flakes",
+        "SSH Certificate Authority",
+        "SOPS / Age Verschlüsselung",
+        "Docker & Container",
+        "ZFS / Btrfs",
+        "Linux Kernel / ZRAM"
+      ]
     },
     {
       "category": "Energie, Finanzen & Domänenmodellierung",
-      "items": ["Quantitative Anlagenbewertung", "Solar-Telemetrie-Abgleich", "Algorithmische Risikomodelle", "Banken-Audit-Reporting", "Typst Schriftsatz-Engine"]
+      "items": [
+        "Quantitative Anlagenbewertung",
+        "Solar-Telemetrie-Abgleich",
+        "Algorithmische Risikomodelle",
+        "Banken-Audit-Reporting",
+        "Typst Schriftsatz-Engine"
+      ]
     }
   ],
   "projects": [
@@ -63,7 +97,13 @@
       "role": "Lead Operations @ O3 Energy",
       "period": "2016 — 2020",
       "description": "Leitung der Datenarchitektur und kaufmännischen Betriebsführung eines Solarportfolios von über 100 Mio. $ Kapitalwert. Entwicklung dynamischer Ertrags- und Bewertungsmodelle unter strengen Banken-Audits, Automatisierung mobiler Felddatenerfassung und Absicherung von Kontrahentenrisiken.",
-      "stack": ["Python", "PostgreSQL", "Time-Series Data", "Docker", "Financial Due Diligence"],
+      "stack": [
+        "Python",
+        "PostgreSQL",
+        "Time-Series Data",
+        "Docker",
+        "Financial Due Diligence"
+      ],
       "impact": "Quantitative Betriebsführung von über 100 Mio. $ Kapitalanlagen; M&A-Prüfungen mit institutionellen Kreditgebern, Steuereigenkapital und Fraunhofer-ISE-Forschungsgrundlagen.",
       "link": "#",
       "featured": true
@@ -73,7 +113,13 @@
       "role": "Forschung & Implementierung (Go)",
       "period": "2026",
       "description": "Experimentelles Substrat für semantische Sensorik und Tokenisierung auf Basis eines Fibonacci-Radix-Streaming-Zustandsautomaten (FSVM). Untersucht Bitstrom-Verarbeitung mit begrenztem Schrittaufwand, strukturelle Kalibrierung über Adjazenzbreite und Zobrist-Hash-Tabellen.",
-      "stack": ["Go", "Zustandsautomaten", "Fibonacci Radix", "Zobrist Hashing", "Bitstrom-Analyse"],
+      "stack": [
+        "Go",
+        "Zustandsautomaten",
+        "Fibonacci Radix",
+        "Zobrist Hashing",
+        "Bitstrom-Analyse"
+      ],
       "impact": "Nachweis der strukturellen Adjazenzbreite als Selektor für Lokalitätssensitivität; Falsifizierung reiner Seed-Diversität anhand automatisierter Korpus-Benchmarks.",
       "link": "https://github.com/shaoyanji/fibtransponder",
       "featured": true
@@ -83,7 +129,14 @@
       "role": "Persönliche Infrastruktur-Flotte",
       "period": "Aktiv",
       "description": "Vollständig reproduzierbare Multi-Host-Flotte (NAS, Workstations, Cloud-Endpunkte), verwaltet mit Nix Flakes. Eigene SSH Certificate Authority mit automatisierter Rotation, Age/SOPS-Verschlüsselung, automatisierte Selbst-Upgrades und Taskfile-Steuerung.",
-      "stack": ["NixOS", "Nix Flakes", "SSH CA", "SOPS / Age", "Tailscale", "Taskfile"],
+      "stack": [
+        "NixOS",
+        "Nix Flakes",
+        "SSH CA",
+        "SOPS / Age",
+        "Tailscale",
+        "Taskfile"
+      ],
       "impact": "Keine manuelle Serverkonfiguration oder Konfigurationsdrift. Bereitstellung per Einzelbefehl, tägliche Kernel-Boot-Validierung und isolierte Secret-Hygiene.",
       "link": "https://github.com/shaoyanji/nixconfig",
       "featured": true
@@ -93,7 +146,13 @@
       "role": "Urheber & Systemarchitekt",
       "period": "2024 — Heute",
       "description": "Schlanke, serverseitig gerenderte Go-Anwendung zur Überführung unstrukturierter Aufgabenanforderungen in unveränderliche, inhaltsadressierte Spezifikationen. Append-Only-Event-Ledger, tastaturfokussierte Terminal-Oberfläche und curl-fähige Endpunkte.",
-      "stack": ["Go", "PostgreSQL", "Nix Flakes", "TUI", "HTML"],
+      "stack": [
+        "Go",
+        "PostgreSQL",
+        "Nix Flakes",
+        "TUI",
+        "HTML"
+      ],
       "impact": "Single-Binary-Bereitstellung, Routenauflösung im Sub-Millisekundenbereich, null Frontend-Ballast und manipulationssichere Audit-Historie.",
       "link": "https://github.com/shaoyanji/bountystash",
       "featured": true

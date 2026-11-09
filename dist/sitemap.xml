@@ -20,4 +20,54 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/contact/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/kontakt/"/>
   </url>
+  <url>
+    <loc>https://bountystash.com/work/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/de/work/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/work/clean-energy-asset-and-telemetry-platform/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/clean-energy-asset-and-telemetry-platform/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/clean-energy-asset-and-telemetry-platform/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/de/work/clean-energy-asset-and-telemetry-platform/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/clean-energy-asset-and-telemetry-platform/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/clean-energy-asset-and-telemetry-platform/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/work/fibtransponder-fibonacci-streaming-state-machine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/fibtransponder-fibonacci-streaming-state-machine/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/fibtransponder-fibonacci-streaming-state-machine/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/de/work/fibtransponder-fibonacci-streaming-state-machine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/fibtransponder-fibonacci-streaming-state-machine/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/fibtransponder-fibonacci-streaming-state-machine/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/work/multi-host-declarative-nixos-infrastructure/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/multi-host-declarative-nixos-infrastructure/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/multi-host-declarative-nixos-infrastructure/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/de/work/multi-host-declarative-nixos-infrastructure/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/multi-host-declarative-nixos-infrastructure/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/multi-host-declarative-nixos-infrastructure/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/work/bountystash-deterministic-work-engine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/bountystash-deterministic-work-engine/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/bountystash-deterministic-work-engine/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/de/work/bountystash-deterministic-work-engine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/bountystash-deterministic-work-engine/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/bountystash-deterministic-work-engine/"/>
+  </url>
 </urlset>

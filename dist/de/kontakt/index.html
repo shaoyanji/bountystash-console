@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de" data-theme="dark" data-view="3d">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,16 +12,56 @@
 <link rel="alternate" hreflang="de" href="https://bountystash.com/de/kontakt/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231F69FF'/%3E%3Ctext y='.9em' font-size='80' font-family='monospace' font-weight='bold' fill='white'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/style.css">
+<script>
+(function(){
+try {
+document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+document.documentElement.setAttribute('data-view', localStorage.getItem('viewMode') || '3d');
+} catch(e){}
+})();
+</script>
 <style>
-html, body { height: auto; min-height: 100%; overflow: auto; }
-body { padding: 96px 1.25rem 64px; }
-.wrap { max-width: 640px; margin: 0 auto; }
-form { display: grid; gap: 1rem; margin-top: 1.5rem; background: var(--surface); border: 2px solid var(--border); padding: 1.25rem; box-shadow: 6px 6px 0 var(--shadow); }
-label { display: block; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.35rem; color: var(--text-muted); }
-input, textarea { width: 100%; background: var(--code-bg); color: var(--text); border: 1.5px solid var(--border); padding: 0.6rem 0.7rem; font-family: var(--font-mono); font-size: var(--text-sm); }
-input:focus, textarea:focus { border-color: var(--border-focus); outline: none; }
+/* Das Formular ist der Sektor. Eine Ebene, kein Inspektor: die Gestalt kommt
+aus den Tokens der Konsole, lokal ist nur die Ausstattung der Felder. */
+.dispatch-form { display: grid; gap: 1rem; margin-top: 1.25rem; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+.field label {
+display: block;
+font-family: var(--font-mono);
+font-size: var(--text-xs);
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.04em;
+color: var(--text-muted);
+margin-bottom: 0.35rem;
+}
+.field input, .field textarea {
+width: 100%;
+background: var(--bg);
+color: var(--text);
+border: 1.5px solid var(--border);
+padding: 0.6rem 0.7rem;
+font-family: var(--font-mono);
+font-size: var(--text-sm);
+box-shadow: inset 2px 2px 0 var(--shadow);
+}
+.field input:focus, .field textarea:focus {
+border-color: var(--accent-bright);
+outline: 2px solid var(--accent-bright);
+outline-offset: 1px;
+}
+.field textarea { resize: vertical; min-height: 9rem; }
+.form-actions { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); margin-top: 0.75rem; }
+.notes {
+font-family: var(--font-mono);
+font-size: var(--text-xs);
+color: var(--text-muted);
+margin-top: 1rem;
+padding-top: 0.75rem;
+border-top: 1px dashed var(--border);
+}
 </style>
 </head>
 <body>
@@ -31,37 +71,141 @@ input:focus, textarea:focus { border-color: var(--border-focus); outline: none; 
 <strong>MATT JI</strong>
 <span class="muted">// KONTAKT</span>
 </div>
-<div style="display: flex; gap: 0.5rem;">
-<a href="/de/" class="hud-control-btn" style="text-decoration: none;">[ &larr; KONSOLE ]</a>
-<a href="/contact/" class="hud-control-btn" style="text-decoration: none;">[ EN ]</a>
+<div style="color: var(--accent-bright); font-weight: 700;">
+[ TIEFE: Z 0000 // SEKTOR: 05 VERSAND ]
+</div>
+<div style="display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap;">
+<span class="hud-control-btn" style="cursor: default;">[ <a href="/contact/" style="color: var(--text-muted); text-decoration: none;">EN</a> | <span style="color: var(--accent-bright);">DE</span> ]</span>
+<button id="crtToggleBtn" class="hud-control-btn" aria-label="CRT-Scanline-Filter umschalten">[ CRT: <span id="crtLabel">ON</span> ]</button>
+<button id="viewToggleBtn" class="hud-control-btn" aria-label="3D- oder Dokumentenansicht umschalten">[ ANSICHT: <span id="viewLabel">3D HUD</span> ]</button>
+<button id="themeToggleBtn" class="hud-control-btn" aria-label="Dunkles oder helles Farbschema">[ <span id="themeLabel">DARK</span> ]</button>
 </div>
 </header>
-<main class="wrap">
-<h1>Kontakt</h1>
-<p class="lead">Ihre Nachricht erreicht matt@bountystash.com direkt. Kein Tracking, kein JavaScript, kein Formular-Dienstleister.</p>
-<form method="post" action="/api/contact">
+<div id="workspaceContainer">
+<div id="spatialViewport">
+<div id="cameraWorld">
+<section class="sector-plane plane-active" id="sector0" data-sector="0" data-name="VERSAND">
+<div class="sector-tag">
+<span>// SEKTOR 05 : VERSAND</span>
+<span class="mono">TIEFE: 0000px</span>
+</div>
+<h1 style="margin: 0.5rem 0;">Kontakt</h1>
+<p class="lead" style="margin-bottom: 0.75rem;">
+Ihre Nachricht geht direkt an matt@bountystash.com: auf dieser Domain abgeschickt, von hier über einen Mail-Relay weitergereicht, ohne Formular-Dienst von Dritten.
+</p>
+<div class="telemetry-strip">
+<div class="telemetry-item">KANAL: <strong>DIREKTE MAIL</strong></div>
+<div class="telemetry-item">FORMULAR: <strong>OHNE JAVASCRIPT</strong></div>
+<div class="telemetry-item">SPRACHEN: <strong>EN / DE</strong></div>
+<div class="telemetry-item">ZEITZONE: <strong>MEZ</strong></div>
+</div>
+<form class="dispatch-form" method="post" action="/api/contact">
 <input type="hidden" name="lang" value="de">
-<div>
+<div class="field-row">
+<div class="field">
 <label for="name">Name</label>
 <input id="name" name="name" type="text" required maxlength="80" autocomplete="name">
 </div>
-<div>
+<div class="field">
 <label for="email">E-Mail</label>
 <input id="email" name="email" type="email" required maxlength="200" autocomplete="email">
 </div>
-<div>
+</div>
+<div class="field">
 <label for="message">Nachricht</label>
-<textarea id="message" name="message" required minlength="20" maxlength="4000" rows="8"></textarea>
+<textarea id="message" name="message" required minlength="20" maxlength="4000" rows="7"></textarea>
 </div>
 <div class="hp" aria-hidden="true">
 <label for="website">Website</label>
 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
 </div>
-<div>
+<div class="form-actions">
 <button class="btn btn-primary" type="submit">Nachricht senden</button>
+<span class="mono muted" style="font-size: var(--text-xs);">[ ABGELEHNT: UNTER 20 ZEICHEN ]</span>
 </div>
 </form>
-<p class="meta">Lieber per Mail? <a href="mailto:matt@bountystash.com">matt@bountystash.com</a> &middot; <a href="https://cal.com/mattji">cal.com/mattji</a></p>
-</main>
+<p class="notes">
+Lieber per Mail? <a href="mailto:matt@bountystash.com">matt@bountystash.com</a> &middot; <a href="https://cal.com/mattji">cal.com/mattji</a>
+</p>
+</section>
+</div>
+</div>
+</div>
+<footer class="spatial-hud-bottom">
+<span class="mono">[ SEKTOR 05 / 05 : VERSAND ]</span>
+<span id="liveClock" class="mono">00:00:00 UTC</span>
+<span class="mono"><a href="/de/" style="text-decoration: none;">[ ESC &rarr; KONSOLE ]</a></span>
+</footer>
+<script>
+(function(){
+var html = document.documentElement;
+var viewport = document.getElementById('spatialViewport');
+var world = document.getElementById('cameraWorld');
+// 3D-HUD <-> Dokument. Derselbe Schlüssel, den die Konsole schreibt, damit
+// der Wechsel beim Gang zwischen den Sektoren erhalten bleibt.
+var viewBtn = document.getElementById('viewToggleBtn');
+var viewLbl = document.getElementById('viewLabel');
+function setView(next) {
+html.setAttribute('data-view', next);
+if (viewLbl) viewLbl.textContent = next === '3d' ? '3D HUD' : 'DOKUMENT';
+try { localStorage.setItem('viewMode', next); } catch(e){}
+if (world) world.style.transform = '';
+if (viewport) viewport.scrollTop = 0;
+}
+if (viewBtn) {
+viewBtn.addEventListener('click', function(){
+setView((html.getAttribute('data-view') || '3d') === '3d' ? 'flat' : '3d');
+});
+}
+setView(html.getAttribute('data-view') || '3d');
+var themeBtn = document.getElementById('themeToggleBtn');
+var themeLbl = document.getElementById('themeLabel');
+if (themeBtn) {
+themeBtn.addEventListener('click', function(){
+var next = (html.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
+html.setAttribute('data-theme', next);
+if (themeLbl) themeLbl.textContent = next.toUpperCase();
+try { localStorage.setItem('theme', next); } catch(e){}
+});
+}
+var crtBtn = document.getElementById('crtToggleBtn');
+var crtLbl = document.getElementById('crtLabel');
+function setCrt(on) {
+document.body.classList.toggle('crt-enabled', on);
+if (crtLbl) crtLbl.textContent = on ? 'ON' : 'OFF';
+try { localStorage.setItem('crtFilter', on ? 'on' : 'off'); } catch(e){}
+}
+var savedCrt = 'on';
+try { savedCrt = localStorage.getItem('crtFilter') || 'on'; } catch(e){}
+setCrt(savedCrt === 'on');
+if (crtBtn) {
+crtBtn.addEventListener('click', function(){
+setCrt(!document.body.classList.contains('crt-enabled'));
+});
+}
+function tick() {
+var el = document.getElementById('liveClock');
+if (el) el.textContent = new Date().toISOString().substring(11, 19) + ' UTC';
+}
+tick();
+setInterval(tick, 1000);
+// Die Ebene neigt sich mit dem Zeiger, wie die Kamera der Konsole. In der
+// Dokumentenansicht pinnt CSS sie mit !important, dieser Weg läuft also nur in 3D.
+if (viewport && world) {
+viewport.addEventListener('pointermove', function(e){
+if (html.getAttribute('data-view') !== '3d') return;
+var x = e.clientX / window.innerWidth - 0.5;
+var y = e.clientY / window.innerHeight - 0.5;
+world.style.transform = 'rotateY(' + (x * 6).toFixed(2) + 'deg) rotateX(' + (-y * 4).toFixed(2) + 'deg)';
+}, { passive: true });
+viewport.addEventListener('pointerleave', function(){ world.style.transform = ''; });
+}
+document.addEventListener('keydown', function(e){
+if (e.key !== 'Escape') return;
+if (e.target && e.target.closest && e.target.closest('input, textarea')) return;
+window.location.href = '/de/';
+});
+})();
+</script>
 </body>
 </html>

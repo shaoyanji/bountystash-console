@@ -233,7 +233,18 @@ function build() {
     'User-agent: *\nAllow: /\n\nSitemap: https://bountystash.com/sitemap.xml\n',
     'utf-8',
   );
-  console.log(` • dist/robots.txt, dist/sitemap.xml, og cards: ${pairs.length * 2} URLs`);
+  // The portfolio this domain used to serve answered /work/<slug> per locale.
+  // The console presents the same work inline, so the retired paths point at the
+  // console rather than 404 once the previous site's edge cache expires.
+  fs.writeFileSync(
+    path.join(DIST_DIR, '_redirects'),
+    '# retired Nix-portfolio case-study paths, now sections of the console\n' +
+      '/de/work/*  /de/  301\n' +
+      '/work/*     /     301\n' +
+      '/work       /     301\n',
+    'utf-8',
+  );
+  console.log(` • dist/robots.txt, dist/sitemap.xml, _redirects, og cards: ${pairs.length * 2} URLs`);
 }
 
 build();

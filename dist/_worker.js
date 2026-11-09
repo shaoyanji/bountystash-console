@@ -125,6 +125,14 @@ export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
 
+    // The previous site answered /work/<slug>; the console presents that work
+    // inline. Advanced mode runs this worker instead of the Pages routing layer,
+    // so the redirect has to live here and not only in _redirects.
+    if (pathname === '/work' || pathname.startsWith('/work/') || pathname === '/de/work' || pathname.startsWith('/de/work/')) {
+      const to = pathname.startsWith('/de/') ? '/de/' : '/';
+      return Response.redirect(new URL(to, request.url).toString(), 301);
+    }
+
     if (pathname === '/api/contact') {
       if (request.method !== 'POST') {
         return new Response('Method Not Allowed', { status: 405, headers: { allow: 'POST' } });

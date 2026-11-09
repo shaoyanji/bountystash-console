@@ -61,18 +61,18 @@ document.documentElement.setAttribute('data-view', v);
 </div>
 <h1 style="margin: 0.5rem 0;">Matt Ji</h1>
 <p class="lead"><strong>Senior Systems &amp; Infrastructure Engineer</strong></p>
-<p class="muted" style="margin-bottom: 0.75rem;">Go • NixOS • Concurrency • Energy &amp; Quantitative Infrastructure</p>
+<p class="muted" style="margin-bottom: 0.75rem;">Go • NixOS • Distributed Systems • Energy &amp; Quantitative Infrastructure</p>
 <p>Systems engineer with a background in engineering, quantitative economics, and energy systems (Colorado School of Mines &amp; University of Freiburg). I design concurrent Go services, declarative NixOS fleet infrastructure, and quantitative data pipelines. Experienced managing risk and telemetry across $100M+ in renewable capital assets.</p>
 <div class="telemetry-strip">
-<div class="telemetry-item">OPS: <strong>$100M+ ASSETS</strong></div>
-<div class="telemetry-item">STACK: <strong>GO &amp; NIXOS</strong></div>
-<div class="telemetry-item">EDUCATION: <strong>MINES &amp; FREIBURG</strong></div>
-<div class="telemetry-item">AUTH: <strong>US &amp; GERMAN PR</strong></div>
+<div class="telemetry-item">Renewable Portfolio Ops: <strong>$100M+</strong></div>
+<div class="telemetry-item">Engineering Alma Mater: <strong>Mines &amp; Freiburg</strong></div>
+<div class="telemetry-item">Primary Stack: <strong>Go &amp; NixOS</strong></div>
+<div class="telemetry-item">Legal Status: <strong>US &amp; German PR</strong></div>
 </div>
 <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); margin-bottom: 1.25rem;">
 • Status: <strong>US Citizen</strong> · <strong>German Permanent Residence (Niederlassungserlaubnis)</strong><br>
 • Languages: <strong>English (Native) · German (B2)</strong><br>
-• Setup: <strong>100% Remote (CET / US-East)</strong> · Available on short notice
+• Availability: <strong>Notice period: Flexible / Available on short notice</strong>
 </div>
 <div class="tag-list" style="margin-bottom: 1rem;">
 <a href="mailto:matt@bountystash.com" class="btn btn-primary">✉ Email Me</a>
@@ -97,37 +97,14 @@ document.documentElement.setAttribute('data-view', v);
 <div class="cards-grid" style="margin-top: 1rem;">
 <article class="card">
 <div class="card-header">
-<h3>Bountystash: Deterministic Work Engine</h3>
-<span class="badge">GO SERVER</span>
-</div>
-<div class="card-role">Creator &amp; Architect · 2024 — Present</div>
-<p style="margin-top: 0.5rem;">A thin, server-rendered Go application turning unstructured task requirements into immutable, content-addressed specifications. Features an append-only event ledger, a keyboard-first terminal UI, and curl-friendly endpoints with zero frontend bloat.</p>
-<div class="card-impact">
-• Single-binary deployment with sub-millisecond route resolution<br>
-• Content hashes &amp; projection quotient hashes for tamper-evident versioning<br>
-• Dual-surface: readable markdown for agents, clean HTML for browsers, TUI for humans
-</div>
-<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
-<div class="tag-list" style="margin-top: 0;">
-<span class="badge">#Go</span>
-<span class="badge">#PostgreSQL</span>
-<span class="badge">#Nix Flakes</span>
-<span class="badge">#TUI</span>
-<span class="badge">#Event Sourcing</span>
-</div>
-<a href="https://github.com/shaoyanji/bountystash" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Source Code (GitHub) →</a>
-</div>
-</article>
-<article class="card">
-<div class="card-header">
-<h3>Multi-Host Declarative NixOS Fleet</h3>
+<h3><a href="/work/multi-host-declarative-nixos-infrastructure/" style="color: inherit; text-decoration: none;">Multi-Host Declarative NixOS Infrastructure</a></h3>
 <span class="badge">NIXCONFIG</span>
 </div>
-<div class="card-role">Production-Grade Infrastructure · Active</div>
-<p style="margin-top: 0.5rem;">Fully reproducible multi-host fleet (NAS, workstations, cloud endpoints) managed with Nix Flakes. Features a custom SSH Certificate Authority with automated dynamic cert rotation, age/SOPS secret encryption, automated morning kernel boot validation, and a Taskfile control plane.</p>
+<div class="card-role">Personal Infrastructure Fleet · Active</div>
+<p style="margin-top: 0.5rem;">Production-grade, fully reproducible multi-host fleet (NAS, workstations, cloud endpoints) managed with Nix Flakes. Features a custom SSH Certificate Authority with automated rotation, age/SOPS secret encryption, automated self-upgrades, and a Taskfile control plane.</p>
 <div class="card-impact">
 • Zero manual server configuration or configuration drift<br>
-• Short-lived SSH certificates (rotate-ssh-cert) eliminating authorized_keys clutter<br>
+• Short-lived SSH certificates instead of authorized_keys clutter<br>
 • ZFS/Btrfs storage, ZRAM tmpfs IO diet, and hermetic CI/CD automation
 </div>
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
@@ -136,9 +113,37 @@ document.documentElement.setAttribute('data-view', v);
 <span class="badge">#Nix Flakes</span>
 <span class="badge">#SSH CA</span>
 <span class="badge">#SOPS / Age</span>
-<span class="badge">#ZFS</span>
+<span class="badge">#Tailscale</span>
+<span class="badge">#Taskfile</span>
 </div>
-<a href="https://github.com/shaoyanji/nixconfig" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Fleet Config (GitHub) →</a>
+<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+<a href="https://github.com/shaoyanji/nixconfig" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Fleet Config (GitHub) &rarr;</a>
+</div>
+</div>
+</article>
+<article class="card">
+<div class="card-header">
+<h3><a href="/work/bountystash-deterministic-work-engine/" style="color: inherit; text-decoration: none;">Bountystash: Deterministic Work Engine</a></h3>
+<span class="badge">BOUNTYSTASH</span>
+</div>
+<div class="card-role">Creator &amp; Systems Architect · 2024 — Present</div>
+<p style="margin-top: 0.5rem;">Thin, server-rendered Go application turning unstructured task requirements into immutable, content-addressed specifications. Features append-only event sourcing, a keyboard-first terminal UI, and curl-friendly endpoints.</p>
+<div class="card-impact">
+• Single-binary deployment with sub-millisecond route resolution<br>
+• Content hashes and projection quotient hashes for tamper-evident versioning<br>
+• Dual surface: markdown for agents, clean HTML for browsers, TUI for humans
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+<div class="tag-list" style="margin-top: 0;">
+<span class="badge">#Go</span>
+<span class="badge">#PostgreSQL</span>
+<span class="badge">#Nix Flakes</span>
+<span class="badge">#TUI</span>
+<span class="badge">#HTML</span>
+</div>
+<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+<a href="https://github.com/shaoyanji/bountystash" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Source Code (GitHub) &rarr;</a>
+</div>
 </div>
 </article>
 </div>
@@ -155,29 +160,29 @@ document.documentElement.setAttribute('data-view', v);
 </div>
 <h2>Algorithmic State Machines &amp; Research</h2>
 <p class="muted">Novel radix encodings, bounded per-step work stream sensing, and tokenization research.</p>
-<article class="card" style="margin-top: 1rem;">
+<article class="card">
 <div class="card-header">
-<h3>fibtransponder: Fibonacci-Radix Streaming State Machine</h3>
+<h3><a href="/work/fibtransponder-fibonacci-streaming-state-machine/" style="color: inherit; text-decoration: none;">fibtransponder: Fibonacci Streaming State Machine</a></h3>
 <span class="badge">GO RESEARCH BASELINE</span>
 </div>
-<div class="card-role">Research &amp; Implementation (Go 1.25+) · 2026</div>
-<p style="margin-top: 0.5rem;">An experimental semantic sensing and tokenization substrate built around a Fibonacci-radix streaming state machine (FSVM). Evaluates bounded per-step work bitstream ingestion while tracking dilation, zero-run markers, and state sketches.</p>
+<div class="card-role">Research &amp; Implementation (Go) · 2026</div>
+<p style="margin-top: 0.5rem;">An experimental tokenization and semantic sensing substrate built around a Fibonacci-radix streaming state machine (FSVM). Evaluates bounded per-step work bitstream ingestion, structural calibration via adjacency width, and Zobrist hash seed tables.</p>
 <div class="card-impact">
-• <strong>Canonical Thesis</strong>: Structural calibration via adjacency width is demonstrated; width selects locality sensitivity.<br>
-• <strong>Corpus Falsification</strong>: Proved that seed-only Zobrist calibration does not create detector diversity.<br>
-• <strong>Sensitivity Shift</strong>: Varying adjacency width triggers a demonstrable prose-first to code-first sensitivity transition.
+• Canonical thesis: structural calibration via adjacency width is demonstrated; width selects locality sensitivity<br>
+• Corpus falsification: proved that seed-only Zobrist calibration does not create detector diversity<br>
+• Sensitivity shift: varying adjacency width triggers a demonstrable prose-first to code-first transition
 </div>
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
 <div class="tag-list" style="margin-top: 0;">
 <span class="badge">#Go</span>
-<span class="badge">#State Machine (FSVM)</span>
+<span class="badge">#State Machines</span>
 <span class="badge">#Fibonacci Radix</span>
-<span class="badge">#Zobrist Hash</span>
-<span class="badge">#Tokenization</span>
+<span class="badge">#Zobrist Hashing</span>
+<span class="badge">#Bitstream Analysis</span>
 </div>
 <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
-<a href="https://github.com/shaoyanji/fibtransponder" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Repository &amp; Spec (GitHub) →</a>
-<a href="https://github.com/shaoyanji/fibtransponder/blob/master/REPORT_CORPUS.md" target="_blank" rel="noopener" class="btn" style="padding: 0.4rem 0.85rem;">Corpus Report →</a>
+<a href="https://github.com/shaoyanji/fibtransponder" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Repository &amp; Spec (GitHub) &rarr;</a>
+<a href="https://github.com/shaoyanji/fibtransponder/blob/master/REPORT_CORPUS.md" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Corpus Report &rarr;</a>
 </div>
 </div>
 </article>
@@ -185,16 +190,16 @@ document.documentElement.setAttribute('data-view', v);
 <h3>Core Technical Arsenal</h3>
 <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 0.5rem;">
 <div class="card" style="padding: 0.75rem;">
-<h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Systems &amp; Concurrency</h4>
-<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Go (Channels, Mutexes, Memory Budgets), Python (AsyncIO), Kafka, PostgreSQL, Redis, gRPC.</p>
+<h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Systems &amp; Concurrency (Go / Python)</h4>
+<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Go (Golang) · Concurrency &amp; Channels · Kafka &amp; Event Streaming · PostgreSQL · Redis · gRPC &amp; REST APIs · State Machines</p>
 </div>
 <div class="card" style="padding: 0.75rem;">
-<h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Declarative Linux &amp; Infra</h4>
-<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">NixOS Fleets, Nix Flakes, SSH CAs, SOPS/Age, Docker, ZFS/ZRAM, Linux Kernel Tuning.</p>
+<h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Declarative Infrastructure &amp; Linux</h4>
+<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">NixOS Fleets · Nix Flakes · SSH Certificate Authority · SOPS / Age Encryption · Docker &amp; Containers · ZFS / Btrfs · Linux Kernel / ZRAM</p>
 </div>
 <div class="card" style="padding: 0.75rem;">
-<h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Domain Mathematics</h4>
-<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Fibonacci Radix, Time-Series Telemetry, Financial Modeling, Typst Geometric Typography.</p>
+<h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">Energy, Finance &amp; Domain Modeling</h4>
+<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">Quantitative Asset Valuation · Solar Telemetry Reconciliation · Algorithmic Risk Models · Bank Audit Reporting · Typst Typesetting Engine</p>
 </div>
 </div>
 </div>
@@ -211,37 +216,40 @@ document.documentElement.setAttribute('data-view', v);
 </div>
 <h2>Clean Energy &amp; Quantitative Asset Scale</h2>
 <p class="muted">High-stakes commercial asset steering, dynamic financial modeling, and bank-audited telemetry.</p>
-<article class="card" style="margin-top: 1rem;">
+<article class="card">
 <div class="card-header">
-<h3>Renewable Energy Capital Asset Operations ($100M+)</h3>
+<h3><a href="/work/clean-energy-asset-and-telemetry-platform/" style="color: inherit; text-decoration: none;">Clean Energy Asset &amp; Telemetry Platform</a></h3>
 <span class="badge">O3 ENERGY &amp; FRAUNHOFER ISE</span>
 </div>
-<div class="card-role">Asset Manager &amp; Quantitative Lead · 2016 — 2020</div>
-<p style="margin-top: 0.5rem;">Directed data architecture and commercial asset steering for a utility solar energy portfolio exceeding $100M+ in capital value. Developed automated data capture and dynamic financial yield models scrutinized under strict institutional bank audits.</p>
+<div class="card-role">Lead Operations @ O3 Energy · 2016 — 2020</div>
+<p style="margin-top: 0.5rem;">Led data architecture and commercial asset steering for a solar energy portfolio exceeding $100M+. Built dynamic quantitative valuation and yield models under bank audits, automated mobile field data capture, and structured counterparty risk hedging.</p>
 <div class="card-impact">
 • Governed quantitative operations across $100M+ in capital assets<br>
-• Coordinated technical due diligence across complex M&amp;A transactions with institutional lenders and tax equity partners<br>
+• Coordinated technical due diligence across M&amp;A transactions with institutional lenders and tax equity partners<br>
 • Automated laboratory instrumentation and numerical solar data processing in C++ and Python during graduate research at Fraunhofer ISE
 </div>
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
 <div class="tag-list" style="margin-top: 0;">
 <span class="badge">#Python</span>
 <span class="badge">#PostgreSQL</span>
-<span class="badge">#Time-Series</span>
-<span class="badge">#Financial Yield Models</span>
-<span class="badge">#Bank Due Diligence</span>
+<span class="badge">#Time-Series Data</span>
+<span class="badge">#Docker</span>
+<span class="badge">#Financial Due Diligence</span>
 </div>
-<a href="mailto:matt@bountystash.com?subject=Asset%20Operations%20Inquiry" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Discuss Architecture &amp; Quant Ops →</a>
+<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+<a href="mailto:matt@bountystash.com?subject=Asset%20Operations%20Inquiry" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Discuss Architecture &amp; Quant Ops &rarr;</a>
+</div>
 </div>
 </article>
-<article class="card" style="margin-top: 1rem; border-left: 3px solid var(--accent);">
+<article class="card">
 <div class="card-header">
-<h3>Deterministic Typst Resume Engine</h3>
+<h3><a href="/work/deterministic-typst-resume-engine/" style="color: inherit; text-decoration: none;">Deterministic Typst Resume Engine</a></h3>
 <span class="badge">ANTIGRAVITY WORKFLOW</span>
 </div>
-<p style="margin-top: 0.5rem;">A local build pipeline compiling structured JSON data directly into pixel-perfect A4 PDFs using Typst. Enforces strict geometric typographic ratios (φ = 1.61803) and sub-second compilation, replacing bulky LaTeX and HTML-to-PDF toolchains.</p>
+<div class="card-role">Build Pipeline &amp; Typesetting · Active</div>
+<p style="margin-top: 0.5rem;">A local build pipeline compiling structured JSON into pixel-perfect A4 PDFs with Typst. Enforces geometric typographic ratios (φ = 1.61803) with sub-second compilation, replacing LaTeX and browser-based PDF toolchains.</p>
 <div class="card-impact">
-• Single source of truth across PDF resume, cover letters, and web portfolio<br>
+• One source of truth across the PDF resume, cover letters, and the web portfolio<br>
 • Hermetic compilation without runtime Node.js or browser headless overhead
 </div>
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
@@ -251,7 +259,9 @@ document.documentElement.setAttribute('data-view', v);
 <span class="badge">#Bitstream Charter</span>
 <span class="badge">#Deterministic PDF</span>
 </div>
-<a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Workflow Pipeline (GitHub) →</a>
+<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+<a href="https://github.com/shaoyanji" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.4rem 0.85rem;">Inspect Workflow Pipeline (GitHub) &rarr;</a>
+</div>
 </div>
 </article>
 <div class="zoom-hint">
@@ -272,31 +282,31 @@ document.documentElement.setAttribute('data-view', v);
 <h3 style="font-size: var(--text-base);">M.Sc. Renewable Energy Management</h3>
 <span class="card-period">2011 — 2014</span>
 </div>
-<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Albert-Ludwigs-Universität Freiburg (Final Grade: 1.8 / 5.0)</p>
-<a href="https://www.uni-freiburg.de" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">University Portal →</a>
+<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Albert-Ludwigs-Universität Freiburg (Grade: 1.8)</p>
+<a href="https://www.uni-freiburg.de" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">University Portal &rarr;</a>
 </div>
 <div class="card">
 <div class="card-header">
 <h3 style="font-size: var(--text-base);">B.S. Petroleum Engineering</h3>
 <span class="card-period">2006 — 2010</span>
 </div>
-<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Colorado School of Mines (Minors in Economics &amp; Public Policy)</p>
-<a href="https://www.mines.edu" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">School of Mines Portal →</a>
+<p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">Colorado School of Mines (Minors: Economics &amp; Public Policy)</p>
+<a href="https://www.mines.edu" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">School of Mines Portal &rarr;</a>
 </div>
 </div>
 <h2 style="margin-top: 1.5rem;">How I Build</h2>
 <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 0.75rem;">
 <div class="card" style="padding: 0.75rem;">
-<h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Reproducibility First</h4>
-<p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">If an infrastructure state or binary cannot be built deterministically from code, it doesn't exist. Flakes prevent drift.</p>
+<h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Reproducibility is non-negotiable</h4>
+<p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">If an infrastructure state, document build, or service binary cannot be built deterministically from code, it doesn&#039;t truly exist. Declarative NixOS flakes and locked dependencies prevent an entire class of production failures.</p>
 </div>
 <div class="card" style="padding: 0.75rem;">
-<h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Domain Over Buzzwords</h4>
-<p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Understanding financial formulas, energy units, and bitstream geometry prevents architectural failures before writing code.</p>
+<h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Domain depth beats generic engineering</h4>
+<p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Writing code is only half the battle. Understanding financial yield formulas, physical energy systems, or bitstream locality sensitivity prevents architectural mistakes before the first line of SQL is written.</p>
 </div>
 <div class="card" style="padding: 0.75rem;">
-<h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">The 14KB TCP Rule</h4>
-<p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">This entire 3D spatial site compiles into under 11KB gzipped. Zero WebGL bloat. Instant single-roundtrip load.</p>
+<h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">Keep the runtime lightweight</h4>
+<p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">Low-latency systems come from sensible fundamentals: compiled Go services, clean data models, server-rendered layouts, and respecting network envelopes like the 14KB rule.</p>
 </div>
 </div>
 <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
@@ -345,7 +355,7 @@ document.documentElement.setAttribute('data-view', v);
 </div>
 <div class="cyber-metric-row">
 <span class="muted">BUNDLE ENVELOPE</span>
-<span>13.60 KB / 14KB TCP [PASS]</span>
+<span>13.81 KB / 14KB TCP [PASS]</span>
 </div>
 <div class="cyber-metric-row">
 <span class="muted">REPRODUCIBILITY</span>
@@ -382,7 +392,7 @@ Primary terminal station. Core identity, legal work status, and direct communica
 <button class="nav-sector-btn" data-target="4" onclick="window.spatialNav.jumpTo(4)">04 FOUNDATION</button>
 </nav>
 <div style="display: flex; align-items: center; gap: 1rem; color: var(--text-muted);">
-<span>13.60 KB GZIP (14KB BUDGET)</span>
+<span>13.81 KB GZIP (14KB BUDGET)</span>
 <span>0 WEBGL BLOAT</span>
 <a href="https://www.bountystash.com">bountystash.com</a>
 </div>

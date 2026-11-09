@@ -70,4 +70,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/bountystash-deterministic-work-engine/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/bountystash-deterministic-work-engine/"/>
   </url>
+  <url>
+    <loc>https://bountystash.com/work/deterministic-typst-resume-engine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/deterministic-typst-resume-engine/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/deterministic-typst-resume-engine/"/>
+  </url>
+  <url>
+    <loc>https://bountystash.com/de/work/deterministic-typst-resume-engine/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bountystash.com/work/deterministic-typst-resume-engine/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://bountystash.com/de/work/deterministic-typst-resume-engine/"/>
+  </url>
 </urlset>

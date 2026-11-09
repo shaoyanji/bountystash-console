@@ -52,7 +52,108 @@ function minifyHtml(html) {
   return out;
 }
 
-function compileLanguage({ lang, dataFile, templateFile, outputFile, minifiedCss }) {
+function fill(template, key, value) {
+  return template.split(`{{${key}}}`).join(value);
+}
+
+/**
+ * The home page's sections are the corpus, rendered. Nothing here is prose of
+ * its own: a copy in the template is a copy that drifts, which is how the page
+ * came to claim C1 German while the CV said B2.
+ */
+function homeSections(data, lang, slugs) {
+  const email = data.profile.contacts.email;
+  const prefix = lang === 'de' ? '/de/work/' : '/work/';
+
+  const button = (link) => {
+    const href = link.href.split('$EMAIL').join(email);
+    const external = /^https?:/.test(href);
+    const attrs = external ? ' target="_blank" rel="noopener"' : '';
+    return `<a href="${escapeHtml(href)}"${attrs} class="btn btn-primary" style="padding: 0.4rem 0.85rem;">${escapeHtml(link.label)} &rarr;</a>`;
+  };
+
+  const card = (project, slug) => {
+    const tags = project.stack.map((s) => `<span class="badge">#${escapeHtml(s)}</span>`).join('\n                  ');
+    const links = (project.links || []).map(button);
+    const actions = links.length
+      ? `<div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">\n                  ${links.join('\n                  ')}\n                </div>`
+      : '';
+    return `<article class="card">
+              <div class="card-header">
+                <h3><a href="${prefix}${slug}/" style="color: inherit; text-decoration: none;">${escapeHtml(project.title)}</a></h3>
+                <span class="badge">${escapeHtml(project.badge || '')}</span>
+              </div>
+              <div class="card-role">${escapeHtml(project.role)} \u00b7 ${escapeHtml(project.period)}</div>
+              <p style="margin-top: 0.5rem;">${escapeHtml(project.description)}</p>
+              <div class="card-impact">
+                ${(project.highlights || []).map((h) => `\u2022 ${escapeHtml(h)}`).join('<br>\n                ')}
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                <div class="tag-list" style="margin-top: 0;">
+                  ${tags}
+                </div>
+                ${actions}
+              </div>
+            </article>`;
+  };
+
+  const sector = (n) =>
+    data.projects
+      .map((project, i) => ({project, slug: slugs[i]}))
+      .filter(({project}) => (project.sector || 1) === n)
+      .map(({project, slug}) => card(project, slug))
+      .join('\n            ');
+
+  const metrics = data.metrics
+    .map((m) => `<div class="telemetry-item">${escapeHtml(m.label)}: <strong>${escapeHtml(m.value)}</strong></div>`)
+    .join('\n            ');
+
+  const skills = data.skills
+    .map(
+      (s) => `<div class="card" style="padding: 0.75rem;">
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.35rem;">${escapeHtml(s.category)}</h4>
+                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin: 0;">${escapeHtml(s.items.join(' \u00b7 '))}</p>
+              </div>`,
+    )
+    .join('\n              ');
+
+  const education = data.profile.education
+    .map(
+      (e) => `<div class="card">
+                <div class="card-header">
+                  <h3 style="font-size: var(--text-base);">${escapeHtml(e.degree)}</h3>
+                  <span class="card-period">${escapeHtml(e.period)}</span>
+                </div>
+                <p class="muted" style="font-family: var(--font-mono); font-size: var(--text-xs); margin-top: 0.25rem;">${escapeHtml(e.school)}</p>
+                <a href="${escapeHtml(e.url)}" target="_blank" rel="noopener" class="btn" style="margin-top: 0.5rem; padding: 0.3rem 0.6rem;">${escapeHtml(e.urlLabel)} &rarr;</a>
+              </div>`,
+    )
+    .join('\n            ');
+
+  const principles = data.philosophy
+    .map(
+      (p) => `<div class="card" style="padding: 0.75rem;">
+                <h4 style="font-size: var(--text-sm); margin-bottom: 0.25rem;">${escapeHtml(p.title)}</h4>
+                <p style="font-size: var(--text-xs); color: var(--text-muted); margin: 0;">${escapeHtml(p.body)}</p>
+              </div>`,
+    )
+    .join('\n            ');
+
+  return {
+    METRICS: metrics,
+    SECTOR1: sector(1),
+    SECTOR2: sector(2),
+    SECTOR3: sector(3),
+    SKILLS: skills,
+    EDUCATION: education,
+    PRINCIPLES: principles,
+    CITIZENSHIP: data.profile.work_auth.citizenship,
+    RESIDENCY: data.profile.work_auth.residency,
+    AVAILABILITY: data.profile.work_auth.availability,
+  };
+}
+
+function compileLanguage({ lang, dataFile, templateFile, outputFile, minifiedCss, slugs }) {
   if (!fs.existsSync(dataFile)) throw new Error(`Missing ${dataFile}`);
   if (!fs.existsSync(templateFile)) throw new Error(`Missing ${templateFile}`);
 
@@ -60,26 +161,29 @@ function compileLanguage({ lang, dataFile, templateFile, outputFile, minifiedCss
   const data = JSON.parse(rawData);
   let template = fs.readFileSync(templateFile, 'utf-8');
 
-  // Substitute template slots
-  template = template.replace(/{{META_TITLE}}/g, escapeHtml(`${data.profile.name} // ${data.profile.title}`));
-  template = template.replace(/{{META_DESCRIPTION}}/g, escapeHtml(data.profile.bio));
-  template = template.replace(/{{STATUS_TEXT}}/g, escapeHtml(data.profile.status.text));
-  // The language line is a fact about the CV, so it comes from the data rather
-  // than a second copy in the markup that nobody re-reads.
-  template = template.replace(/{{LANGUAGES}}/g, escapeHtml(data.profile.work_auth.languages));
-  template = template.replace(/{{LOCATION}}/g, escapeHtml(data.profile.location));
-  template = template.replace(/{{PROFILE_NAME}}/g, escapeHtml(data.profile.name));
-  template = template.replace(/{{PROFILE_TITLE}}/g, escapeHtml(data.profile.title));
-  template = template.replace(/{{PROFILE_SUBTITLE}}/g, escapeHtml(data.profile.subtitle));
-  template = template.replace(/{{PROFILE_BIO}}/g, escapeHtml(data.profile.bio));
-  template = template.replace(/{{EMAIL}}/g, escapeHtml(data.profile.contacts.email));
-  template = template.replace(/{{GITHUB_URL}}/g, escapeHtml(data.profile.contacts.github));
-  template = template.replace(/{{LINKEDIN_URL}}/g, escapeHtml(data.profile.contacts.linkedin));
-  template = template.replace(/{{WEBSITE_URL}}/g, escapeHtml(data.profile.contacts.website));
-  template = template.replace(/{{CURRENT_YEAR}}/g, new Date().getFullYear().toString());
+  // Substitute template slots. Text goes through escapeHtml; the rendered
+  // sections are markup already and are inserted as they are.
+  const slots = {
+    META_TITLE: `${data.profile.name} // ${data.profile.title}`,
+    META_DESCRIPTION: data.profile.bio,
+    STATUS_TEXT: data.profile.status.text,
+    LANGUAGES: data.profile.work_auth.languages,
+    LOCATION: data.profile.location,
+    PROFILE_NAME: data.profile.name,
+    PROFILE_TITLE: data.profile.title,
+    PROFILE_SUBTITLE: data.profile.subtitle,
+    PROFILE_BIO: data.profile.bio,
+    EMAIL: data.profile.contacts.email,
+    GITHUB_URL: data.profile.contacts.github,
+    LINKEDIN_URL: data.profile.contacts.linkedin,
+    WEBSITE_URL: data.profile.contacts.website,
+    CURRENT_YEAR: new Date().getFullYear().toString(),
+  };
+  for (const [key, value] of Object.entries(slots)) template = fill(template, key, escapeHtml(String(value)));
+  for (const [key, value] of Object.entries(homeSections(data, lang, slugs))) template = fill(template, key, value);
 
   // Inject inlined minified CSS directly for 0-roundtrip initial paint
-  template = template.replace(/{{INLINE_CSS}}/g, minifiedCss);
+  template = fill(template, 'INLINE_CSS', minifiedCss);
 
   // Minify HTML output (strip comments and leading indentation)
   template = minifyHtml(template);
@@ -88,7 +192,7 @@ function compileLanguage({ lang, dataFile, templateFile, outputFile, minifiedCss
   const tempBuf = Buffer.from(template, 'utf-8');
   const tempGzip = zlib.gzipSync(tempBuf);
   const gzipKbStr = (tempGzip.length / 1024).toFixed(2) + ' KB';
-  template = template.replace(/{{GZIP_SIZE}}/g, gzipKbStr);
+  template = fill(template, 'GZIP_SIZE', gzipKbStr);
 
   // Write HTML
   fs.mkdirSync(path.dirname(outputFile), { recursive: true });
@@ -144,17 +248,30 @@ function build() {
   const minifiedCss = minifyCss(rawCss);
   fs.writeFileSync(OUTPUT_CSS, rawCss, 'utf-8');
 
+  const DE_DATA = path.join(ROOT_DIR, 'data', 'portfolio.de.json');
+  const enData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
+  const deData = JSON.parse(fs.readFileSync(DE_DATA, 'utf-8'));
+
+  // Slugs come from the English titles for both locales, which is the rule the
+  // corpus uses and the URL a reader may already have bookmarked.
+  const sub = {' ': '-', '/': '-', '&': 'and', "'": '', ',': '', '.': '', '(': '', ')': '', ':': '', '—': '-'};
+  const slug = (title) =>
+    Array.from(String(title).toLowerCase())
+      .map((c) => sub[c] ?? c)
+      .join('');
+  const slugs = enData.projects.map((p) => slug(p.title));
+
   // 1. English Edition (/)
   compileLanguage({
     lang: 'en',
     dataFile: DATA_FILE,
     templateFile: TEMPLATE_FILE,
     outputFile: OUTPUT_HTML,
-    minifiedCss
+    minifiedCss,
+    slugs,
   });
 
   // 2. German Edition (/de/)
-  const DE_DATA = path.join(ROOT_DIR, 'data', 'portfolio.de.json');
   const DE_TEMPLATE = path.join(ROOT_DIR, 'src', 'template.de.html');
   const DE_OUTPUT = path.join(DIST_DIR, 'de', 'index.html');
   compileLanguage({
@@ -162,16 +279,14 @@ function build() {
     dataFile: DE_DATA,
     templateFile: DE_TEMPLATE,
     outputFile: DE_OUTPUT,
-    minifiedCss
+    minifiedCss,
+    slugs,
   });
 
   // 3. Contact form (EN + DE) and its thank-you pages. The form posts to
   // /api/contact, handled by _worker.js: copied verbatim, because Pages runs a
   // worker at the root of the deploy directory in advanced mode and the deploy
   // artifact has to be the whole thing.
-  const enData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
-  const deData = JSON.parse(fs.readFileSync(DE_DATA, 'utf-8'));
-
   compilePage({
     templateFile: path.join(ROOT_DIR, 'src', 'contact.html'),
     outputFile: path.join(DIST_DIR, 'contact', 'index.html'),
@@ -213,21 +328,12 @@ function build() {
   // rule is the corpus's (lib/bountystash/shared.nix), so /work/<slug> is the URL
   // the retired portfolio answered and the one its inbound links still name.
   const pageJs = fs.readFileSync(path.join(ROOT_DIR, 'src', 'page-script.js'), 'utf-8');
-  const sub = {' ': '-', '/': '-', '&': 'and', "'": '', ',': '', '.': '', '(': '', ')': '', ':': '', '—': '-'};
-  const slug = (title) =>
-    Array.from(String(title).toLowerCase())
-      .map((c) => sub[c] ?? c)
-      .join('');
   const num = (n) => String(n).padStart(2, '0');
 
   const labels = {
     en: {kind: 'Case study', impact: 'Impact', stack: 'Stack', back: '← Selected work', href: '/work/'},
     de: {kind: 'Fallstudie', impact: 'Wirkung', stack: 'Technik', back: '← Ausgewählte Arbeiten', href: '/de/work/'},
   };
-
-  // Slugs come from the English titles for both locales, which is the rule the
-  // corpus uses and the URL a reader may already have bookmarked.
-  const slugs = enData.projects.map((p) => slug(p.title));
 
   const workPairs = [];
   for (const lang of ['en', 'de']) {

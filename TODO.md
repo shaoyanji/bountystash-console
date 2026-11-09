@@ -6,7 +6,8 @@
     - Profile title: *Leitender System- und Infrastrukturingenieur*
     - Subtitle: *Go • NixOS • Verteilte Systeme • Energie- und Quantitative Infrastruktur*
     - Sector titles: `00 KONSOLE`, `01 SYSTEME`, `02 ALGORITHMEN`, `03 KAPITAL 100M+$`, `04 FUNDAMENT`
-    - Experience, telemetry labels, and bio descriptions in native/fluent C1 German.
+    - Experience, telemetry labels, and bio descriptions in idiomatic German.
+    - The stated level is B2, per the CV; do not upgrade it in copy.
 - [x] **Language Switcher UI**:
   - [x] Add minimal HUD language toggle (`[EN | DE]`) in persistent top telemetry bar.
   - [x] Dual-artifact routing: `/` for English, `/de/` for German.

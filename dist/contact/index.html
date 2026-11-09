@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Matt Ji</title>
+<meta name="description" content="Send Matt Ji a message about systems, infrastructure, or a role. Plain form: no JavaScript, no trackers, no widget.">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://bountystash.com/contact/">
+<link rel="alternate" hreflang="en" href="https://bountystash.com/contact/">
+<link rel="alternate" hreflang="de" href="https://bountystash.com/de/kontakt/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231F69FF'/%3E%3Ctext y='.9em' font-size='80' font-family='monospace' font-weight='bold' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+<style>
+html, body { height: auto; min-height: 100%; overflow: auto; }
+body { padding: 96px 1.25rem 64px; }
+.wrap { max-width: 640px; margin: 0 auto; }
+form { display: grid; gap: 1rem; margin-top: 1.5rem; background: var(--surface); border: 2px solid var(--border); padding: 1.25rem; box-shadow: 6px 6px 0 var(--shadow); }
+label { display: block; font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.35rem; color: var(--text-muted); }
+input, textarea { width: 100%; background: var(--code-bg); color: var(--text); border: 1.5px solid var(--border); padding: 0.6rem 0.7rem; font-family: var(--font-mono); font-size: var(--text-sm); }
+input:focus, textarea:focus { border-color: var(--border-focus); outline: none; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.meta { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted); margin-top: 0.75rem; }
+</style>
+</head>
+<body>
+<header class="spatial-hud-top">
+<div style="display: flex; align-items: center; gap: 0.75rem;">
+<span class="status-dot"></span>
+<strong>MATT JI</strong>
+<span class="muted">// CONTACT</span>
+</div>
+<div style="display: flex; gap: 0.5rem;">
+<a href="/" class="hud-control-btn" style="text-decoration: none;">[ &larr; CONSOLE ]</a>
+<a href="/de/kontakt/" class="hud-control-btn" style="text-decoration: none;">[ DE ]</a>
+</div>
+</header>
+<main class="wrap">
+<h1>Contact</h1>
+<p class="lead">A message arrives at matt@bountystash.com directly. No tracking, no JavaScript, no third-party form widget.</p>
+<form method="post" action="/api/contact">
+<input type="hidden" name="lang" value="en">
+<div>
+<label for="name">Name</label>
+<input id="name" name="name" type="text" required maxlength="80" autocomplete="name">
+</div>
+<div>
+<label for="email">Email</label>
+<input id="email" name="email" type="email" required maxlength="200" autocomplete="email">
+</div>
+<div>
+<label for="message">Message</label>
+<textarea id="message" name="message" required minlength="20" maxlength="4000" rows="8"></textarea>
+</div>
+<div class="hp" aria-hidden="true">
+<label for="website">Website</label>
+<input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<div>
+<button class="btn btn-primary" type="submit">Send message</button>
+</div>
+</form>
+<p class="meta">Prefer mail? <a href="mailto:matt@bountystash.com">matt@bountystash.com</a> &middot; <a href="https://cal.com/mattji">cal.com/mattji</a></p>
+</main>
+</body>
+</html>

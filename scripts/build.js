@@ -115,6 +115,20 @@ function compileLanguage({ lang, dataFile, templateFile, outputFile, minifiedCss
   console.log(`======================================================`);
 }
 
+/**
+ * A page outside the 14 KB console: one template, one output, the same
+ * minifier. The cap governs the console itself, not the form that posts to the
+ * Pages Function beside it.
+ */
+function compilePage({ templateFile, outputFile, data }) {
+  const raw = fs.readFileSync(templateFile, 'utf-8');
+  const html = minifyHtml(raw.replace(/{{EMAIL}}/g, escapeHtml(data.profile.contacts.email)));
+  fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+  fs.writeFileSync(outputFile, html, 'utf-8');
+  const gzipBytes = zlib.gzipSync(Buffer.from(html, 'utf-8')).length;
+  console.log(` • ${path.relative(ROOT_DIR, outputFile)}: ${(gzipBytes / 1024).toFixed(2)} KB gzip`);
+}
+
 function build() {
   console.log('\n⚡ [BUILD] Compiling Modern Brutalist Portfolio (Dual Locale EN/DE)...');
 
@@ -147,6 +161,38 @@ function build() {
     outputFile: DE_OUTPUT,
     minifiedCss
   });
+
+  // 3. Contact form (EN + DE) and its thank-you pages. The form posts to
+  // /api/contact, handled by _worker.js: copied verbatim, because Pages runs a
+  // worker at the root of the deploy directory in advanced mode and the deploy
+  // artifact has to be the whole thing.
+  const enData = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
+  const deData = JSON.parse(fs.readFileSync(DE_DATA, 'utf-8'));
+
+  compilePage({
+    templateFile: path.join(ROOT_DIR, 'src', 'contact.html'),
+    outputFile: path.join(DIST_DIR, 'contact', 'index.html'),
+    data: enData
+  });
+  compilePage({
+    templateFile: path.join(ROOT_DIR, 'src', 'contact.de.html'),
+    outputFile: path.join(DIST_DIR, 'de', 'kontakt', 'index.html'),
+    data: deData
+  });
+  compilePage({
+    templateFile: path.join(ROOT_DIR, 'src', 'thanks.html'),
+    outputFile: path.join(DIST_DIR, 'contact', 'thanks', 'index.html'),
+    data: enData
+  });
+  compilePage({
+    templateFile: path.join(ROOT_DIR, 'src', 'thanks.de.html'),
+    outputFile: path.join(DIST_DIR, 'de', 'kontakt', 'danke', 'index.html'),
+    data: deData
+  });
+
+  fs.copyFileSync(path.join(ROOT_DIR, 'src', 'contact-worker.js'), path.join(DIST_DIR, '_worker.js'));
+  const workerGzip = zlib.gzipSync(fs.readFileSync(path.join(DIST_DIR, '_worker.js'))).length;
+  console.log(` • dist/_worker.js: ${(workerGzip / 1024).toFixed(2)} KB gzip (POST /api/contact, rest via env.ASSETS)`);
 }
 
 build();

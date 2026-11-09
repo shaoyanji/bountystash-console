@@ -193,6 +193,44 @@ function build() {
   fs.copyFileSync(path.join(ROOT_DIR, 'src', 'contact-worker.js'), path.join(DIST_DIR, '_worker.js'));
   const workerGzip = zlib.gzipSync(fs.readFileSync(path.join(DIST_DIR, '_worker.js'))).length;
   console.log(` • dist/_worker.js: ${(workerGzip / 1024).toFixed(2)} KB gzip (POST /api/contact, rest via env.ASSETS)`);
+
+  // Crawl files and share cards belong to the artifact. Pages answers an exact
+  // path from the deployment, so a missing robots.txt or og.png is a 404 the
+  // moment the previous site's edge cache expires — and an unfurl with no card.
+  for (const card of ['og.png', 'og-de.png']) {
+    const from = path.join(ROOT_DIR, 'assets', card);
+    if (!fs.existsSync(from)) throw new Error(`Missing ${from}`);
+    fs.copyFileSync(from, path.join(DIST_DIR, card));
+  }
+
+  const pairs = [
+    ['https://bountystash.com/', 'https://bountystash.com/de/'],
+    ['https://bountystash.com/contact/', 'https://bountystash.com/de/kontakt/'],
+  ];
+  const urls = pairs
+    .flatMap(([en, de]) =>
+      [en, de].map(
+        (loc) =>
+          `  <url>\n    <loc>${loc}</loc>\n` +
+          `    <xhtml:link rel="alternate" hreflang="en" href="${en}"/>\n` +
+          `    <xhtml:link rel="alternate" hreflang="de" href="${de}"/>\n  </url>`,
+      ),
+    )
+    .join('\n');
+  fs.writeFileSync(
+    path.join(DIST_DIR, 'sitemap.xml'),
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+      urls +
+      '\n</urlset>\n',
+    'utf-8',
+  );
+  fs.writeFileSync(
+    path.join(DIST_DIR, 'robots.txt'),
+    'User-agent: *\nAllow: /\n\nSitemap: https://bountystash.com/sitemap.xml\n',
+    'utf-8',
+  );
+  console.log(` • dist/robots.txt, dist/sitemap.xml, og cards: ${pairs.length * 2} URLs`);
 }
 
 build();

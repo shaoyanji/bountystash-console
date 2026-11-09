@@ -200,7 +200,10 @@ function build() {
   for (const card of ['og.png', 'og-de.png']) {
     const from = path.join(ROOT_DIR, 'assets', card);
     if (!fs.existsSync(from)) throw new Error(`Missing ${from}`);
-    fs.copyFileSync(from, path.join(DIST_DIR, card));
+    const to = path.join(DIST_DIR, card);
+    fs.rmSync(to, { force: true });
+    fs.copyFileSync(from, to);
+    fs.chmodSync(to, 0o644);
   }
 
   const pairs = [

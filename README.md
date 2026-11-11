@@ -63,3 +63,20 @@ npm run preview
 Founder, [Bountystash](https://bountystash.com) · Senior Systems & Infrastructure Engineer  
 - GitHub: [@shaoyanji](https://github.com/shaoyanji)  
 - Email: [matt@bountystash.com](mailto:matt@bountystash.com)
+
+---
+
+## Backend
+
+`src/contact-worker.js` is the Pages Function. With `BOUNTYSTASH_API` set to the
+console backend (`cmd/console-api` in `shaoyanji/bountystash`), it proxies:
+
+| Route | Behaviour |
+| :--- | :--- |
+| `POST /api/contact` | proxied; the backend stores the message **before** mailing it. On a 5xx or an unreachable backend the worker falls back to its own Resend call, so the form keeps working. |
+| `GET /api/status` | proxied when configured: version, uptime, database state, counts. 404 otherwise. |
+| `GET /api/work` | proxied when configured: public work only, newest first. 404 otherwise. |
+
+Secrets: `RESEND_API_KEY` (fallback mail path) and `BOUNTYSTASH_API` (backend
+origin, no trailing slash). The 14 KB page budget is unaffected — the worker is
+not part of the first packet.

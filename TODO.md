@@ -46,3 +46,13 @@
   - [ ] Do **NOT** promote to `bountystash.com` until user explicitly requests promotion.
   - [ ] Final promotion command: `task bountystash:deploy:prod`.
 
+
+---
+
+## 4. Backend
+
+- [x] **Console backend (`cmd/console-api`)**:
+  - [x] `POST /api/contact` stores the message before mailing it, so a Resend outage no longer loses the enquiry.
+  - [x] `GET /api/status` and `GET /api/work` expose the engine's state and public work.
+  - [x] Worker proxies to `BOUNTYSTASH_API` and falls back to the local Resend path.
+  - [ ] Point `BOUNTYSTASH_API` at a public origin and remove the fallback once it is proven in production.

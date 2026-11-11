@@ -12,6 +12,11 @@
  * a form service.
  *
  * No dependencies, no KV, no database. The only secret is RESEND_API_KEY.
+ *
+ * BACKEND MODE: when BOUNTYSTASH_API is set, /api/contact, /api/status and
+ * /api/work are proxied to cmd/console-api, which stores the message before it
+ * mails it. The local Resend path below stays as the fallback, so the form keeps
+ * working if that service is unreachable.
  * ============================================================================
  */
 
@@ -121,9 +126,42 @@ async function submit(request, env) {
   return redirect(next);
 }
 
+function backend(env) {
+  return String((env && env.BOUNTYSTASH_API) || '')
+    .trim()
+    .replace(/\/+$/, '');
+}
+
+// Returns null when the backend cannot be reached or is not configured, so the
+// caller can decide between an error page and the local path.
+async function proxy(request, api, path) {
+  try {
+    const upstream = await fetch(api + path, {
+      method: request.method,
+      headers: {
+        'content-type': request.headers.get('content-type') || 'application/x-www-form-urlencoded',
+        'user-agent': request.headers.get('user-agent') || 'bountystash-console-worker/1.0',
+        'x-forwarded-for': request.headers.get('cf-connecting-ip') || '',
+      },
+      body: request.method === 'GET' || request.method === 'HEAD' ? undefined : request.body,
+      redirect: 'manual',
+    });
+
+    const headers = new Headers();
+    for (const name of ['content-type', 'location', 'cache-control']) {
+      const value = upstream.headers.get(name);
+      if (value) headers.set(name, value);
+    }
+    return new Response(upstream.body, { status: upstream.status, headers });
+  } catch (error) {
+    return null;
+  }
+}
+
 export default {
   async fetch(request, env) {
-    const { pathname } = new URL(request.url);
+    const { pathname, search } = new URL(request.url);
+    const api = backend(env);
 
     // /work/<slug> is a real page again (one directory per slug, built from the
     // same data as the home cards), so nothing is redirected here any more.
@@ -131,7 +169,23 @@ export default {
       if (request.method !== 'POST') {
         return new Response('Method Not Allowed', { status: 405, headers: { allow: 'POST' } });
       }
+      if (api) {
+        const proxied = await proxy(request, api, pathname);
+        // A 5xx means the backend did not store the message, so fall through to
+        // the local path rather than telling the visitor to write an email.
+        if (proxied && proxied.status < 500) {
+          return proxied;
+        }
+      }
       return submit(request, env);
+    }
+
+    if (pathname === '/api/status' || pathname === '/api/work') {
+      if (!api) {
+        return new Response('Not Found', { status: 404 });
+      }
+      const proxied = await proxy(request, api, pathname + search);
+      return proxied || new Response('Bad Gateway', { status: 502 });
     }
 
     return env.ASSETS.fetch(request);

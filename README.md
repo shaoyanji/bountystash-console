@@ -80,3 +80,11 @@ console backend (`cmd/console-api` in `shaoyanji/bountystash`), it proxies:
 Secrets: `RESEND_API_KEY` (fallback mail path) and `BOUNTYSTASH_API` (backend
 origin, no trailing slash). The 14 KB page budget is unaffected — the worker is
 not part of the first packet.
+
+The origin is `https://api.bountystash.com`: a Cloudflare Tunnel from clanker,
+so it is outbound only and needs no inbound port on a box with no public
+address. `api` is a proxied CNAME to the tunnel, whose ingress answers 404 for
+`/admin` before the request reaches the backend, so the operator page is never
+on the public edge. When clanker is suspended the tunnel drops and the worker
+falls back to its own Resend call — the form keeps working, and only
+`/api/status` and `/api/work` go dark until the box wakes.

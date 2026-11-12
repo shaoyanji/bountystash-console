@@ -41,10 +41,10 @@
   - [x] Interactive `pre-push` hook installed in `.git/hooks/pre-push`.
   - [x] Prompts operator via `gum confirm` to optionally deploy updated build to Cloudflare Pages preview.
   - [x] Non-blocking 15-second timeout fallback (auto-skips if unattended).
-- [ ] **Production Promotion Protocol**:
+- [x] **Production Promotion Protocol**:
   - [x] Keep preview isolated at `https://preview.cv-resume-40q.pages.dev`.
-  - [ ] Do **NOT** promote to `bountystash.com` until user explicitly requests promotion.
-  - [ ] Final promotion command: `task bountystash:deploy:prod`.
+  - [x] Production deployed 2026-11-12 (build `2d4d5b71`) — a Pages environment variable only reaches a new deployment, so setting `BOUNTYSTASH_API` required one.
+  - [ ] Redeploy belongs to `task bountystash:deploy:prod`, not a hand-run wrangler command.
 
 
 ---
@@ -55,4 +55,5 @@
   - [x] `POST /api/contact` stores the message before mailing it, so a Resend outage no longer loses the enquiry.
   - [x] `GET /api/status` and `GET /api/work` expose the engine's state and public work.
   - [x] Worker proxies to `BOUNTYSTASH_API` and falls back to the local Resend path.
-  - [ ] Point `BOUNTYSTASH_API` at a public origin and remove the fallback once it is proven in production.
+  - [x] Point `BOUNTYSTASH_API` at a public origin — `https://api.bountystash.com`, a Cloudflare Tunnel from clanker — and prove it: the site's `/api/status` serves the backend's own JSON, and a posted enquiry landed a row in `console_messages`.
+  - [x] Keep the fallback on purpose. clanker suspends when idle, so the tunnel drops; the form should still mail then instead of failing.
